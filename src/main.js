@@ -1,27 +1,56 @@
 import Vue from "vue";
 import App from "./App.vue";
 // 按需引入组件，引入方式见https://element.eleme.cn/#/zh-CN/component/quickstart#an-xu-yin-ru
-import { Input, Select, Option, Button, Avatar } from "element-ui";
+import {
+  Input,
+  Select,
+  Option,
+  Button,
+  Table,
+  TableColumn,
+  Pagination,
+  Checkbox
+} from "element-ui";
 
 Vue.config.productionTip = false;
 Vue.use(Input);
 Vue.use(Select);
+Vue.use(Checkbox);
 Vue.use(Option);
 Vue.use(Button);
-Vue.use(Avatar);
-
-// import * as appService from "@njsdata/app-sdk";
+Vue.use(Table);
+Vue.use(TableColumn);
+Vue.use(Pagination);
 
 if (process.env.NODE_ENV !== "production") {
   // 添加 customConfig 进行测试
   let customConfig = {
-    title: "数据构建",
-    desc: "无码化应用搭建，弹指间即完成数据从无到有到收集和使用",
-    url: "http://baidu.com",
-    imgUrl:
-      "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png",
+    title: "技术服务委托",
+    buttonTitle: '新增委托',
+    selectNum: 4,
+    inputNum: 4,
+    tableDisplayFieldName: "name",
+    assetId: "db5d25a6-b167-4ead-b7eb-ef6510f3b7ee",
+    selectAssetId: "3ff309d4-1b34-498d-9c60-8d478f1f43a7",
+    width: "",
+    selectDisplayFieldName: "name",//显示字段
+    selectValueFieldName: "age",//下拉框值字段
+    inputSelectConfig: {
+      input: {
+        inputNum: 2,
+        field: ['name', 'age']
+      },
+      select: {
+        selectNum: 1,
+        field: [{
+          searchField:'sex',
+          showField:'sex',
+        },]
+      }
+    },
+    data: JSON.parse('[["资产名称","目录"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有城镇资产资产","是222222国有"],["私有城镇资产","是11111私有"]]'),
+    dataTwo: JSON.parse('[["资产名称22222","目录"],["国有农村资产222222","是11111111国有"],["国有城镇资产资产222222","是222222国有"],["私有城镇资产222222","是11111私有"]]')
   };
-
   new Vue({
     render: h => {
       return <App customConfig={customConfig} />;

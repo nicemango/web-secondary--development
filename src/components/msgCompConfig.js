@@ -1,14 +1,18 @@
 // 组件可派发事件
 export const events = [
   {
-    key: "onImgClick",
-    name: "图片点击",
+    key: "buttonClick",
+    name: "按钮点击",
+    payload: [
+    ],
+  },
+  {
+    key: "rowClick",
+    name: "行点击",
     payload: [
       {
-        name: "内容",
-        key: "value",
-        dataType: "string",
-      },
+        key: "rowInformation", name: "行信息", dataType: "string"
+      }
     ],
   },
 ];
@@ -16,8 +20,8 @@ export const events = [
 // 组件可接收事件
 export const actions = [
   {
-    key: "messageSuccess",
-    name: "成功提示",
+    key: "load",
+    name: "加载",
   },
 ];
 
