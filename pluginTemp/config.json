@@ -1,0 +1,20 @@
+{
+  "id": "a5fc64ea-aaec-4f83-997f-fb1df7e8d6f5",
+  "type": "analyzers",
+  "main": "app.66ff22af.js",
+  "version": "2",
+  "props": {
+    "img": "custom_table.png",
+    "type": "k23dasd547",
+    "disableimg": "disabled_custom_table.png",
+    "name": "vue实现测试",
+    "domId": "ex_custom_table_15",
+    "lib": [],
+    "cssDep": [],
+    "scriptName": "app.a515a2e6.js",
+    "optionModules": [],
+    "vars": [
+      "fontSize"
+    ]
+  }
+}
