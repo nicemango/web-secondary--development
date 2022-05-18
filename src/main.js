@@ -36,24 +36,20 @@ if (process.env.NODE_ENV !== "production") {
     selectDisplayFieldName: "name",//显示字段
     selectValueFieldName: "age",//下拉框值字段
     inputSelectConfig: {
-      input: {
-        inputNum: 2,
-        field: ['name', 'age']
-      },
-      select: {
-        selectNum: 1,
-        field: [{
-          searchField:'sex',
-          showField:'sex',
-        },]
-      }
+      input: ['name', 'age'], select: [
+        {
+          displayField: 'sex', valueField: 'sex'
+        }, {
+          displayField: 'name', valueField: 'name'
+        }
+      ]
     },
     data: JSON.parse('[["资产名称","目录"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有城镇资产资产","是222222国有"],["私有城镇资产","是11111私有"]]'),
     dataTwo: JSON.parse('[["资产名称22222","目录"],["国有农村资产222222","是11111111国有"],["国有城镇资产资产222222","是222222国有"],["私有城镇资产222222","是11111私有"]]')
   };
   new Vue({
     render: h => {
-      return <App customConfig={customConfig} />;
+      return <App customConfig={customConfig}/>;
     },
   }).$mount("#app");
 } else {
@@ -61,17 +57,14 @@ if (process.env.NODE_ENV !== "production") {
     window.CUSTOM_PLUGIN = new Map();
   }
 
-  window.CUSTOM_PLUGIN.set(
-    process.env.VUE_APP_CUSTOM_PLUGIN_ID,
-    (dom, props) => {
-      const customConfig = (props && props.customConfig) || {};
-      const component = new Vue({
-        render: h => <App customConfig={customConfig} info={props} />,
-      }).$mount();
-      if (dom.childNodes.length > 0) {
-        dom.removeChild(dom.childNodes[0]);
-      }
-      dom.appendChild(component.$el);
+  window.CUSTOM_PLUGIN.set(process.env.VUE_APP_CUSTOM_PLUGIN_ID, (dom, props) => {
+    const customConfig = (props && props.customConfig) || {};
+    const component = new Vue({
+      render: h => <App customConfig={customConfig} info={props}/>,
+    }).$mount();
+    if (dom.childNodes.length > 0) {
+      dom.removeChild(dom.childNodes[0]);
     }
-  );
+    dom.appendChild(component.$el);
+  });
 }

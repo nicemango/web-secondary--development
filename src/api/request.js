@@ -4,9 +4,9 @@ import qs from "querystringify";
 let apiContextPath = "";
 if (process.env.NODE_ENV === "development") {
   document.cookie =
-    "token=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpblRpbWVzdGFtcCI6MTY1MjcxNjA3MDgxNiwidXNlcklkIjoiMTIzNDU2Nzg5MCJ9.jFHjsmLA3Q_tC0FguyOx49Oaruk6f4U9p9NyC4L4S6o";
+    "token=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpblRpbWVzdGFtcCI6MTY1Mjg3Mjg3MjgzOCwidXNlcklkIjoiMTIzNDU2Nzg5MCJ9.J2_DIheEqipfH1bg_1FFN_5JI6Yp_QzHZcGmfArEtgY";
   document.cookie =
-    "refreshToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpblRpbWVzdGFtcCI6MTY1MjcxNjA3MDg1Nn0.9ycKLYXoeM_qzy9YRQ2oFlJZGHneY48I1-UQEdJqKS0";
+    "refreshToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpblRpbWVzdGFtcCI6MTY1Mjg3Mjg3MjgzOX0.NsrZXzDbg1Dv-O75NpUshjAyj4_YsNL8BaIhYBsXWpQ";
   document.cookie = "username=admin";
   document.cookie = "windowOnline=true";
   apiContextPath = "/api";
