@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Button, Card } from "antd";
-// import appService from "@njsdata/app-sdk";
 import "./app.less";
 
 export default class App extends Component {
@@ -29,25 +28,11 @@ export default class App extends Component {
           actions,
         }
       );
-    // window.componentCenter.registerTriggerForType(
-    //   this.props.componentId,
-    //   "process",
-    //   this,
-    //   {
-    //     events,
-    //     actions,
-    //   }
-    // );
   }
 
   goToStudy = () => {
     this.props?.customConfig?.url && window.open(this.props?.customConfig?.url);
   };
-  // getData = () => {
-  // console.log(appService.getMenuData(), "菜单");
-  // console.log(appService.getPageData(), "页面");
-  // console.log(appService.getVariable(), "变量");
-  // };
 
   do_EventCenter_messageSuccess() {
     window.location.reload();
