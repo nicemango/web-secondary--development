@@ -1,10 +1,10 @@
 {
   "id": "bc17c674-42a6-4794-92bd-9425ac81e910",
-  "type": "app",
+  "type": "head",
   "main": "main.30dcaf4f.js",
   "version": "2",
   "props": {
-    "type": "customize",
+    "type": "head",
     "img": "APP_0001.png",
     "name": "dsadq",
     "loadStyle": 0,
