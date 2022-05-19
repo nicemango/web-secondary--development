@@ -1,9 +1,36 @@
-import React, { Component } from "react";
-import { Button, Card } from "antd";
+import React, { Component, useEffect } from "react";
+import { Button, Menu } from "antd";
+import { AppstoreOutlined, MailOutlined, SettingOutlined } from "@ant-design/icons";
+// import appService from "@njsdata/app-sdk";
 import "./app.less";
 
-export default class App extends Component {
-  componentDidMount() {
+function getItem(label, key, icon, children, type) {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+  };
+}
+
+const items = [
+  getItem("案件登记", "sub1", <MailOutlined />),
+  getItem("案件上报", "sub2", <AppstoreOutlined />),
+  getItem("移动上报", "sub4", <SettingOutlined />),
+  getItem("核实案件", "sub5", <SettingOutlined />),
+  getItem("自行处置", "sub6", <SettingOutlined />),
+  getItem("核实反馈", "sub7", <SettingOutlined />),
+  getItem("园林上报", "sub8", <SettingOutlined />),
+  getItem("市政上报", "sub9", <SettingOutlined />),
+]; // submenu keys of first level
+
+const rootSubmenuKeys = ["sub1", "sub2", "sub4"];
+
+const App = (props) => {
+  console.log(props);
+  const [openKeys, setOpenKeys] = React.useState(["sub1"]);
+  useEffect(() => {
     const events = [
       {
         key: "jumpButton",
@@ -11,72 +38,66 @@ export default class App extends Component {
         payload: [],
       },
     ];
-
     const actions = [
       {
         key: "messageSuccess",
         name: "刷新页面",
       },
     ];
-    this.props?.customConfig?.componentId &&
-      window.componentCenter?.register(
-        this.props?.customConfig?.componentId,
-        "",
-        this,
-        {
-          events,
-          actions,
-        }
-      );
-  }
+    props?.customConfig?.componentId &&
+      window.componentCenter?.register(props?.customConfig?.componentId, "", this, {
+        events,
+        actions,
+      });
+  }, []);
+  const onOpenChange = (keys) => {
+    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
 
-  goToStudy = () => {
-    this.props?.customConfig?.url && window.open(this.props?.customConfig?.url);
+    if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      setOpenKeys(keys);
+    } else {
+      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+    }
+  };
+  const onClick = (e) => {
+    console.log("click ", e);
+  };
+  const do_EventCenter_messageSuccess = () => {
+    window.location.reload();
   };
 
-  do_EventCenter_messageSuccess() {
-    window.location.reload();
-  }
-
   // 逻辑控制用，不可删
-  Event_Center_getName() {
+  const Event_Center_getName = () => {
     return "应用二开测试";
-  }
-
-  render() {
-    const { customConfig } = this.props;
-    const { title, desc, url, color, componentId } = customConfig || {};
-    return (
-      <Card
-        className="infoCard"
-        bordered={false}
-        title={<span className="card-title">{title || "数据构建"}</span>}
-        extra={
-          <Button
-            ghost
-            onClick={() => {
-              window?.eventCenter?.triggerEvent(componentId, "jumpButton");
-            }}
-          >
-            跳转
-          </Button>
-        }
-        style={{
-          background: color || "#0454f2",
-        }}
-      >
-        <p className="card-desc">
-          {desc || "无码化应用搭建，弹指间即完成数据从无到有到收集和使用"}
-        </p>
-        <Button
-          ghost
-          onClick={() => {
-            window.open(url || "https://www.sdata1010.cn/");
+  };
+  const { customConfig } = props;
+  const { componentId, uesrHead } = customConfig || {};
+  return (
+    <>
+      <div className="userInfo">
+        <div className="userInfoLeft">
+          <img src={uesrHead} style={{ display: uesrHead ? "block" : "none" }} className="userHead"></img>
+          <img src={require("./assets/header.png").default} style={{ display: uesrHead ? "none" : "block" }} className="userHead"></img>
+        </div>
+        <div className="userInfoRight">
+          <span>管理员2</span>
+          <span>您好，欢迎使用</span>
+        </div>
+      </div>
+      <div id="customHeadAndSide">
+        <Menu
+          mode="inline"
+          openKeys={openKeys}
+          onOpenChange={onOpenChange}
+          theme="dark"
+          style={{
+            width: 256,
           }}
-        >
-          前往
-        </Button>
-      </Card>
-    );
-  }
-}
+          items={items}
+        />
+      </div>
+    </>
+  );
+};
+
+export default App;
