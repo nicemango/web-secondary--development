@@ -1,7 +1,5 @@
 <template>
-  <el-input v-model="data"
-            @input="inputChange"
-            size="small" />
+  <div></div>
 </template>
 
 <script>
@@ -18,7 +16,7 @@ export default {
   },
   mounted() {
     let { component, child_id, index } = this.customConfig;
-    let initId = `${component?.id}__childId__${child_id.substr(0, 10)}`;
+    let initId = `${component?.id}__childId__${child_id?.substr(0, 10)}`;
     initId = `${initId}__index__${index}`;
     window?.componentCenter?.register(initId, "comp", this, eventActionDefine);
   },
@@ -27,7 +25,7 @@ export default {
       this.data = e;
       let { formConfig, component, child_id, index, onChange } =
         this.customConfig;
-      let initId = `${component?.id}__childId__${child_id.substr(0, 10)}`;
+      let initId = `${component?.id}__childId__${child_id?.substr(0, 10)}`;
       await window.eventCenter.triggerEventNew({
         objectId: formConfig?.id,
         componentId: initId,
@@ -44,7 +42,7 @@ export default {
       let { formConfig, component } = this.customConfig;
       return `${formConfig?.form_name}-${component.columnStyle.title}`;
     },
-    do_EventCenter_setValue({ value }) {
+    do_EventCenter_getMaoInfo({ value }) {
       this.data = value;
     },
     Event_Center_getName() {
@@ -53,7 +51,7 @@ export default {
   },
   destroyed() {
     let { component, child_id, index } = this.customConfig;
-    let initId = `${component?.id}__childId__${child_id.substr(0, 10)}`;
+    let initId = `${component?.id}__childId__${child_id?.substr(0, 10)}`;
     initId = `${initId}__index__${index}`;
     window?.componentCenter?.removeInstance(initId);
   },

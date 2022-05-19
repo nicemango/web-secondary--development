@@ -1,12 +1,38 @@
 // 组件可派发事件
 export const events = [
   {
-    key: "change",
-    name: "内容改变",
+    key: "getDetaiAddress",
+    name: "获取详细位置",
     payload: [
       {
-        name: "内容",
-        key: "value",
+        name: "乡镇",
+        key: "townShip",
+        dataType: "string",
+      },
+      {
+        name: "详细位置",
+        key: "detailAddress",
+        dataType: "string",
+      },
+      {
+        name: "经度",
+        key: "lng",
+        dataType: "string",
+      },
+      {
+        name: "纬度",
+        key: "lat",
+        dataType: "string",
+      },
+    ],
+  },
+  {
+    key: "getDrawPolyline",
+    name: "获取路线长度",
+    payload: [
+      {
+        name: "路线长度",
+        key: "length",
         dataType: "string",
       },
     ],
@@ -16,26 +42,18 @@ export const events = [
 // 组件可接收事件
 export const actions = [
   {
-    key: "setValue",
-    name: "设值",
-    isSupportChild: true, // 是否支持子表
+    key: "changeCenterPoint",
+    name: "改变地图中心点",
+    isSupportChild: false,
     params: [
       {
-        key: "value",
-        name: "值",
+        key: "mapLng",
+        name: "经度",
         dataType: "string",
       },
-    ],
-  },
-  {
-    key: "getValue",
-    name: "取值",
-    isSupportChild: true, // 是否支持子表
-    hasReturn: true,
-    returns: [
       {
-        key: "value",
-        name: "值",
+        key: "mapLat",
+        name: "纬度",
         dataType: "string",
       },
     ],
