@@ -13,7 +13,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 package-lock.json
-*.zip
 pluginTemp/js/app.*.js
 
 # Editor directories and files
