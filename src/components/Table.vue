@@ -10,8 +10,11 @@ export default {
   },
   data() {
     return {
-      data: this.customConfig.data,
+      data: '',
     };
+  },
+  created() {
+    this.data = JSON.parse(this.customConfig.data).address
   },
 };
 </script>

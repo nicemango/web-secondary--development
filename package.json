@@ -15,11 +15,13 @@
     "not dead"
   ],
   "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
     "@vue/babel-helper-vue-jsx-merge-props": "^1.2.1",
     "@vue/babel-preset-jsx": "^1.2.4",
     "axios": "^0.23.0",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.6",
+    "lodash": "^4.17.21",
     "querystringify": "^2.2.0",
     "vue": "^2.6.11"
   },

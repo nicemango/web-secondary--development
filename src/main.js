@@ -2,6 +2,8 @@ import Vue from "vue";
 import App from "./App.vue";
 // 按需引入组件，引入方式见https://element.eleme.cn/#/zh-CN/component/quickstart#an-xu-yin-ru
 import {
+  Button,
+  Tooltip,
   Input,
   Select,
   Option,
@@ -10,6 +12,7 @@ import {
   RadioGroup,
   RadioButton,
   Switch,
+  Cascader,
 } from "element-ui";
 import "./index.css";
 import Element from "element-ui";
@@ -17,6 +20,8 @@ import "element-ui/lib/theme-chalk/index.css";
 
 Vue.config.productionTip = false;
 
+Vue.use(Button);
+Vue.use(Tooltip);
 Vue.use(Input);
 Vue.use(Select);
 Vue.use(Option);
@@ -25,6 +30,7 @@ Vue.use(FormItem);
 Vue.use(RadioGroup);
 Vue.use(RadioButton);
 Vue.use(Switch);
+Vue.use(Cascader);
 
 // Vue.use(Element);
 
@@ -58,7 +64,7 @@ if (process.env.NODE_ENV !== "production") {
     changeConfiguration: values => {
       console.log(values);
     },
-    configuration: '{"allowClear":true,"size":"大","placeholder":"444"}',
+    configuration: '{"mapWidth": "100%", "mapHeight": "500px", "mapCityCenter":["118.432581,32.423072"]}',
   };
 
   new Vue({
@@ -70,7 +76,7 @@ if (process.env.NODE_ENV !== "production") {
               <div class="components">
                 <span class="title">{item.title}：</span>
                 <App
-                  style={{ width: "calc(100% - 220px)" }}
+                  style={{ width: "calc(100% - 220px)"}}
                   customConfig={customConfig}
                   type={item.type}
                 />
