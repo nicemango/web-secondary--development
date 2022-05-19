@@ -27,15 +27,10 @@ if (process.env.NODE_ENV !== "production") {
   let customConfig = {
     title: "技术服务委托",
     buttonTitle: '新增委托',
-    selectNum: 4,
-    inputNum: 4,
-    tableDisplayFieldName: "name",
+    tableDisplayFieldName: "name,sex",
     assetId: "db5d25a6-b167-4ead-b7eb-ef6510f3b7ee",
     selectAssetId: "3ff309d4-1b34-498d-9c60-8d478f1f43a7",
-    width: "",
-    selectDisplayFieldName: "name",//显示字段
-    selectValueFieldName: "age",//下拉框值字段
-    inputSelectConfig: {
+    inputSelectConfig: JSON.stringify({
       input: ['name', 'age'], select: [
         {
           displayField: 'sex', valueField: 'sex'
@@ -43,7 +38,7 @@ if (process.env.NODE_ENV !== "production") {
           displayField: 'name', valueField: 'name'
         }
       ]
-    },
+    }),
     data: JSON.parse('[["资产名称","目录"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有农村资产","是11111111国有"],["国有城镇资产资产","是222222国有"],["私有城镇资产","是11111私有"]]'),
     dataTwo: JSON.parse('[["资产名称22222","目录"],["国有农村资产222222","是11111111国有"],["国有城镇资产资产222222","是222222国有"],["私有城镇资产222222","是11111私有"]]')
   };

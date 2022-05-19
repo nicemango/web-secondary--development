@@ -40,7 +40,9 @@
       highlight-current-row
       @row-click="handleRowClick"
     >
-      <el-table-column :prop="tableDisplayFieldName"></el-table-column>
+      <div v-for="item in tableDisplayFieldName">
+        <el-table-column :prop="item"></el-table-column>
+      </div>
     </el-table>
     <div style="width: 100%" class="pagaNation">
       <el-pagination
@@ -76,15 +78,12 @@ export default {
       inputSearchArr: [],
       selectSearchArr: [],
       selectValueArr: [],
-      selectDisplayFieldName: "",
-      selectValueFieldName: "",
       tableDisplayFieldName: "",
       currentPage: 1,
       total: 0,
       pageSize: 10,
       allTableList: [],
       displayTableList: [],
-      selectedRowInformation: "",
       inputSelectConfig: {},
       selectFilterCondition: [],
       inputFilterCondition: []
@@ -92,7 +91,10 @@ export default {
   },
   computed: {
     allFilterCondition() {
+      let inputFilterCondition=[]
       let selectFilterCondition = []
+      try {
+        let selectFilterCondition = []
       this.inputSelectConfig.select.forEach((item, index) => {
         let selectFilterConditionItem = {}
         selectFilterConditionItem[item.displayField] = this.selectValueArr[index]
@@ -104,34 +106,30 @@ export default {
         inputFilterConditionItem[item] = this.inputSearchArr[index].value
         inputFilterCondition.push(inputFilterConditionItem)
       })
+      }catch (e) {
+
+      }
       return [...inputFilterCondition, ...selectFilterCondition]
     }
   },
-  mounted() {
+  async mounted() {
     let {
       title,
       buttonTitle,
       tableDisplayFieldName,
-      selectDisplayFieldName,
-      selectValueFieldName,
       assetId,
       selectAssetId,
       inputSelectConfig,
     } = this.customConfig;
     this.title = title;
-    this.tableDisplayFieldName = tableDisplayFieldName;
+    this.tableDisplayFieldName = tableDisplayFieldName.split(",");
     this.buttonTitle = buttonTitle;
-    this.selectDisplayFieldName = selectDisplayFieldName;
-    this.selectValueFieldName = selectValueFieldName;
-    this.inputSelectConfig = inputSelectConfig;
-    queryAssetById(assetId).then((originTableData) => {
-      this.handleTableData(originTableData);
-      this.load();
-    });
-    queryAssetById(selectAssetId).then((originSelectData) => {
-      this.handleSelectData(originSelectData);
-      this.load();
-    });
+    this.inputSelectConfig = JSON.parse(inputSelectConfig);
+    let originTableData = await queryAssetById(assetId)
+    let originSelectData = await queryAssetById(selectAssetId)
+    this.handleTableData(originTableData);
+    this.handleSelectData(originSelectData);
+    this.load();
     for (let i = 0; i < this.inputSelectConfig.input.length; i++) {
       this.inputSearchArr.push({value: ""});
     }
@@ -232,9 +230,6 @@ export default {
       window.eventCenter?.triggerEvent(componentId, "rowClick", {
         rowInformation: row,
       });
-    },
-    handleSelectedChange(row) {
-      row && (this.selectedRowInformation = row[this.tableDisplayFieldName]);
     },
     handleSizeChange() {
       this.load();

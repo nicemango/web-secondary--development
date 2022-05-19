@@ -1,7 +1,7 @@
 {
   "id": "01cd35b6-eb5d-4d01-98df-ac3ce74aa7b3",
   "type": "app",
-  "main": "app.467c1ae6.js",
+  "main": "app.b59ba0a1.js",
   "version": "2",
   "props": {
     "type": "customize",
@@ -13,14 +13,10 @@
     "customconf": [
       "title",
       "buttonTitle",
-      "selectNum",
-      "inputNum",
       "tableDisplayFieldName",
       "assetId",
       "selectAssetId",
-      "width",
-      "selectDisplayFieldName",
-      "selectValueFieldName"
+      "inputSelectConfig"
     ]
   }
 }
