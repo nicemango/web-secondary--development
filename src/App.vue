@@ -115,6 +115,7 @@ export default {
       tableBody.forEach((tableItem) => {
         let temp = {};
         tableItem.forEach((item, index) => {
+          console.log(item,index)
           temp[tableHeader[index]] = item;
         });
         tableData.push(temp);
@@ -163,9 +164,8 @@ export default {
     refreshTableData() {
       this.tableData = [];
       this.labelList.forEach((item) => {
-        let laberStr = "样品位置-" + item;
         this.tableData.push({
-          sample: laberStr.slice(0, -1),
+          sample: item.slice(0, -1),
         });
       });
     },
