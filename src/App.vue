@@ -6,9 +6,8 @@
       </div>
       <div class="total">{{ allTableList.length }}</div>
       <div>
-        <el-button type="primary" @click="handleButtonClick">{{
-            buttonTitle
-                                                             }}
+        <el-button type="primary" @click="handleButtonClick"
+          >{{ buttonTitle }}
         </el-button>
       </div>
     </div>
@@ -31,7 +30,7 @@
           :key="index"
           :label="item.label"
           :value="item.value"
-        >{{ item.label }}
+          >{{ item.label }}
         </el-option>
       </el-select>
     </div>
@@ -41,7 +40,7 @@
       @row-click="handleRowClick"
     >
       <div v-for="item in tableDisplayFieldName">
-        <el-table-column :prop="item"></el-table-column>
+        <el-table-column sortable :prop="item"></el-table-column>
       </div>
     </el-table>
     <div style="width: 100%" class="pagaNation">
@@ -50,7 +49,6 @@
         @current-change="handleCurrentChange"
         :current-page.sync="currentPage"
         :page-sizes="[10, 20, 50, 100]"
-        ccccccc
         :page-size.sync="pageSize"
         layout="total, sizes, prev, pager, next"
         :total="total"
@@ -64,7 +62,7 @@
 import eventActionDefine from "./components/msgCompConfig";
 import "./index.css";
 import _ from "lodash";
-import {queryAssetById} from "@/api/asset.js";
+import { queryAssetById } from "@/api/asset.js";
 
 export default {
   name: "App",
@@ -86,31 +84,31 @@ export default {
       displayTableList: [],
       inputSelectConfig: {},
       selectFilterCondition: [],
-      inputFilterCondition: []
+      inputFilterCondition: [],
+      originTableData: {},
     };
   },
   computed: {
     allFilterCondition() {
-      let inputFilterCondition=[]
-      let selectFilterCondition = []
+      let inputFilterCondition = [];
+      let selectFilterCondition = [];
       try {
-        let selectFilterCondition = []
-      this.inputSelectConfig.select.forEach((item, index) => {
-        let selectFilterConditionItem = {}
-        selectFilterConditionItem[item.displayField] = this.selectValueArr[index]
-        selectFilterCondition.push(selectFilterConditionItem)
-      })
-      let inputFilterCondition = []
-      this.inputSelectConfig.input.forEach((item, index) => {
-        let inputFilterConditionItem = {}
-        inputFilterConditionItem[item] = this.inputSearchArr[index].value
-        inputFilterCondition.push(inputFilterConditionItem)
-      })
-      }catch (e) {
-
-      }
-      return [...inputFilterCondition, ...selectFilterCondition]
-    }
+        // let selectFilterCondition = []
+        this.inputSelectConfig.select.forEach((item, index) => {
+          let selectFilterConditionItem = {};
+          selectFilterConditionItem[item.displayField] =
+            this.selectValueArr[index];
+          selectFilterCondition.push(selectFilterConditionItem);
+        });
+        // let inputFilterCondition = []
+        this.inputSelectConfig.input.forEach((item, index) => {
+          let inputFilterConditionItem = {};
+          inputFilterConditionItem[item] = this.inputSearchArr[index].value;
+          inputFilterCondition.push(inputFilterConditionItem);
+        });
+      } catch (e) {}
+      return [...inputFilterCondition, ...selectFilterCondition];
+    },
   },
   async mounted() {
     let {
@@ -121,27 +119,30 @@ export default {
       selectAssetId,
       inputSelectConfig,
     } = this.customConfig;
+    console.log(inputSelectConfig);
+    
     this.title = title;
+    this.assetId= assetId
     this.tableDisplayFieldName = tableDisplayFieldName.split(",");
     this.buttonTitle = buttonTitle;
     this.inputSelectConfig = JSON.parse(inputSelectConfig);
-    let originTableData = await queryAssetById(assetId)
-    let originSelectData = await queryAssetById(selectAssetId)
-    this.handleTableData(originTableData);
+    this.originTableData = await queryAssetById(assetId);
+    let originSelectData = await queryAssetById(selectAssetId);
+    this.handleTableData(this.originTableData);
     this.handleSelectData(originSelectData);
     this.load();
     for (let i = 0; i < this.inputSelectConfig.input.length; i++) {
-      this.inputSearchArr.push({value: ""});
+      this.inputSearchArr.push({ value: "" });
     }
 
-    let {componentId} = this.customConfig || {};
+    let { componentId } = this.customConfig || {};
     componentId &&
-    window.componentCenter?.register(
-      componentId,
-      "comp",
-      this,
-      eventActionDefine
-    );
+      window.componentCenter?.register(
+        componentId,
+        "comp",
+        this,
+        eventActionDefine
+      );
   },
   methods: {
     filterDataBySearchAndSelect(allTableList) {
@@ -149,25 +150,29 @@ export default {
       //result为对应关系从总数据里多字段筛选出来的数据
       result = allTableList.filter((item) => {
         return this.allFilterCondition.every((filterCondition) => {
-          let filterConditionKey = Object.keys(filterCondition)[0]
-          let filterConditionValue = filterCondition[filterConditionKey] || ""
-          return item[filterConditionKey].indexOf(filterConditionValue) > -1
+          let filterConditionKey = Object.keys(filterCondition)[0];
+          let filterConditionValue = filterCondition[filterConditionKey] || "";
+          return item[filterConditionKey].indexOf(filterConditionValue) > -1;
         });
       });
 
       return result;
     },
-    load() {
-      this.displayTableList = this.filterDataBySearchAndSelect(this.allTableList);
+    async load() {
+      this.originTableData = await queryAssetById(this.assetId);
+      this.handleTableData(this.originTableData);
+      this.displayTableList = this.filterDataBySearchAndSelect(
+        this.allTableList
+      );
       this.displayTableList = this.filterDataBypagination(
         this.displayTableList
       );
     },
     handleButtonClick() {
-      let {componentId, appId} = this.customConfig || {};
+      let { componentId, appId } = this.customConfig || {};
       componentId &&
-      appId &&
-      window.eventCenter?.triggerEvent(componentId, "buttonClick", {});
+        appId &&
+        window.eventCenter?.triggerEvent(componentId, "buttonClick", {});
     },
     //将平台的数据转化为正常使用的数据形式
     translatePlatformDataToJsonArray(originTableData) {
@@ -197,17 +202,17 @@ export default {
       try {
         displayMapping = this.inputSelectConfig.select;
       } catch (error) {
-        console.log("传入的数据不合法")
+        console.log("传入的数据不合法");
       }
       displayMapping.forEach((displayMappingItem) => {
-        let selectList = []
+        let selectList = [];
         selectData.forEach((selectDataItem) => {
           selectList.push({
             label: selectDataItem[displayMappingItem["displayField"]],
             value: selectDataItem[displayMappingItem["valueField"]],
           });
-        })
-        this.selectSearchArr.push(selectList)
+        });
+        this.selectSearchArr.push(selectList);
       });
     },
     filterDataBypagination(data) {
@@ -215,8 +220,8 @@ export default {
       if ((this.currentPage - 1) * this.pageSize >= this.total) {
         this.currentPage =
           Math.ceil(this.total / this.pageSize) == 0
-          ? 1
-          : Math.ceil(this.total / this.pageSize);
+            ? 1
+            : Math.ceil(this.total / this.pageSize);
       }
       return data.slice(
         (this.currentPage - 1) * this.pageSize,
@@ -224,12 +229,12 @@ export default {
       );
     },
     handleRowClick(row) {
-      let {componentId, appId} = this.customConfig || {};
+      let { componentId, appId } = this.customConfig || {};
       componentId &&
-      appId &&
-      window.eventCenter?.triggerEvent(componentId, "rowClick", {
-        rowInformation: row,
-      });
+        appId &&
+        window.eventCenter?.triggerEvent(componentId, "rowClick", {
+          rowInformation: row,
+        });
     },
     handleSizeChange() {
       this.load();
@@ -270,7 +275,7 @@ export default {
 }
 
 .multiFfilterDataGrid >>> .el-table__header-wrapper {
-  height: 0px;
+  height: 50px;
 }
 
 .multiFfilterDataGrid >>> .el-table__row.current-row {
@@ -282,11 +287,14 @@ export default {
 }
 
 .multiFfilterDataGrid >>> .el-table {
-  max-height: 500px;
+  max-height: 550px;
   overflow: auto;
 }
 
 .multiFfilterDataGrid >>> .el-table .el-table__cell {
   border-bottom: 0;
+}
+.multiFfilterDataGrid >>> .el-table--border::after, .el-table--group::after, .el-table::before {
+  z-index: 0;
 }
 </style>
