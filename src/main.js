@@ -30,7 +30,8 @@ if (process.env.NODE_ENV !== "production") {
     tableDisplayFieldName: "name,age",
     assetId: "db5d25a6-b167-4ead-b7eb-ef6510f3b7ee",
     selectAssetId: "3ff309d4-1b34-498d-9c60-8d478f1f43a7",
-    sortConfig:'age,name',//排序字段配置
+    sortConfig:'age',//排序字段配置
+    sortType:'ascending',
     inputSelectConfig: JSON.stringify({
       input: ['name', 'age'], select: [
         {

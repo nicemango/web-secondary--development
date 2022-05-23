@@ -92,7 +92,8 @@ export default {
       inputFilterCondition: [],
       originTableData: {},
       sortConfig: [],
-      firstRowInfo:{}
+      firstRowInfo: {},
+      componentId: "",
     };
   },
   computed: {
@@ -126,11 +127,13 @@ export default {
       selectAssetId,
       inputSelectConfig,
       sortConfig,
+      sortType,
     } = this.customConfig;
 
     this.sortConfig = sortConfig.split(",");
 
     this.title = title;
+    this.sortType = sortType;
     this.assetId = assetId;
     this.tableDisplayFieldName = tableDisplayFieldName.split(",");
     this.buttonTitle = buttonTitle;
@@ -140,12 +143,12 @@ export default {
     this.handleTableData(this.originTableData);
     this.handleSelectData(originSelectData);
     this.load();
-    this.eventTriger()
     for (let i = 0; i < this.inputSelectConfig.input.length; i++) {
       this.inputSearchArr.push({ value: "" });
     }
-
     let { componentId } = this.customConfig || {};
+    this.componentId = componentId;
+
     componentId &&
       window.componentCenter?.register(
         componentId,
@@ -153,13 +156,13 @@ export default {
         this,
         eventActionDefine
       );
-    window.eventCenter?.triggerEvent(componentId, "firstLoad", {
-      rowInformation: row,
-    });
+    // window.eventCenter?.triggerEvent(componentId, "firstLoad", {
+    //   rowInformation: row,
+    // });
   },
   methods: {
     eventTriger() {
-      window.eventCenter?.triggerEvent(componentId, "firstLoad", {
+      window.eventCenter?.triggerEvent(this.componentId, "firstLoad", {
         rowInformation: this.firstRowInfo,
       });
     },
@@ -168,19 +171,21 @@ export default {
       var fieldName = column.prop;
       var sortingType = column.order;
       this.displayTableList.forEach((d) => {
-        d[fieldName] = Number(d[fieldName]);
+        if (Number(d[fieldName]) !== "NaN") {
+          if (sortingType === "ascending") {
+            //升序
+            this.displayTableList = this.displayTableList.sort(
+              (a, b) => a[fieldName] - b[fieldName]
+            );
+          } else if (sortingType === "descending") {
+            //降序
+            this.displayTableList = this.displayTableList.sort(
+              (a, b) => b[fieldName] - a[fieldName]
+            );
+          }
+        }
       });
-      if (sortingType === "ascending") {
-        //升序
-        this.displayTableList = this.displayTableList.sort(
-          (a, b) => a[fieldName] - b[fieldName]
-        );
-      } else if (sortingType === "descending") {
-        //降序
-        this.displayTableList = this.displayTableList.sort(
-          (a, b) => b[fieldName] - a[fieldName]
-        );
-      }
+
       this.$refs.myTable.setCurrentRow(this.displayTableList[0]);
     },
     filterDataBySearchAndSelect(allTableList) {
@@ -202,6 +207,33 @@ export default {
       this.displayTableList = this.filterDataBySearchAndSelect(
         this.allTableList
       );
+      let infoType;
+      infoType = this.displayTableList.every((d) => {
+        return Number(d[this.sortConfig])
+
+      });
+      if (infoType) {
+        if (this.sortType === "ascending") {
+          this.displayTableList = this.displayTableList.sort((a, b) => {
+            return a[this.sortConfig] - b[this.sortConfig];
+          });
+        } else {
+          this.displayTableList = this.displayTableList.sort((a, b) => {
+            return b[this.sortConfig] - a[this.sortConfig];
+          });
+        }
+      } else {
+        if (this.sortType === "ascending") {
+          this.displayTableList = this.displayTableList.sort((a, b) => {
+            return a[this.sortConfig].localeCompare(b[this.sortConfig], "zh");
+          });
+        } else {
+          this.displayTableList = this.displayTableList.sort((a, b) => {
+            return a[this.sortConfig].localeCompare(b[this.sortConfig], "zh");
+          });
+        }
+      }
+
       this.displayTableList = this.filterDataBypagination(
         this.displayTableList
       );
@@ -339,5 +371,8 @@ export default {
 .el-table--group::after,
 .el-table::before {
   z-index: 0;
+}
+.multiFfilterDataGrid >>> .el-table__header-wrapper {
+  display: none;
 }
 </style>

@@ -1,7 +1,7 @@
 {
   "id": "01cd35b6-eb5d-4d01-98df-ac3ce74aa7b3",
   "type": "app",
-  "main": "app.ea1b80a6.js",
+  "main": "app.5a0a1856.js",
   "version": "2",
   "props": {
     "type": "customize",
@@ -17,7 +17,8 @@
       "assetId",
       "selectAssetId",
       "inputSelectConfig",
-      "sortConfig"
+      "sortConfig",
+      "sortType"
     ]
   }
 }
