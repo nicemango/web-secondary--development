@@ -11,7 +11,16 @@ export const events = [
     name: "行点击",
     payload: [
       {
-        key: "rowInformation", name: "行信息", dataType: "string"
+        key: "rowInformation", name: "行信息", dataType: "object"
+      }
+    ],
+  },
+  {
+    key: "firstLoad",
+    name: "首次加载",
+    payload: [
+      {
+        key: "rowInformation", name: "行信息", dataType: "object"
       }
     ],
   },
