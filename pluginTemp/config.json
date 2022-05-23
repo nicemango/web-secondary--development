@@ -16,7 +16,8 @@
       "tableDisplayFieldName",
       "assetId",
       "selectAssetId",
-      "inputSelectConfig"
+      "inputSelectConfig",
+      "sortConfig"
     ]
   }
 }
