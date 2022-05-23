@@ -4,9 +4,9 @@ import qs from "querystringify";
 let apiContextPath = "";
 if (process.env.NODE_ENV === "development") {
   document.cookie =
-    "token=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpblRpbWVzdGFtcCI6MTY1MzAwODI5MzY2NSwidXNlcklkIjoiMTIzNDU2Nzg5MCJ9.ZzMOgo-XVH4ZTZhB2mgrulCwAy0xxilrB8H2FpmVkcg";
+    "token=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpblRpbWVzdGFtcCI6MTY1MzI3NjQ4Mjc4MCwidXNlcklkIjoiMTIzNDU2Nzg5MCJ9.RUaEPiAXJtiBd-f5VPMJGCZoC82JReP_Ack1F3OwTIo";
   document.cookie =
-    "refreshToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpblRpbWVzdGFtcCI6MTY1MzAwODI5MzY3NH0.uAzvA6fVJDz4fXc4bGkybqO00ck3cNvqgRvKqan5HHk";
+    "refreshToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpblRpbWVzdGFtcCI6MTY1MzI3NjQ4Mjc4MX0.kYTxLERzW_GFxM-LRlsQh5C46WyCnXEIliuoCBMGMSU";
   document.cookie = "username=admin";
   document.cookie = "windowOnline=true";
   apiContextPath = "/api";
@@ -20,7 +20,7 @@ const instance = axios.create({
   },
   headers:
     (window.location.search && qs.parse(window.location.search).token) ||
-    window.token
+      window.token
       ? { token: qs.parse(window.location.search).token || window.token }
       : {},
 });

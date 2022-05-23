@@ -38,9 +38,14 @@
       :data="displayTableList"
       highlight-current-row
       @row-click="handleRowClick"
+      @sort-change="tableSort"
+      ref="myTable"
     >
       <div v-for="item in tableDisplayFieldName">
-        <el-table-column sortable :prop="item"></el-table-column>
+        <el-table-column
+          :sortable="sortConfig.indexOf(item) > -1"
+          :prop="item"
+        ></el-table-column>
       </div>
     </el-table>
     <div style="width: 100%" class="pagaNation">
@@ -86,6 +91,8 @@ export default {
       selectFilterCondition: [],
       inputFilterCondition: [],
       originTableData: {},
+      sortConfig: [],
+      firstRowInfo:{}
     };
   },
   computed: {
@@ -118,11 +125,13 @@ export default {
       assetId,
       selectAssetId,
       inputSelectConfig,
+      sortConfig,
     } = this.customConfig;
-    console.log(inputSelectConfig);
-    
+
+    this.sortConfig = sortConfig.split(",");
+
     this.title = title;
-    this.assetId= assetId
+    this.assetId = assetId;
     this.tableDisplayFieldName = tableDisplayFieldName.split(",");
     this.buttonTitle = buttonTitle;
     this.inputSelectConfig = JSON.parse(inputSelectConfig);
@@ -131,6 +140,7 @@ export default {
     this.handleTableData(this.originTableData);
     this.handleSelectData(originSelectData);
     this.load();
+    this.eventTriger()
     for (let i = 0; i < this.inputSelectConfig.input.length; i++) {
       this.inputSearchArr.push({ value: "" });
     }
@@ -143,8 +153,36 @@ export default {
         this,
         eventActionDefine
       );
+    window.eventCenter?.triggerEvent(componentId, "firstLoad", {
+      rowInformation: row,
+    });
   },
   methods: {
+    eventTriger() {
+      window.eventCenter?.triggerEvent(componentId, "firstLoad", {
+        rowInformation: this.firstRowInfo,
+      });
+    },
+    //表格排序
+    tableSort(column) {
+      var fieldName = column.prop;
+      var sortingType = column.order;
+      this.displayTableList.forEach((d) => {
+        d[fieldName] = Number(d[fieldName]);
+      });
+      if (sortingType === "ascending") {
+        //升序
+        this.displayTableList = this.displayTableList.sort(
+          (a, b) => a[fieldName] - b[fieldName]
+        );
+      } else if (sortingType === "descending") {
+        //降序
+        this.displayTableList = this.displayTableList.sort(
+          (a, b) => b[fieldName] - a[fieldName]
+        );
+      }
+      this.$refs.myTable.setCurrentRow(this.displayTableList[0]);
+    },
     filterDataBySearchAndSelect(allTableList) {
       let result = [];
       //result为对应关系从总数据里多字段筛选出来的数据
@@ -167,6 +205,9 @@ export default {
       this.displayTableList = this.filterDataBypagination(
         this.displayTableList
       );
+      this.firstRowInfo = this.displayTableList[0];
+
+      this.$refs.myTable.setCurrentRow(this.displayTableList[0]);
     },
     handleButtonClick() {
       let { componentId, appId } = this.customConfig || {};
@@ -294,7 +335,9 @@ export default {
 .multiFfilterDataGrid >>> .el-table .el-table__cell {
   border-bottom: 0;
 }
-.multiFfilterDataGrid >>> .el-table--border::after, .el-table--group::after, .el-table::before {
+.multiFfilterDataGrid >>> .el-table--border::after,
+.el-table--group::after,
+.el-table::before {
   z-index: 0;
 }
 </style>

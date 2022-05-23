@@ -27,9 +27,10 @@ if (process.env.NODE_ENV !== "production") {
   let customConfig = {
     title: "技术服务委托",
     buttonTitle: '新增委托',
-    tableDisplayFieldName: "name,sex",
+    tableDisplayFieldName: "name,age",
     assetId: "db5d25a6-b167-4ead-b7eb-ef6510f3b7ee",
     selectAssetId: "3ff309d4-1b34-498d-9c60-8d478f1f43a7",
+    sortConfig:'age,name',//排序字段配置
     inputSelectConfig: JSON.stringify({
       input: ['name', 'age'], select: [
         {
