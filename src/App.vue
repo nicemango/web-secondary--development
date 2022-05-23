@@ -147,7 +147,6 @@ export default {
       this.inputSearchArr.push({ value: "" });
     }
     let { componentId } = this.customConfig || {};
-    this.componentId = componentId;
 
     componentId &&
       window.componentCenter?.register(
@@ -156,16 +155,11 @@ export default {
         this,
         eventActionDefine
       );
-    // window.eventCenter?.triggerEvent(componentId, "firstLoad", {
-    //   rowInformation: row,
-    // });
+    window.eventCenter?.triggerEvent(componentId, "firstLoad", {
+      rowInformation: this.firstRowInfo,
+    });
   },
   methods: {
-    eventTriger() {
-      window.eventCenter?.triggerEvent(this.componentId, "firstLoad", {
-        rowInformation: this.firstRowInfo,
-      });
-    },
     //表格排序
     tableSort(column) {
       var fieldName = column.prop;
