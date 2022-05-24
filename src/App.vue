@@ -41,7 +41,6 @@
       :data="displayTableList"
       highlight-current-row
       @row-click="handleRowClick"
-      @sort-change="tableSort"
       ref="myTable"
     >
       <div v-for="item in tableDisplayFieldName">
@@ -143,7 +142,7 @@ export default {
     this.inputSelectConfig = JSON.parse(inputSelectConfig);
     this.originTableData = await queryAssetById(assetId);
     let originSelectData = await queryAssetById(selectAssetId);
-    this.handleTableData(this.originTableData);
+    // this.handleTableData(this.originTableData);
     this.handleSelectData(originSelectData);
     this.load();
     for (let i = 0; i < this.inputSelectConfig.input.length; i++) {
@@ -161,27 +160,18 @@ export default {
       );
   },
   methods: {
-    //表格排序
-    tableSort(column) {
-      var fieldName = column.prop;
-      var sortingType = column.order;
-      this.displayTableList.forEach((d) => {
-        if (Number(d[fieldName]) !== "NaN") {
-          if (sortingType === "ascending") {
-            //升序
-            this.displayTableList = this.displayTableList.sort(
-              (a, b) => a[fieldName] - b[fieldName]
-            );
-          } else if (sortingType === "descending") {
-            //降序
-            this.displayTableList = this.displayTableList.sort(
-              (a, b) => b[fieldName] - a[fieldName]
-            );
-          }
-        }
-      });
-
-      this.$refs.myTable.setCurrentRow(this.displayTableList[0]);
+    formDate(date) {
+      let bzDate = new Date(date);
+      let Y = bzDate.getFullYear() + "-";
+      let M =
+        (bzDate.getMonth() + 1 < 10
+          ? "0" + (bzDate.getMonth() + 1)
+          : bzDate.getMonth() + 1) + "-";
+      let D = bzDate.getDate() + " ";
+      let h = bzDate.getHours() + ":";
+      let m = bzDate.getMinutes() + ":";
+      let s = bzDate.getSeconds();
+      return Y + M + D + h + m + s;
     },
     filterDataBySearchAndSelect(allTableList) {
       let result = [];
@@ -198,36 +188,63 @@ export default {
     },
     async load() {
       let { componentId } = this.customConfig || {};
+
       this.originTableData = await queryAssetById(this.assetId);
       this.handleTableData(this.originTableData);
-      let infoType;
-      infoType = this.displayTableList.every((d) => {
-        return Number(d[this.sortConfig]);
-      });
-      if (infoType) {
-        if (this.sortType === "ascending") {
-          this.displayTableList = this.displayTableList.sort((a, b) => {
-            return a[this.sortConfig] - b[this.sortConfig];
-          });
-        } else {
-          this.displayTableList = this.displayTableList.sort((a, b) => {
-            return b[this.sortConfig] - a[this.sortConfig];
-          });
-        }
-      } else {
-        if (this.sortType === "ascending") {
-          this.displayTableList = this.displayTableList.sort((a, b) => {
-            return a[this.sortConfig].localeCompare(b[this.sortConfig], "zh");
-          });
-        } else {
-          this.displayTableList = this.displayTableList.sort((a, b) => {
-            return a[this.sortConfig].localeCompare(b[this.sortConfig], "zh");
-          });
-        }
-      }
       this.displayTableList = this.filterDataBySearchAndSelect(
         this.allTableList
       );
+      if (this.sortConfig[1] && this.sortConfig[1] === "dateTime") {
+        this.displayTableList.forEach((d) => {
+          d[this.sortConfig[0]] = new Date(d[this.sortConfig[0]]).getTime();
+        });
+        if (this.sortType === "ascending") {
+          this.displayTableList = this.displayTableList.sort((a, b) => {
+            return a[this.sortConfig[0]] - b[this.sortConfig[0]];
+          });
+        } else {
+          this.displayTableList = this.displayTableList.sort((a, b) => {
+            return b[this.sortConfig[0]] - a[this.sortConfig[0]];
+          });
+        }
+        this.displayTableList.forEach((item) => {
+          item[this.sortConfig[0]] = this.formDate(item[this.sortConfig[0]]);
+        });
+      } else {
+        let infoType;
+        console.log("displayTableList===", this.displayTableList);
+        infoType = this.displayTableList.every((d) => {
+          return Number(d[this.sortConfig[0]] !== "NaN");
+        });
+        console.log("infoType==", infoType);
+        if (infoType) {
+          if (this.sortType === "ascending") {
+            this.displayTableList = this.displayTableList.sort((a, b) => {
+              return a[this.sortConfig[0]] - b[this.sortConfig[0]];
+            });
+          } else {
+            this.displayTableList = this.displayTableList.sort((a, b) => {
+              return b[this.sortConfig[0]] - a[this.sortConfig[0]];
+            });
+          }
+        } else {
+          if (this.sortType === "ascending") {
+            this.displayTableList = this.displayTableList.sort((a, b) => {
+              return a[this.sortConfig[0]].localeCompare(
+                b[this.sortConfig[0]],
+                "zh"
+              );
+            });
+          } else {
+            this.displayTableList = this.displayTableList.sort((a, b) => {
+              return a[this.sortConfig[0]].localeCompare(
+                b[this.sortConfig[0]],
+                "zh"
+              );
+            });
+          }
+        }
+      }
 
       this.displayTableList = this.filterDataBypagination(
         this.displayTableList
