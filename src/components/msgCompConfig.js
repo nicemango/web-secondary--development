@@ -16,8 +16,8 @@ export const events = [
     ],
   },
   {
-    key: "firstLoad",
-    name: "首次加载",
+    key: "load",
+    name: "加载",
     payload: [
       {
         key: "rowInformation", name: "行信息", dataType: "object"

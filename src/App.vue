@@ -6,7 +6,10 @@
       </div>
       <div class="total">{{ allTableList.length }}</div>
       <div>
-        <el-button type="primary" @click="handleButtonClick"
+        <el-button
+          type="primary"
+          class="multiConditionButton"
+          @click="handleButtonClick"
           >{{ buttonTitle }}
         </el-button>
       </div>
@@ -147,6 +150,7 @@ export default {
       this.inputSearchArr.push({ value: "" });
     }
     let { componentId } = this.customConfig || {};
+    this.componentId = componentId;
 
     componentId &&
       window.componentCenter?.register(
@@ -155,9 +159,6 @@ export default {
         this,
         eventActionDefine
       );
-    window.eventCenter?.triggerEvent(componentId, "firstLoad", {
-      rowInformation: this.firstRowInfo,
-    });
   },
   methods: {
     //表格排序
@@ -196,15 +197,12 @@ export default {
       return result;
     },
     async load() {
+      let { componentId } = this.customConfig || {};
       this.originTableData = await queryAssetById(this.assetId);
       this.handleTableData(this.originTableData);
-      this.displayTableList = this.filterDataBySearchAndSelect(
-        this.allTableList
-      );
       let infoType;
       infoType = this.displayTableList.every((d) => {
-        return Number(d[this.sortConfig])
-
+        return Number(d[this.sortConfig]);
       });
       if (infoType) {
         if (this.sortType === "ascending") {
@@ -227,6 +225,9 @@ export default {
           });
         }
       }
+      this.displayTableList = this.filterDataBySearchAndSelect(
+        this.allTableList
+      );
 
       this.displayTableList = this.filterDataBypagination(
         this.displayTableList
@@ -234,8 +235,21 @@ export default {
       this.firstRowInfo = this.displayTableList[0];
 
       this.$refs.myTable.setCurrentRow(this.displayTableList[0]);
+      window.eventCenter?.triggerEvent(componentId, "load", {
+        rowInformation: this.firstRowInfo,
+      });
     },
     handleButtonClick() {
+      this.inputSelectConfig.select = [];
+      this.inputSearchArr.forEach((d) => {
+        d.value = "";
+      });
+      this.inputSelectConfig.input = [];
+      this.selectValueArr = [];
+
+      this.load();
+      this.currentPage = 1;
+
       let { componentId, appId } = this.customConfig || {};
       componentId &&
         appId &&
@@ -281,6 +295,7 @@ export default {
         });
         this.selectSearchArr.push(selectList);
       });
+      console.log("this.this.selectSearchArr===", this.selectSearchArr);
     },
     filterDataBypagination(data) {
       this.total = data.length;
