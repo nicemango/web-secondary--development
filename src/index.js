@@ -8,11 +8,14 @@ import App from "./App";
  * 生产包是当做 onemind 主站插件使用的，页面里已经有一份 ant.css 了，所以这里可以省去
  * 从功能通过 webpack.IgnorePlugin 插件实现，如果想要打入此 css，请在 webpack 配置中做修改。
  */
+
 if (process.env.NODE_ENV !== "production") {
   require("antd/dist/antd.css");
   // 添加 customConfig 进行测试
   let customConfig = {
-    uesrHead: "",
+    appId: "",
+    dataSouce:
+      '[{"label":"开发插件","key":"item-1-7"},{"label":"逻辑切面","key":"item-1","children":[{"label":"开发插件","key":"item-1-1"},{"label":"使用插件","key":"item-1-2"},{"label":"JAVA SDK使用说明","key":"item-1-3"}]},{"label":"业务流开放","key":"item-2","children":[{"label":"开发插件","key":"item-2-1"},{"label":"使用插件","key":"item-2-2"},{"label":"JAVA SDK使用说明","key":"item-2-3"}]}]',
   };
   ReactDOM.render(<App customConfig={customConfig} />, document.getElementById("root"));
 } else {

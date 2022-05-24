@@ -1,7 +1,16 @@
-#customHeadAndSide .ant-menu-submenu-open,
 #customHeadAndSide .ant-menu-item-active,
 #customHeadAndSide .ant-menu-item-selected {
   background-color: #4381e6 !important;
+}
+#customHeadAndSide .ant-menu-item-active::after,
+#customHeadAndSide .ant-menu-item-selected::after {
+  content: "";
+  width: 0;
+  border: 12px solid transparent;
+  border-right: 12px solid white !important;
+  height: 0;
+  position: absolute;
+  top: 6px;
 }
 #customHeadAndSide .ant-menu-dark,
 #customHeadAndSide .ant-menu-root,

@@ -1,9 +1,18 @@
 #customHeadAndSide {
-  .ant-menu-submenu-open,
   .ant-menu-item-active,
   .ant-menu-item-selected {
     background-color: #4381e6 !important;
+    &::after {
+      content: "";
+      width: 0;
+      border: 12px solid transparent;
+      border-right: 12px solid white !important;
+      height: 0;
+      position: absolute;
+      top: 6px;
+    }
   }
+
   .ant-menu-dark,
   .ant-menu-root,
   .ant-menu,
