@@ -1,7 +1,7 @@
 {
-  "id": "bc17c674-42a6-4794-92bd-9425ac81e910",
+  "id": "ff6da5b2-7a18-41fb-a61a-c995327832e8",
   "type": "navigation",
-  "main": "main.30dcaf4f.js",
+  "main": "main.58a181cc.js",
   "version": "2",
   "props": {
     "type": "navigation",
@@ -11,6 +11,7 @@
     "lib": [],
     "css_script": [],
     "customconf": [
+      "uesrHead"
     ]
   }
 }
