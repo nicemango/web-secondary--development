@@ -23,17 +23,18 @@ lib
 .env.production.local
 .env.development
 .env.production
-# npm
+# npm 依赖
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-lock.yaml
-package-lock.json
 
 pluginTemp/js/*
 **/pluginTemp/js/*.js
 pluginTemp/libs/*
 plugin-*.zip
+
+pnpm-lock.yaml
+package-lock.json
 
 .umi
 
