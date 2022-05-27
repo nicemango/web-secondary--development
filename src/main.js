@@ -60,13 +60,14 @@ if (dom) {
     window.CUSTOM_PLUGIN.set(
       process.env.VUE_APP_CUSTOM_PLUGIN_ID,
       (dom, props) => {
-        const component = new Vue({
-          render: h => <App {...{ props }} />,
-        }).$mount();
         if (dom.childNodes.length > 0) {
           dom.removeChild(dom.childNodes[0]);
         }
-        dom.appendChild(component.$el);
+        const div = document.createElement("div");
+        dom.appendChild(div);
+        new Vue({
+          render: h => <App {...{ props }} />,
+        }).$mount(div);
       }
     );
   }
