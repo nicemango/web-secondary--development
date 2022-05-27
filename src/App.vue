@@ -1,29 +1,10 @@
 <template>
-  <div
-    className="analyzer-vue-demo"
-    :style="{
-      width: '100%',
-      height: '100%',
-      fontSize: options.externalVariables.fontSize || '14px',
-    }"
-  >
-    <div v-if="dataSource && tableDataHeader && tableData">
-      <div className="card-bg" @click="clickBt">点这里测试逻辑控制</div>
-      <el-table :data="tableData" style="width: 100%">
-        <el-table-column
-          v-for="(item, index) in tableDataHeader"
-          :key="index"
-          :prop="item.prop"
-          :label="item.label"
-          width="180"
-        >
-        </el-table-column>
-      </el-table>
-    </div>
-  </div>
+  <div id="main" ref="main" style="height:100%;margin: auto;"></div>
 </template>
 
 <script>
+import * as echarts from 'echarts';
+
 const zipObject = (arr1, arr2) => {
   const ret = {};
   arr1.forEach((item, index) => {
@@ -46,54 +27,41 @@ export default {
       type: Object,
       default: () => ({
         // 配置项从externalVariables里取
-        externalVariables: {},
+        externalVariables: {
+          bgColor: ''
+        },
       }),
     },
     updateProcess: {
       type: Function,
-      default: () => {},
+      default: () => { },
     },
   },
   data() {
     return {
-      demoTableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄",
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄",
-        },
-      ],
+      demoTableData: [],
+      data: [],
+      x: [],
+      y: [],
+      z: [],
+      source: []
     };
   },
-  computed: {
-    tableDataHeader() {
-      return (this.dataSource[0] || []).map(t => ({
-        prop: t,
-        label: t,
-      }));
-    },
-    tableData() {
-      let [header, ...tableData] = this.dataSource;
-      tableData = tableData || [];
-      return tableData.map(d => (window?._?.zipObject || zipObject)(header, d));
-    },
-  },
+  // computed: {
+  //   tableDataHeader() {
+  //     return (this.dataSource[0] || []).map(t => ({
+  //       prop: t,
+  //       label: t,
+  //     }));
+  //   },
+  //   tableData() {
+  //     let [header, ...tableData] = this.dataSource;
+  //     tableData = tableData || [];
+  //     return tableData.map(d => (window?._?.zipObject || zipObject)(header, d));
+  //   },
+  // },
   mounted() {
+    this.handlerData()
     const events = [
       {
         key: "onClick",
@@ -129,8 +97,98 @@ export default {
         actions,
       });
     this.updateProcess && this.updateProcess();
+    this.eChartsInit()
   },
   methods: {
+    all(a) {
+      // console.log(a);
+      a[0].map((item, index) => {
+        a.map(ite => {
+          this.x.push(ite[index])
+          console.log(this.x);
+        })
+        this.z.push(this.x.splice(a.length, a.length))
+      })
+      this.z[0] = this.x
+      // console.log(this.x,this.z);
+      console.log(this.z);
+      this.z.unshift([])
+      return this.z
+    },
+    handlerData() {
+      this.source = this.all(this.dataSource)
+    },
+    eChartsInit() {
+      // var chartDom = document.getElementById('main');
+      var chartDom = this.$refs.main
+      var myChart = echarts.init(chartDom);
+      var option;
+      // echarts.dataTool.prepareBoxplotData(this.dataset.source)
+      option = {
+        title: [
+          {
+            text: '盒须图',
+            left: 'left'
+          },
+        ],
+        dataset: [
+          {
+            // prettier-ignore
+            source: this.source
+          },
+          {
+            transform: {
+              type: 'boxplot',
+              config: ''
+            }
+          },
+          {
+            fromDatasetIndex: 1,
+            fromTransformResult: 1
+          }
+        ],
+        tooltip: {
+          trigger: 'item',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        grid: {
+          left: '10%',
+          right: '10%',
+          bottom: '15%'
+        },
+        xAxis: {
+          type: 'category',
+          boundaryGap: true,
+          nameGap: 30,
+          splitArea: {
+            show: false
+          },
+          splitLine: {
+            show: false
+          }
+        },
+        yAxis: {
+          type: 'value',
+          splitArea: {
+            show: true
+          }
+        },
+        series: [
+          {
+            name: 'boxplot',//箱形图
+            type: 'boxplot',
+            itemStyle: { //盒须图样式。
+              color: this.options.externalVariables.bgColor ? this.options.externalVariables.bgColor : "skyblue", //boxplot图形的颜色。 默认从全局调色盘 option.color 获取颜色
+              borderColor: '#000', //boxplot图形的描边颜色。支持的颜色格式同 color，不支持回调函数。
+            },
+          }
+        ]
+      };
+      option && myChart.setOption(option);
+
+    },
     clickBt() {
       this.componentId &&
         window.eventCenter?.triggerEvent &&
@@ -149,3 +207,19 @@ export default {
   },
 };
 </script>
+<style>
+html,
+body {
+  height: 100% !important;
+}
+
+template {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#main {
+  width: 100% !important;
+  height: 100% !important;
+}
+</style>

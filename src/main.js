@@ -37,11 +37,11 @@ if (dom) {
 } else {
   if (process.env.NODE_ENV !== "production") {
     const dataSource = JSON.parse(
-      '[["衬衫","高跟鞋","裤子","袜子","雪纺衫","羊毛衫"],[5,10,10,17,36,20]]'
+      '[["Xayis","Yayis","Zayis","Dayis"],[125,458,452,856],[253,685,542,521],[485,489,532,352],[125,489,352,852],[368,489,352,742],[715,489,652,632],[952,489,652,962]]'
     );
     const options = {
       externalVariables: {
-        fontSize: "20px",
+        bgColor: ''
       },
     };
     const props = {
@@ -60,13 +60,14 @@ if (dom) {
     window.CUSTOM_PLUGIN.set(
       process.env.VUE_APP_CUSTOM_PLUGIN_ID,
       (dom, props) => {
-        const component = new Vue({
-          render: h => <App {...{ props }} />,
-        }).$mount();
         if (dom.childNodes.length > 0) {
           dom.removeChild(dom.childNodes[0]);
         }
-        dom.appendChild(component.$el);
+        const div = document.createElement("div");
+        dom.appendChild(div);
+        new Vue({
+          render: h => <App {...{ props }} />,
+        }).$mount(div);
       }
     );
   }
