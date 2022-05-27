@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="map">
     <div id="containerAdd" :style="mapStyle" ref="containerAdd"></div>
     <div class="map_button">
       <el-button type="success" size="mini" round v-show="!geocoderButton" ref="geocoderClickOn">开启详细定位</el-button>
@@ -13,7 +13,7 @@
 
 <script>
 import eventActionDefine from "./msgCompConfig";
-import AMapLoader from '@amap/amap-jsapi-loader'
+// import AMapLoader from '@amap/amap-jsapi-loader'
 
 window._AMapSecurityConfig = {
   securityJsCode:'d6916f1f375303ccb0c2fff4d752b46a',
@@ -33,9 +33,10 @@ export default {
       configuration: {},
       mapStyle: '',
       mapCityCenter: '',
-      map: '',
+      map: null,
       geocoderButton: false,
       overlaysButton: false,
+      mapCenterPoint: null
     };
   },
 
@@ -72,11 +73,13 @@ export default {
     }
 
     this.initMap()
+
+    window.loadMap = this.do_EventCenter_loadMap
   },
 
-  methods: { 
+  methods: {
     initMap() {
-      AMapLoader.load({
+      this.AMapLoader.load({
         "key": "4f9ebccb236519f688c2545d15e5242d",
         "version": "2.0",
         "plugins": [
@@ -85,7 +88,25 @@ export default {
           'AMap.MouseTool'
         ]
       }).then( (AMap) => {
-        let map = new AMap.Map(this.$refs['containerAdd'],{ zoom: 10, zooms:[9,15], center: this.mapCityCenter })
+        let centerPoint = this.mapCityCenter ? this.mapCityCenter : [118.432581,32.423072]
+        if(this.mapCenterPoint) {
+          centerPoint = this.mapCenterPoint
+        }
+        let map = new AMap.Map(this.$refs['containerAdd'],{ zoom: 13, zooms:[9,15], center: centerPoint })
+
+        let marker = null
+        if(this.mapCenterPoint) {
+          let carIcon = new AMap.Icon({
+            image: '//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png',
+            imageSize: new AMap.Size(25, 34),
+          });
+          marker = new AMap.Marker({
+            icon: carIcon,
+            position: centerPoint,
+            offset: new AMap.Pixel(-13, -30)
+          })
+          map.add(marker)
+        }
 
         this.map = map
         let _that = this
@@ -186,6 +207,9 @@ export default {
           polygon.setPath(pathArray);
           map.add(polygon)
         })
+      }).catch( (e) => {
+        this.map = null
+        this.initMap()
       })
     },
 
@@ -212,6 +236,10 @@ export default {
       this.map.setCenter([value.mapLng, value.mapLat])
       this.map.setZoom(13)
     },
+    do_EventCenter_loadMap(value) {
+      this.mapCenterPoint = [value.mapLng, value.mapLat]
+      this.initMap()
+    },
     Event_Center_getName() {
       return this.data;
     },
@@ -219,11 +247,18 @@ export default {
 
   destroyed() {
     window?.componentCenter?.removeInstance(this.customConfig.componentId);
+
+    this.map && this.map.destroy();
   },
 };
 </script>
 
 <style>
+  .map {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
   .map_button {
     position: absolute;
     top: 20px;
