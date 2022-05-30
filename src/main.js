@@ -41,7 +41,11 @@ if (dom) {
     );
     const options = {
       externalVariables: {
-        bgColor: ''
+        bgColor:'',
+        tiTle:'',
+        position:'',
+        titlefontSize:'',
+        titlefontColor:''
       },
     };
     const props = {

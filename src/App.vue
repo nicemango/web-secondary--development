@@ -28,7 +28,11 @@ export default {
       default: () => ({
         // 配置项从externalVariables里取
         externalVariables: {
-          bgColor: ''
+          bgColor: '',
+          tiTle: '',
+          position: '',
+          titlefontSize: '',
+          titlefontColor: ''
         },
       }),
     },
@@ -61,6 +65,7 @@ export default {
   //   },
   // },
   mounted() {
+    // console.log(this.options.externalVariables.tiTle);
     this.handlerData()
     const events = [
       {
@@ -105,13 +110,13 @@ export default {
       a[0].map((item, index) => {
         a.map(ite => {
           this.x.push(ite[index])
-          console.log(this.x);
+          // console.log(this.x);
         })
         this.z.push(this.x.splice(a.length, a.length))
       })
       this.z[0] = this.x
       // console.log(this.x,this.z);
-      console.log(this.z);
+      // console.log(this.z);
       this.z.unshift([])
       return this.z
     },
@@ -119,6 +124,7 @@ export default {
       this.source = this.all(this.dataSource)
     },
     eChartsInit() {
+      // console.log(this.options.externalVariables.tiTle);
       // var chartDom = document.getElementById('main');
       var chartDom = this.$refs.main
       var myChart = echarts.init(chartDom);
@@ -127,20 +133,18 @@ export default {
       option = {
         title: [
           {
-            text: '盒须图',
-            left: 'left'
+            text: this.options.externalVariables.tiTle ? this.options.externalVariables.tiTle : '标题',
+            left: this.options.externalVariables.position ? this.options.externalVariables.position : 'center',
+            textStyle: {
+              fontSize: this.options.externalVariables.titlefontSize ? this.options.externalVariables.titlefontSize : '18px',
+              color: this.options.externalVariables.titlefontColor ? this.options.externalVariables.titlefontColor : '#464646'
+            }
           },
         ],
         dataset: [
           {
             // prettier-ignore
             source: this.source
-          },
-          {
-            transform: {
-              type: 'boxplot',
-              config: ''
-            }
           },
           {
             fromDatasetIndex: 1,
@@ -167,7 +171,8 @@ export default {
           },
           splitLine: {
             show: false
-          }
+          },
+          data: this.dataSource[0]
         },
         yAxis: {
           type: 'value',
