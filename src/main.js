@@ -42,7 +42,7 @@ if (dom) {
     const options = {
       externalVariables: {
         bgColor:'',
-        tiTle:'',
+        title:'',
         position:'',
         titlefontSize:'',
         titlefontColor:''

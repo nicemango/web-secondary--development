@@ -1,7 +1,7 @@
 {
   "id": "44129faa-6b68-4190-b680-1e5b08c1498b",
   "type": "analyzers",
-  "main": "app.92fbdf86.js",
+  "main": "app.74733934.js",
   "version": "2",
   "props": {
     "img": "custom_table.png",
@@ -15,7 +15,7 @@
     "optionModules": [],
     "vars": [
       "bgColor",
-      "tiTle",
+      "title",
       "position",
       "titlefontSize",
       "titlefontColor"

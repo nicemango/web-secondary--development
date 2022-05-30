@@ -29,7 +29,7 @@ export default {
         // 配置项从externalVariables里取
         externalVariables: {
           bgColor: '',
-          tiTle: '',
+          title: '',
           position: '',
           titlefontSize: '',
           titlefontColor: ''
@@ -68,31 +68,11 @@ export default {
     // console.log(this.options.externalVariables.tiTle);
     this.handlerData()
     const events = [
-      {
-        key: "onClick",
-        name: "点击",
-        payload: [
-          {
-            name: "名称",
-            dataType: "string",
-            key: "name",
-          },
-        ],
-      },
+      
     ];
 
     const actions = [
-      {
-        key: "messageSuccess",
-        name: "成功提示",
-        params: [
-          {
-            key: "value",
-            name: "值",
-            dataType: "string",
-          },
-        ],
-      },
+      
     ];
 
     this.componentId &&
@@ -106,17 +86,13 @@ export default {
   },
   methods: {
     all(a) {
-      // console.log(a);
       a[0].map((item, index) => {
         a.map(ite => {
           this.x.push(ite[index])
-          // console.log(this.x);
         })
         this.z.push(this.x.splice(a.length, a.length))
       })
       this.z[0] = this.x
-      // console.log(this.x,this.z);
-      // console.log(this.z);
       this.z.unshift([])
       return this.z
     },
@@ -133,7 +109,7 @@ export default {
       option = {
         title: [
           {
-            text: this.options.externalVariables.tiTle ? this.options.externalVariables.tiTle : '标题',
+            text: this.options.externalVariables.title ? this.options.externalVariables.title : '标题',
             left: this.options.externalVariables.position ? this.options.externalVariables.position : 'center',
             textStyle: {
               fontSize: this.options.externalVariables.titlefontSize ? this.options.externalVariables.titlefontSize : '18px',
@@ -203,11 +179,7 @@ export default {
     },
     // 逻辑控制用，不可删，return内容可改
     Event_Center_getName: () => {
-      return "Demo实例";
-    },
-    do_EventCenter_messageSuccess(param) {
-      console.log(param);
-      alert("动作执行成功！");
+      return "箱体图";
     },
   },
 };
