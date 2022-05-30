@@ -39,13 +39,3 @@ plugin-*.zip
 
 .history
 temp
-# Editor directories and files
-.idea
-.vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-temp
-.env
