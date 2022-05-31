@@ -48,7 +48,8 @@ export default {
       x: [],
       y: [],
       z: [],
-      source: []
+      source: [],
+      timer:null
     };
   },
   // computed: {
@@ -168,6 +169,11 @@ export default {
         ]
       };
       option && myChart.setOption(option);
+     this.timer= setTimeout(() => {
+        window.addEventListener('resize', function () {
+          myChart.resize()
+        })
+      }, 1000)
 
     },
     clickBt() {
@@ -182,6 +188,10 @@ export default {
       return "箱体图";
     },
   },
+  beforeDestroy() {
+    clearTimeout(this.timer);
+  },
+
 };
 </script>
 <style>
