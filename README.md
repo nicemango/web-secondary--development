@@ -1,5 +1,3 @@
-[toc]
-
 # smardaten前端组件二次开发
 
 ## 你需要知道的知识
@@ -48,8 +46,10 @@ config.json,customconf配置项
 
 **`接收用户输入`**
 * react version
-  this.props.customConfi
+  
+  this.props.customConfig
 * vue version
+  
   this.customConfig
 ### 分析仪
 **`定义用户输入`**
@@ -57,8 +57,10 @@ config.json,vars配置项
 
 **`接收用户输入`**
 * react version
+  
   this.props.options.externalVariables
 * vue version
+  
   this.options.externalVariables
 
 ### 大屏
@@ -67,8 +69,10 @@ config.json,vars配置项
 
 **`接收用户输入`**
 * vue version
+  
   this.customConfig.variable.default_value
 * react version
+  
   this.props.variable.default_value
 
 ### 填报
@@ -77,20 +81,26 @@ designConfiguration组件
 
 **`接收用户输入`**
 * vue version
+  
   this.customConfig.configuration
 * react version
+  
   this.props.customConfig.configuration
 
 $\color{red}{tips:注意加?.}$
 
 ## 数据源的获取
-### 应用，分析仪，大屏
 
 **`字符串形式`**
 使用JSON.stringify()转化数据
 
 **`查询资产`**
-调用queryAssetById接口，数据图书馆资产
+调用queryAssetById接口，使用数据图书馆资产
+
+**`用户配置`**
+填报独有
+通过customConfig.configuration获得
+
 
 ## 行为交互（逻辑控制）
 
@@ -99,6 +109,7 @@ $\color{red}{tips:注意加?.}$
 原生js的逻辑控制
 
 ```js
+//原生的点击事件，鼠标点击的时候，浏览器会触发点击事件（浏览器内部提供），开发者只用书写注册代码即可在用户点击时进行交互
 document.addEventListener("click",function(e){
   console.log(e.clientX)
 })
@@ -106,12 +117,13 @@ document.addEventListener("click",function(e){
 
 ### EventBus
 ```js
-//注册事件
-EventBus.register(eventName,function(){});
+//EventBus使用register注册事件
+EventBus.register(eventName,function(e){
+  console.log(e)
+});
 
-//触发事件
+//EventBus使用triggerEvent触发事件，并可对外暴露相关参数
 EventBus.triggerEvent(eventName,params)
-
 ```
 ### smardaten平台EventCenter(以应用二开为例)
 ```js
@@ -166,20 +178,19 @@ this.props?.customConfig?.componentId && window.componentCenter?.register(this.p
 **`对应于EventBus的triggerEvent`**
 
 ```js
-window.eventCenter?.triggerEvent(this.props?.customConfig?.componentId,
- "searchValueChange", {searchValue: val})
+window.eventCenter?.triggerEvent(this.props?.customConfig?.componentId,"searchValueChange", {searchValue: val})
 ```
 
-**`对应于 EventBus的register`**
+**`对应于EventBus的register`**
 
 >smardaten平台  组件的交互页签-逻辑绑定-新增逻辑
 
-**`对应于 EventBus的function`**
+**`对应于EventBus的function`**
 
 >smardaten平台  组件的交互页签-逻辑绑定-新增逻辑-组件动作
 
 
-### 补充(手写EventBus)
+### 补充(手写实现简易EventBus)
 
 ```js
 class EventBus {
@@ -199,16 +210,25 @@ class EventBus {
       callback.call(null, context);
     })
   }
+  clear(){
+    this.listeners = {};
+  }
 }
 export default new EventBus();
 ```
 ## 远程调试及功能验证
 ### 远程调试
 + react版本
-  修改proxy.js的target字段为代理地址，修改src/api/request.js中document.cookie的token和refreshToken字段为对应代理地址的相应字段即可实现远程调试
+  1. 修改proxy.js的target字段为代理地址
+  2. 修改src/api/request.js中document.cookie的token和refreshToken字段为代理地址请求头的相应字段
+  3. npm run start
 + vue版本
-  修改vue.config.js的target字段为代理地址，修改src/api/request.js中document.cookie的token和refreshToken字段为对应代理地址的相应字段即可实现远程调试
+  1. 修改vue.config.js的target字段为代理地址，
+  2. 修改src/api/request.js中document.cookie的token和refreshToken字段为代理地址请求头的相应字段
+  3. npm run serve
 ### 功能验证
-上传二开插件包到验证环境上，创建对应的字段即可。其他的功能验证与本地验证基本一致
-逻辑控制的验证，需要点到二开组件的交互界面，点击相应事件名，添加相应的打印输出逻辑，即可判断事件是否已经接入smardaten平台
-如果是动作，则可搭建最简单的场景，如一个按钮，点击事件触发对应的动作，看能否正常生效即可。
++ 上传二开插件包到验证环境上，写入对应的配置字段即可。基本的功能验证与本地调试基本一致
++ events的验证，需要点到二开组件的交互界面，点击相应事件名，添加相应的打印输出逻辑，即可判断事件是否已经接入smardaten平台
++ actions验证，可搭建最简单的场景，如一个按钮，点击事件触发对应的动作，看能否正常生效即可。
+## 其他注意事项
+在组件的模板中，预置了一些事件动作相关的函数及定义，请在正式开发中将$\color{red}{用不到的事件与动作清除掉，并正确书写Event\_Center\_getName函数的返回值}$，以防止对配置人员造成困扰。
