@@ -49,7 +49,7 @@ export default {
       y: [],
       z: [],
       source: [],
-      timer:null
+      timer: null
     };
   },
   // computed: {
@@ -69,11 +69,11 @@ export default {
     // console.log(this.options.externalVariables.tiTle);
     this.handlerData()
     const events = [
-      
+
     ];
 
     const actions = [
-      
+
     ];
 
     this.componentId &&
@@ -94,7 +94,7 @@ export default {
         this.z.push(this.x.splice(a.length, a.length))
       })
       this.z[0] = this.x
-      this.z.unshift([])
+      // this.z.unshift([])
       return this.z
     },
     handlerData() {
@@ -112,6 +112,7 @@ export default {
           {
             text: this.options.externalVariables.title ? this.options.externalVariables.title : '标题',
             left: this.options.externalVariables.position ? this.options.externalVariables.position : 'center',
+            // left: '50%',
             textStyle: {
               fontSize: this.options.externalVariables.titlefontSize ? this.options.externalVariables.titlefontSize : '18px',
               color: this.options.externalVariables.titlefontColor ? this.options.externalVariables.titlefontColor : '#464646'
@@ -169,7 +170,7 @@ export default {
         ]
       };
       option && myChart.setOption(option);
-     this.timer= setTimeout(() => {
+      this.timer = setTimeout(() => {
         window.addEventListener('resize', function () {
           myChart.resize()
         })
