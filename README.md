@@ -16,7 +16,7 @@
   3. 安装完成后，运行scli i，选择对应模块及框架
   4. npm i或者yarn install安装相关依赖项，运行npm run serve(Vue版本)/npm run start(React版本)即可开始进行开发
 + github方式
-  1. fork仓库[https://github.com/Orochi-sx/web-secondary--development](https://github.com/Orochi-sx/web-secondary--development/)
+  1. 本地下载github仓库[https://github.com/Orochi-sx/web-secondary--development](https://github.com/Orochi-sx/web-secondary--development/)
   2. 切换对应的分支及插件类型，如vue版本的应用插件为vue-version-app
   3. npm i或者yarn install安装相关依赖项，运行npm run serve(Vue版本)/npm run start(React版本)即可开始进行开发
 ## 页面及文件结构
@@ -27,21 +27,28 @@
 
 填报二开通常有六个文件需要编写,分别为add,child,preview,table,designConfiguration,set
 * set
-填报的配置页面组件展示区域
+  
+  填报的配置页面组件展示区域
 * designConfiguration
-填报配置页面的配置项区域
+  
+  填报配置页面的配置项区域
 * add
-填报增删改页面展示
+  
+  填报增删改页面展示
 * child
-填报插入字表组件页面展示
+  
+  填报插入字表组件页面展示
 * table
-填报在列表页中的展示
+  
+  填报在列表页中的展示
 * preview
-填报详情页页面展示
+  
+  填报详情页页面展示
 
 ## 数据交互
 ### 应用
 **`定义用户输入`**
+
 config.json,customconf配置项
 
 **`接收用户输入`**
@@ -53,6 +60,7 @@ config.json,customconf配置项
   this.customConfig
 ### 分析仪
 **`定义用户输入`**
+
 config.json,vars配置项
 
 **`接收用户输入`**
@@ -65,6 +73,7 @@ config.json,vars配置项
 
 ### 大屏
 **`定义用户输入`**
+
 交互-选择变量
 
 **`接收用户输入`**
@@ -77,6 +86,7 @@ config.json,vars配置项
 
 ### 填报
 **`定义用户输入`**
+
 designConfiguration组件
 
 **`接收用户输入`**
@@ -92,14 +102,16 @@ $\color{red}{tips:注意加?.}$
 ## 数据源的获取
 
 **`字符串形式`**
+
 使用JSON.stringify()转化数据
 
 **`查询资产`**
+
 调用queryAssetById接口，使用数据图书馆资产
 
 **`用户配置`**
-填报独有
-通过customConfig.configuration获得
+
+通过customConfig.configuration获得（填报独有）
 
 
 ## 行为交互（逻辑控制）
@@ -230,5 +242,15 @@ export default new EventBus();
 + 上传二开插件包到验证环境上，写入对应的配置字段即可。基本的功能验证与本地调试基本一致
 + events的验证，需要点到二开组件的交互界面，点击相应事件名，添加相应的打印输出逻辑，即可判断事件是否已经接入smardaten平台
 + actions验证，可搭建最简单的场景，如一个按钮，点击事件触发对应的动作，看能否正常生效即可。
-## 其他注意事项
-在组件的模板中，预置了一些事件动作相关的函数及定义，请在正式开发中将$\color{red}{用不到的事件与动作清除掉，并正确书写Event\_Center\_getName函数的返回值}$，以防止对配置人员造成困扰。
+## 其他注意事项（开发过程中务必关注）
++ 在组件的模板中，预置了一些事件动作相关的函数及定义，请在正式开发中将$\color{red}{用不到的事件与动作清除掉}$，并正确书写`Event_Center_getName`函数的返回值，以防止对配置人员造成困扰。
++ 因为二开插件外层布局由配置人员通过平台布局组件实现，四种类型的前端二开组件，除非特殊要求，理论上都应该将最外层的宽高设置为100%。
++ 二开组件代码中，如果需要获取dom元素并进行操作，react版本或vue版本都应通过ref去获取dom元素而非通过选择器，以防止组件服用时造成冲突
++ 分析仪二开通常对图表类进行二次开发，所以应加上窗口监听事件，并在其中写入图表重绘方法
+  eg.
+  ```js
+  let chart= echarts.init(this.refs.chart)
+  window.addEventListener("resize",function(){
+    chart.resize()
+  })
+  ```
