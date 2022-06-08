@@ -26,11 +26,11 @@
     npm i sdata-cli -g
   ```
   3. 安装完成后，运行scli i，选择对应模块及框架
-  4. npm i或者yarn install安装相关依赖项，运行npm run serve(Vue版本)/npm run start(React版本)即可开始进行开发
+  4. npm i或者yarn install安装相关依赖项，运行npm run start(React版本)即可开始进行开发
 + github方式
   1. 本地下载github仓库[https://github.com/Orochi-sx/web-secondary--development](https://github.com/Orochi-sx/web-secondary--development/)
-  2. 切换对应的分支及插件类型，如vue版本的应用插件为vue-version-app
-  3. npm i或者yarn install安装相关依赖项，运行npm run serve(Vue版本)/npm run start(React版本)即可开始进行开发
+  2. 切换对应的分支及插件类型，如react版本的应用插件为react-version-app
+  3. npm i或者yarn install安装相关依赖项，运行npm run start(React版本)即可开始进行开发
 
 ## 插件包文件说明
 | 文件名 | 说明                                                                                                                               |
@@ -56,7 +56,7 @@
 | props   | 传递插件自定义相关属性。不同模块的自定义属性不同,请参见数据交互章节讲解。                                                           |
 ## 文件结构
 ### 分析仪
-分析仪页面只有一个主页面文件，通常为App.vue/App.js
+分析仪页面只有一个主页面文件，通常为App.js
 
 ## 数据交互
 ### 分析仪
@@ -81,9 +81,6 @@ config.json,vars配置项
 
 调用queryAssetById接口，使用数据图书馆资产
 
-**`用户配置`**
-
-通过customConfig.configuration获得（填报独有）
 
 ## 行为交互（逻辑控制）
 ### 概念引入
@@ -136,7 +133,6 @@ const actions = [
   {
     key: "setValue",
     name: "设值",
-    isSupportChild: true, // 是否支持子表(填报组件)
     params: [
       {
         key: "value",
@@ -148,7 +144,6 @@ const actions = [
   {
     key: "getValue",
     name: "取值",
-    isSupportChild: true, // 是否支持子表(填报组件)
     hasReturn: true,
     returns: [
       {
@@ -283,5 +278,3 @@ export default new EventBus();
 
 ## 功能验证
 + 上传二开插件包到验证环境上，写入对应的配置字段即可。基本的功能验证与本地调试基本一致
-+ events的验证，需要点到二开组件的交互界面，点击相应事件名，添加相应的打印输出逻辑，即可判断事件是否已经接入smardaten平台
-+ actions验证，可搭建最简单的场景，如一个按钮，点击事件触发对应的动作，看能否正常生效即可。
