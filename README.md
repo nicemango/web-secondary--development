@@ -80,10 +80,6 @@ config.json,vars配置项
 
 调用queryAssetById接口，使用数据图书馆资产
 
-**`用户配置`**
-
-通过customConfig.configuration获得（填报独有）
-
 ## 行为交互（逻辑控制）
 ### 概念引入
 
@@ -135,7 +131,6 @@ const actions = [
   {
     key: "setValue",
     name: "设值",
-    isSupportChild: true, // 是否支持子表(填报组件)
     params: [
       {
         key: "value",
@@ -147,7 +142,6 @@ const actions = [
   {
     key: "getValue",
     name: "取值",
-    isSupportChild: true, // 是否支持子表(填报组件)
     hasReturn: true,
     returns: [
       {
@@ -229,13 +223,19 @@ export default new EventBus();
 ## 插件的上传及使用
 ### 插件上传
 1. 登录数睿平台，单击“开放平台”，进入开放平台页面。
+
 ![](https://img.kancloud.cn/d9/a4/d9a4bec3826204ba416641df86356bb0_3900x1886.png)
 
 2. 单击“插件开发”，进入插件开发页面。
+
 ![](https://img.kancloud.cn/f5/69/f5694c4d7824d0b25c6b9ad7a0d8f2d3_3882x1980.png)
+
 3. 单击“我的插件”，进入插件列表页面。
+
 ![](https://img.kancloud.cn/77/da/77da3cdf2c67db84589bfeb11a72030e_3896x1460.png)
+
 4. 单击“新增插件”，新增插件弹窗弹出。
+
 ![](https://img.kancloud.cn/9f/1e/9f1ec451feaa81f2775220e9a75e1b90_3034x1838.png)
 
 5. 在新增插件弹窗中，输入插件信息。
@@ -251,7 +251,7 @@ export default new EventBus();
 | 图标 | 单击“选择图标”，根据需要选择面性或线性类型的图标，并且可以通过配置主题颜色，配置图标的颜色。也可以选择自定义，上传自定义图标，支持的自定义图标格式有jpg、jpeg、png、bmp和svg，且图片的大小不能超过128K。 |
 ### 插件使用
 #### 分析仪
-1. 新增插件已经上传Smartdata平台，具体步骤可参见[上传插件](../%E4%B8%8A%E4%BC%A0%E6%8F%92%E4%BB%B6.md)。
+1. 新增插件已经上传Smartdata平台。
 
 2. 进入首页，在菜单栏中选择分析仪模块。
 
@@ -275,11 +275,13 @@ export default new EventBus();
 
 ![](./images/1654591566(1).png)
 
-8. 点击右侧配置栏，如果插件所需要变量则在这里输入
+8. 点击右侧配置栏
+
+![](./images/1654654542(1).png) 
+
+9.插件所需要变量则在这里输入
 
 ![](./images/1654591666(1).png)
 
 ## 功能验证
 + 上传二开插件包到验证环境上，写入对应的配置字段即可。基本的功能验证与本地调试基本一致
-+ events的验证，需要点到二开组件的交互界面，点击相应事件名，添加相应的打印输出逻辑，即可判断事件是否已经接入smardaten平台
-+ actions验证，可搭建最简单的场景，如一个按钮，点击事件触发对应的动作，看能否正常生效即可。
