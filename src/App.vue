@@ -96,6 +96,7 @@ export default {
       sortConfig: [],
       firstRowInfo: {},
       componentId: "",
+      selectArr: [],
     };
   },
   computed: {
@@ -126,7 +127,6 @@ export default {
       buttonTitle,
       tableDisplayFieldName,
       assetId,
-      selectAssetId,
       inputSelectConfig,
       sortConfig,
       sortType,
@@ -141,9 +141,10 @@ export default {
     this.buttonTitle = buttonTitle;
     this.inputSelectConfig = JSON.parse(inputSelectConfig);
     this.originTableData = await queryAssetById(assetId);
-    let originSelectData = await queryAssetById(selectAssetId);
+
     // this.handleTableData(this.originTableData);
-    this.handleSelectData(originSelectData);
+    this.handleSelectData();
+
     this.load();
     for (let i = 0; i < this.inputSelectConfig.input.length; i++) {
       this.inputSearchArr.push({ value: "" });
@@ -294,17 +295,26 @@ export default {
       let tableData = this.translatePlatformDataToJsonArray(originTableData);
       this.allTableList = tableData;
     },
-    handleSelectData(originSelectData) {
-      let selectData = this.translatePlatformDataToJsonArray(originSelectData);
+    async handleSelectData() {
+      for (let i = 0; i < this.inputSelectConfig.select.length; i++) {
+        this.selectArr.push(
+          await queryAssetById(this.inputSelectConfig.select[i].selectAssetId)
+        );
+      }
+      console.log("this.selectArr==1111", this.selectArr);
+      var flagArr = []
+      this.selectArr.forEach(item=>{
+        flagArr.push(this.translatePlatformDataToJsonArray(item))
+      })
       let displayMapping;
       try {
         displayMapping = this.inputSelectConfig.select;
       } catch (error) {
         console.log("传入的数据不合法");
       }
-      displayMapping.forEach((displayMappingItem) => {
+      displayMapping.forEach((displayMappingItem,index) => {
         let selectList = [];
-        selectData.forEach((selectDataItem) => {
+        flagArr[index].forEach((selectDataItem) => {
           selectList.push({
             label: selectDataItem[displayMappingItem["displayField"]],
             value: selectDataItem[displayMappingItem["valueField"]],
@@ -312,7 +322,6 @@ export default {
         });
         this.selectSearchArr.push(selectList);
       });
-      console.log("this.this.selectSearchArr===", this.selectSearchArr);
     },
     filterDataBypagination(data) {
       this.total = data.length;
