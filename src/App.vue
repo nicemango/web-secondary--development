@@ -1,6 +1,15 @@
 <template>
   <div class="bigest">
-    <div class="title">得民招聘网</div>
+    <div class="title">
+      <div class="top">
+        <div style="height:100%;width:60px">
+          <img src="../output/images/1c4c7d184fa9d98a46fd36d187204c3.png" alt="" class="icon" />
+        </div>
+        <div>
+          得民招聘网
+        </div>
+      </div>
+    </div>
     <div class="big">
       <div class="left">
         <div class="ltop">
@@ -19,21 +28,21 @@
               <div class="row">
                 <div class="red1">正在招</div>
                 <div class="ccontent">江苏南京</div>
-                <div>
-                  <el-button type="primary">立即联系</el-button>
-                </div>
+                <el-button type="primary">立即联系</el-button>
               </div>
             </div>
           </div>
           <div v-if="this.count1 == 1">
             <div v-for="item in this.userData" class="content1">
-              <div>
-                123
+              <div class="userImg1">
+                <img :src="item.imgUrl" alt="" class="userImg">
               </div>
               <div class="row1">
                 <div>
                   <div class="ctitle">{{ item.name }}</div>
-                  <div class="ccontent">{{ item.sex }}-{{ item.age }}岁-{{ item.nation }}族-工龄{{ item.seniority }}年</div>
+                  <div class="ccontent">{{ item.sex }} · {{ item.age }}岁 · {{ item.nation }}族 · 工龄{{ item.seniority }}年
+                  </div>
+                  <div class="lol">{{ item.skills }}</div>
                 </div>
                 <div class="cperson">{{ item.introduce }}</div>
               </div>
@@ -62,7 +71,7 @@
             <div class="yzcode">
               <div>
                 <el-input placeholder="请输入图片验证码" class="mobile" v-model="yzm" @input="yzmCheck">
-                  <template slot="append"><span class="imgyzm">123456</span></template>
+                  <template slot="append"> <img :src="this.captchaUrl" class="img" @click="changePicyzm" /> </template>
                 </el-input>
                 <div v-show="!this.flag2" class="red">*验证码格式有误</div>
               </div>
@@ -70,14 +79,14 @@
             <div class="yzcode">
               <div>
                 <el-input placeholder="请输入验证码" class="mobile" v-model="sjyzm" @input="sjyzmCheck">
-                  <template slot="append"><span class="getyzCode">获取验证码</span></template>
+                  <template slot="append"><span class="getyzCode" @click="GetPhoneyzm">获取验证码</span></template>
                 </el-input>
                 <div v-show="!this.flag3" class="red">*验证码格式有误</div>
               </div>
             </div>
             <div>
               <input type="checkbox" :checked="flag" @click="add">已阅读并同意<span class="getyzCode1">《隐私政策》《服务协议》</span>
-              <el-button type="primary" class="login" @click="login" :disabled="!flag">登录</el-button>
+              <el-button type="primary" class="login" @click="login1" :disabled="!flag">登录</el-button>
             </div>
           </div>
           <div class="rb" v-show="count == 1">
@@ -94,7 +103,7 @@
             <div class="yzcode">
               <div>
                 <el-input placeholder="请输入图片验证码" class="mobile" v-model="yzm" @input="yzmCheck">
-                  <template slot="append"><span class="imgyzm">123456</span></template>
+                  <template slot="append"><img :src="this.captchaUrl" class="img" @click="changePicyzm" /></template>
                 </el-input>
               </div>
               <div v-show="!this.flag2" class="red">*验证码格式有误</div>
@@ -102,14 +111,14 @@
             <div class="yzcode">
               <div>
                 <el-input placeholder="请输入验证码" class="mobile" v-model="sjyzm" @input="sjyzmCheck">
-                  <template slot="append"><span class="getyzCode">获取验证码</span></template>
+                  <template slot="append"><span class="getyzCode" @click="GetPhoneyzm">获取验证码</span></template>
                 </el-input>
                 <div v-show="!this.flag3" class="red">*验证码格式有误</div>
               </div>
             </div>
             <div>
               <input type="checkbox" :checked="flag" @click="add">已阅读并同意<span class="getyzCode1">《隐私政策》《服务协议》</span>
-              <el-button type="primary" class="login" @click="register" :disabled="!flag">注册</el-button>
+              <el-button type="primary" class="login" @click="register1" :disabled="!flag">注册</el-button>
             </div>
           </div>
         </div>
@@ -124,6 +133,7 @@
 <script>
 // import appService from "@njsdata/app-sdk";
 import eventActionDefine from "./components/msgCompConfig";
+import "element-ui/lib/theme-chalk/index.css"
 import "./index.css";
 import { queryAssetById } from "./api/asset"
 export default {
@@ -148,7 +158,9 @@ export default {
       change: ['登录', '注册'],
       tab: ['招工信息', '工人找活'],
       count: 0,
-      count1: 0
+      count1: 0,
+      count123: 0,
+      captchaUrl: ''
     }
   },
   computed: {
@@ -160,6 +172,12 @@ export default {
     },
   },
   mounted() {
+    this.changePicyzm()
+    // this.captchaUrl = 'http://10.15.111.11:18080/sdata/rest/system/authority/getAuthPic?module=123141241221'
+    // GetpicYzm().then(() => {
+    //   this.captchaUrl = 'http://10.15.111.11:18080/sdata/rest/system/authority/getAuthPic?module=123141241221'
+    // })
+    // this.getYanzhengImg()
     let { componentId } = this.customConfig || {};
     componentId &&
       window.componentCenter?.register(
@@ -168,15 +186,70 @@ export default {
         this,
         eventActionDefine
       );
+    let userConfig = JSON.parse(window.configuration.secondary_develop_login.current_value)
+    // let userConfig = [
+    //   //招工
+    //   {
+    //     asset_id: "8bf91192-0cc0-4be9-a5c3-535cea758ad5",
+    //     title: "name1",
+    //     content: "content1",
+    //     person: "person1"
+    //   },
+    //   //找活
+    //   {
+    //     asset_id: "fe91018f-66b9-494f-9da7-3858443111f9",
+    //     name: "title1",
+    //     sex: "sex1",
+    //     age: "age1",
+    //     nation: "nation1",
+    //     seniority: "seniority1",
+    //     introduce: "introduce1",
+    //     imgUrl: "imgUrl1",
+    //     skills: "skills1"
+    //   }
+    // ]
+    //userConfig.xxx  资产id  
     //请求数据图书馆的数据
-    queryAssetById('29ba12cb-4b5f-4c0c-9564-4374fedba8cd').then(res => {
-      this.contentData = this.translatePlatformDataToJsonArray(res).splice(0, 4)
+    queryAssetById(userConfig[0].asset_id).then(res => {
+      let contentData = this.translatePlatformDataToJsonArray(res)
+      contentData.forEach((item, index) => {
+        item.title = item[userConfig[0].title]
+        item.content = item[userConfig[0].content]
+        item.person = item[userConfig[0].person]
+        this.contentData.push(item)
+      })
+      if (this.contentData.length > 10) {
+        this.contentData = this.contentData.splice(0, 10)
+      }
     })
-    queryAssetById('95667b34-c650-4046-8be4-f75973b27697').then(res => {
-      this.userData = this.translatePlatformDataToJsonArray(res).splice(0, 3)
+    queryAssetById(userConfig[1].asset_id).then(res => {
+      let userData = this.translatePlatformDataToJsonArray(res)
+      userData.forEach((item, index) => {
+        item.name = item[userConfig[1].name]
+        item.sex = item[userConfig[1].sex]
+        item.age = item[userConfig[1].age]
+        item.nation = item[userConfig[1].nation]
+        item.seniority = item[userConfig[1].seniority]
+        item.introduce = item[userConfig[1].introduce]
+        item.imgUrl = item[userConfig[1].imgUrl]
+        item.skills = item[userConfig[1].skills]
+        this.userData.push(item)
+      })
+      if (this.userData.length > 10) {
+        this.userData = this.userData.splice(0, 10)
+      }
     })
+    // console.log(this.customConfig.data[0][0].title);
+
   },
   methods: {
+    //获取图片验证码
+    getYanzhengImg() {
+      console.log(123);
+      GetpicYzm().then(() => {
+        this.captchaUrl = 'http://10.15.111.11:18080/sdata/rest/system/authority/getAuthPic?module=123141241221'
+      })
+    },
     //处理数据
     //  将平台返回数据转化为对象数组的形式 
     translatePlatformDataToJsonArray(originTableData) {
@@ -201,13 +274,29 @@ export default {
     changeTab(i) {
       this.count1 = i
     },
-    //登录
-    login() {
-      console.log('登录');
-    },
     //注册
-    register() {
-      console.log('注册');
+    register1() {
+      register(this.sjyzm, this.name, this.mobile).then(res => {
+        // console.log(res);
+        if (res.status == 500) {
+          alert("该手机号已经注册")
+        }
+        if (res.status == 200) {
+          alert("注册成功")
+        }
+      })
+    },
+    //登录
+    login1() {
+      Login(this.sjyzm, this.mobile).then(res => {
+        // console.log(res);
+        if (res.status == 200) {
+          alert('登录成功')
+        }
+        if (res.status == 500) {
+          alert('该手机号未注册')
+        }
+      })
     },
     //手机号码验证
     mobileCheck() {
@@ -218,6 +307,38 @@ export default {
         this.flag1 = true
       }
     },
+    //更改图片验证码
+    changePicyzm() {
+      GetpicYzm().then(response => {
+        const url =
+          'data:image/png;base64,' +
+          btoa(
+            new Uint8Array(response.data).reduce(
+              (data, byte) => data + String.fromCharCode(byte),
+              ''
+            )
+          );
+
+        this.captchaUrl = url
+      })
+        .catch(error => {
+          // debugger
+          console.log(error);
+          const url =
+            'data:image/png;base64,' +
+            btoa(
+              new Uint8Array(error.data).reduce(
+                (data, byte) => data + String.fromCharCode(byte),
+                ''
+              )
+            );
+
+          this.captchaUrl = url
+        });
+      // GetpicYzm().then(() => {
+      //   this.captchaUrl = 'http://10.15.111.11:18080/sdata/rest/system/authority/getAuthPic?module=123141241221'
+      // })
+    },
     //图片验证码验证
     yzmCheck() {
       let yzm1 = /^[A-Za-z0-9]+$/
@@ -226,6 +347,15 @@ export default {
       if (!this.yzm) {
         this.flag2 = true
       }
+    },
+    //获取短信验证码
+    GetPhoneyzm() {
+      Phoneyzm(this.yzm, String(this.mobile)).then(res => {
+        // console.log(res);
+        if (res.status == 500) {
+          alert('短信发送间隔必须大于一分钟')
+        }
+      })
     },
     //短信验证码验证
     sjyzmCheck() {
@@ -292,6 +422,90 @@ export default {
 <style scoped>
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* .el-button{
+  width: 100%;
+  height: 20%;
+} */
+button {
+  appearance: auto;
+  writing-mode: horizontal-tb !important;
+  text-rendering: auto;
+  color: -internal-light-dark(black, white);
+  letter-spacing: normal;
+  word-spacing: normal;
+  line-height: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+  cursor: default;
+  box-sizing: border-box;
+  background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
+  margin: 0em;
+  padding: 1px 6px;
+  cursor: pointer;
+  height: 26px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-around;
+  width: 25%;
+  padding-left: 200px;
+  height: 100px;
+  /* line-height: 100px; */
+  color: #4D9CFB;
+  font-weight: bolder;
+  /* vertical-align: text-bottom; */
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+  line-height: 100px;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.lol {
+  width: 30%;
+  font-size: 14px;
+  background-color: rgba(245, 246, 250);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  color: #7F7F7F;
+  text-align: center;
+}
+
+.userImg {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+}
+
+.userImg1 {
+  height: 100%;
+  line-height: 200px;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.img {
+  width: 100px;
+  height: 30px;
+  cursor: pointer;
 }
 
 .r-first {
@@ -315,6 +529,10 @@ export default {
 .cneter {
   display: flex;
   justify-content: space-between;
+}
+
+.lefttop {
+  width: 40%;
 }
 
 .skyblue {
@@ -342,6 +560,7 @@ export default {
 }
 
 .row {
+  /* height: 100%; */
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -398,7 +617,7 @@ export default {
   height: 90%;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   border-top: 1px solid #f2f2f2;
 }
 
@@ -411,7 +630,7 @@ export default {
   height: 200px;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   border-top: 1px solid #f2f2f2;
 }
 
@@ -420,6 +639,10 @@ export default {
   background-color: #fff;
   overflow: auto;
 
+}
+
+.lbottom::-webkit-scrollbar {
+  width: 0;
 }
 
 .lbottom>div {
@@ -449,10 +672,9 @@ export default {
   font-size: 20px;
 }
 
-
 .bigest {
   width: 100%;
-  height: 100%;
+  height: 1007px;
   position: relative;
   /* background-color: #ccc;
    */
@@ -518,13 +740,16 @@ export default {
 }
 
 .title {
-  padding-left: 240px;
+  width: 100%;
+  /* padding-left: 240px; */
   font-size: 30px;
-  height: 80px;
-  line-height: 80px;
+  height: 100px;
+  line-height: 100px;
   color: #4D9CFB;
   font-weight: bolder;
   border-bottom: 1px solid #ccc;
+  /* display: flex;
+  justify-content: space-around; */
 }
 
 .active {

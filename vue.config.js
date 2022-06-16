@@ -3,7 +3,11 @@ module.exports = {
     disableHostCheck: true,
     proxy: {
       "/api": {
+<<<<<<< HEAD
+        target: "http://10.15.111.11:18080",
+=======
         target: "http://10.15.110.26:18080",
+>>>>>>> 980da0195725b125ff3f7923c09bf26251452385
         changeOrigin: true,
         pathRewrite: {
           "/api": "",
@@ -33,10 +37,15 @@ module.exports = {
         });
       });
     });
-    // config.module
-    //   .rule("images")
-    //   .use("url-loader")
-    //   .loader("url-loader")
-    //   .tap(options => Object.assign(options, { limit: 1 * 100 * 1024 * 1024 }));
+    config.module
+      .rule("images")
+      .use("url-loader")
+      .loader("url-loader")
+      .tap(options => Object.assign(options, { limit: 1 * 100 * 1024 * 1024 }));
+    config.module
+      .rule("fonts")
+      .use("url-loader")
+      .loader("url-loader")
+      .tap(options => Object.assign(options, { limit: 2 * 100 * 1024 * 1024 }));
   },
 };
