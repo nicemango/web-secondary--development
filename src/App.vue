@@ -1,5 +1,5 @@
 <template>
-  <div class="bigest">
+  <div class="bigest" ref="biggest">
     <div class="title">
       <div class="top">
         <div style="height:100%;width:60px">
@@ -135,7 +135,7 @@
 import eventActionDefine from "./components/msgCompConfig";
 import "element-ui/lib/theme-chalk/index.css"
 import "./index.css";
-import { queryAssetById } from "./api/asset"
+import { queryAssetById, GetpicYzm, Phoneyzm, register, Login } from "./api/asset"
 export default {
   name: "App",
   props: {
@@ -172,6 +172,10 @@ export default {
     },
   },
   mounted() {
+    if(this.$refs.biggest.parentNode.parentNode){
+      this.$refs.biggest.parentNode.parentNode.style.height='100%'
+    }
+    
     this.changePicyzm()
     // this.captchaUrl = 'http://10.15.111.11:18080/sdata/rest/system/authority/getAuthPic?module=123141241221'
     // GetpicYzm().then(() => {
@@ -240,7 +244,6 @@ export default {
       }
     })
     // console.log(this.customConfig.data[0][0].title);
-
   },
   methods: {
     //获取图片验证码
@@ -469,7 +472,7 @@ button {
   width: 60px;
   height: 60px;
   line-height: 100px;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   margin-right: 20px;
 }
 
@@ -536,9 +539,6 @@ body {
 }
 
 .skyblue {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
   height: 20%;
   background-color: #4D9CFB;
@@ -553,7 +553,7 @@ body {
   width: 80%;
   position: relative;
   margin: 0 auto;
-  height: 80%;
+  height: calc(100% - 100px - 28%);
   margin-top: 80px;
   box-shadow: 10px 10px 10px 10px #f2f2f2;
   background-color: #fff;
