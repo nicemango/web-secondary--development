@@ -5,7 +5,7 @@ import request from "./request";
  * @param id 资产ID
  */
 export const queryAssetById = id =>
-  request.post(`/asset/getAssetData?asset_id=${id}`);
+  request.post(`/form/getAssetData?asset_id=${id}`);
 export const GetpicYzm = () =>
   request.get(`/system/authority/getAuthPic?module=123141241221`, {
     responseType: 'arraybuffer',
