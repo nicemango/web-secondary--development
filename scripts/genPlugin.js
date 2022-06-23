@@ -18,6 +18,7 @@ function printZip(zip) {
   });
 }
 
+let configJson = require("../pluginTemp/config.json");
 // 删除老的文件
 glob.sync(path.resolve(__dirname, "../pluginTemp/js/*")).map((file) => {
   console.log("file:", file);
@@ -59,12 +60,6 @@ console.log("新文件拷贝完成");
 let configJson = require("../pluginTemp/config.json");
 
 configJson.main = mainFileName;
-
-fs.writeFileSync(
-  path.resolve(__dirname, "../pluginTemp/config.json"),
-  JSON.stringify(configJson, null, 2),
-  "utf8"
-);
 
 console.log("config.json 修改完成", configJson);
 
