@@ -1,16 +1,23 @@
 <template>
-  <div class="infoCard">
-    <div class="card-title" @click="triggerEvent">
-      {{ title }}
+  <div class="biggset" :style="{ background: 'url(' + imgUrl + ')' }" ref="big">
+    <div v-for="(item, index) in headTab" :key="item.key" style="position: relative; line-height: 49px;">
+      <span :class="index == currentIndex ? 'active' : ''" style="cursor: pointer;" @click="changeTab(item, index)">{{
+          item.label
+      }}</span>
     </div>
-    <div class="card-desc">
-      {{ desc }}
+    <div style="background-image:-webkit-linear-gradient(bottom,#fff,skyblue); 
+    -webkit-background-clip:text; 
+    -webkit-text-fill-color:transparent; font-size: 35px;">
+      {{ headTitle }}
     </div>
-    <el-button ghost @click="goToStudy"> 去学习 </el-button>
-    <el-button ghost @click="getData"> 获取数据 </el-button>
+    <div v-for="(item, index) in headTab1" :key="item.key" style="position: relative; line-height: 49px;">
+      <span :class="index == currentIndex1 ? 'active' : ''" style="cursor: pointer;" @click="changeTab1(item, index)">{{
+          item.label
+      }}</span>
+    </div>
   </div>
-</template>
 
+</template>
 <script>
 // import appService from "@njsdata/app-sdk";
 import eventActionDefine from "./components/msgCompConfig";
@@ -19,17 +26,25 @@ export default {
   name: "App",
   props: {
     customConfig: Object,
-    info: Object,
+  },
+  data() {
+    return {
+      headTitle: '',
+      headTab: [],
+      headTab1: [],
+      imgUrl: '',
+      currentIndex: 4,
+      currentIndex1: 4
+    }
   },
   computed: {
-    title() {
-      return this.customConfig?.title || "数据构建";
-    },
-    desc() {
-      return this.customConfig?.desc || "描述";
-    },
   },
   mounted() {
+    // console.log('customConfig', this.customConfig);
+    let big = this.$refs.big
+    console.log(big);
+    big.parentNode.style.height = '100%'
+    big.parentNode.style.width = '100%'
     let { componentId } = this.customConfig || {};
     componentId &&
       window.componentCenter?.register(
@@ -38,39 +53,67 @@ export default {
         this,
         eventActionDefine
       );
+    this.headTitle = this.customConfig.title
+    this.headTab = JSON.parse(this.customConfig.dataSouce).slice(0, 3)
+    this.headTab1 = JSON.parse(this.customConfig.dataSouce).slice(3, 6)
+    this.imgUrl = this.customConfig.backgroundImg
+    console.log(this.headTab, this.headTab1);
   },
   methods: {
-    goToStudy() {
-      window.open(this.customConfig?.url || "http://baidu.com");
-    },
-    getData() {
-      //   console.log(appService.getMenuData(), "菜单");
-      //   console.log(appService.getPageData(), "页面");
-      //   console.log(appService.getVariable(), "变量");
-    },
-    triggerEvent() {
-      let { componentId, appId } = this.customConfig || {};
-      componentId &&
-        appId &&
-        window.eventCenter?.triggerEventNew({
-          objectId: appId,
-          componentId: componentId,
-          type: "app",
-          event: "onImgClick",
-          payload: {
-            value: "sasdasd",
-          },
-        });
-    },
-    do_EventCenter_messageSuccess() {
-      alert("动作执行成功！");
-    },
     Event_Center_getName() {
-      return "应用二开测试";
+      return "头部tab";
     },
+    changeTab(item, i) {
+      window?.clickMenu({ key: item.key, isSubMenu: true });
+      if (this.currentIndex == i) {
+        this.currentIndex = 4
+        return
+      }
+      this.currentIndex = i
+      this.currentIndex1 = 4
+    },
+    changeTab1(item, i) {
+      window?.clickMenu({ key: item.key, isSubMenu: true });
+      if (this.currentIndex1 == i) {
+        this.currentIndex1 = 4
+        return
+      }
+      this.currentIndex1 = i
+      this.currentIndex = 4
+    }
+  },
+  beforeDestroy() {
+    console.log('customConfig', this.customConfig);
   },
   destroyed() {
     window.componentCenter?.removeInstance(this.customConfig?.componentId);
   },
 };
 </script>
+<style scoped>
+.biggset {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: transparent;
+  color: #fff
+}
+
+span:hover {
+  color: skyblue;
+}
+
+.active {
+  color: skyblue;
+}
+
+.active1 {
+  background-color: skyblue;
+}
+</style>
+<style>
+body {
+  background-color: #000;
+}
+</style>

@@ -15,11 +15,9 @@ Vue.use(Avatar);
 if (process.env.NODE_ENV !== "production") {
   // 添加 customConfig 进行测试
   let customConfig = {
-    title: "数据构建",
-    desc: "无码化应用搭建，弹指间即完成数据从无到有到收集和使用",
-    url: "http://baidu.com",
-    imgUrl:
-      "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png",
+    dataSouce: '[{ "label": "组织架构管理", "key": "https://www.baidu.com" },{ "label": "会议系统管理", "key": "item-2" },{ "label": "会场管理", "key": "item-3" },{ "label": "巡检记录管理", "key": "item-4" },{ "label": "会议记录管理", "key": "item-5" },{ "label": "应急预案管理", "key": "item-6" }]',
+    backgroundImg: 'https://img0.baidu.com/it/u=530426417,2082848644&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500',
+    title:"视频资源管理平台",
   };
 
   new Vue({
