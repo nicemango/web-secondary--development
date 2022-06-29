@@ -55,6 +55,10 @@ export default class App extends Component {
       this.markingText = props.options.externalVariables.markingText;
       this.titleText = props.options.externalVariables.titleText;
       this.titlePosition = props.options.externalVariables.titlePosition;
+      this.xAxisFontSize = props.options.externalVariables.xAxisFontSize;
+      this.xAxisFontFamily = props.options.externalVariables.xAxisFontFamily;
+      this.numberFontSize = props.options.externalVariables.numberFontSize;
+      this.numberFontFamily = props.options.externalVariables.numberFontFamily;
     }
   }
   initEcharts(data) {
@@ -99,7 +103,7 @@ export default class App extends Component {
     });
     // 补0 是为了echarts 更好的现实   在E charts中会进行处理  不做显示
 
-    console.log(arrx, arry, Long1);
+    console.log(arrx);
     const myChart = echarts.init(this.divRef);
     let option = {
       title: {
@@ -153,7 +157,8 @@ export default class App extends Component {
             },
             textStyle: {
               color: "black", //文字颜色
-              fontSize: "20px",
+              fontSize: this.xAxisFontSize ? this.xAxisFontSize : '20px',
+              fontFamily: this.xAxisFontFamily ? this.xAxisFontFamily : ''
             },
           },
         },
@@ -215,7 +220,8 @@ export default class App extends Component {
                 name: "",
                 // 支持 'average', 'min', 'max'
                 // type: "average",
-                xAxis: this.markingPosition ? this.markingPosition : arrx[0],
+                xAxis: this.markingPosition ? arrx[this.findmarkText(arrx)] : arrx[parseInt(arrx.length * 0.2)],
+                // x:'80px',
                 animation: false,
                 label: {
                   position: "insideMiddleBottom",
@@ -239,7 +245,8 @@ export default class App extends Component {
               //formatter:'{c}
               textStyle: {
                 fontWeight: "bold",
-                fontSize: 20,
+                fontSize: this.numberFontSize ? this.numberFontSize : 16,
+                fontFamily: this.numberFontFamily ? this.numberFontFamily : '',
                 color: "#B6BDBD",
               },
             },
@@ -289,6 +296,14 @@ export default class App extends Component {
     };
     const debounceTask = debounce(task, 1000);
     window.addEventListener("resize", debounceTask);
+  }
+
+  findmarkText(arr) {
+    let arrFlag = null
+    arrFlag = arr.findIndex(item => {
+      return item === this.markingPosition
+    })
+    return arrFlag
   }
 
   componentDidMount() {

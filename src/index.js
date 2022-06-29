@@ -26,6 +26,11 @@ if (process.env.NODE_ENV !== "production") {
       barColor: null,
       lineColor: null,
       tipLineFontSize: null,
+      markingPosition: "",
+      xAxisFontSize:'',
+      xAxisFontFamily:'',
+      numberFontSize:'',
+      numberFontFamily:''
     },
   };
   ReactDOM.render(<App dataSource={dataSource} options={options} />, document.getElementById("root"));

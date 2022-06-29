@@ -1,5 +1,5 @@
 {
-  "id": "9c18788a-7f95-4383-9469-5f7a5ba17b90",
+  "id": "173f294e-30c9-465b-a871-35e5c232f19f",
   "type": "analyzer",
   "main": "main.bdf1f838.js",
   "version": "2",
@@ -20,7 +20,11 @@
       "markingPosition",
       "markingText",
       "titleText",
-      "titlePosition"
+      "titlePosition",
+      "xAxisFontSize",
+      "xAxisFontFamily",
+      "numberFontSize",
+      "numberFontFamily"
     ],
     "optionModules": []
   }
