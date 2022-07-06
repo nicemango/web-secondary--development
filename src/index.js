@@ -25,12 +25,15 @@ if (process.env.NODE_ENV !== "production") {
     externalVariables: {
       barColor: null,
       lineColor: null,
-      tipLineFontSize: null,
-      markingPosition: "",
-      xAxisFontSize:'',
-      xAxisFontFamily:'',
-      numberFontSize:'',
-      numberFontFamily:''
+      markTextSize: null,
+      markingText: '',
+      titleText: '',
+      titlePosition: '',
+      markPosition: "",
+      xFontSize: '',
+      xFontFamily: '',
+      FontSize: '',
+      FontFamily: ''
     },
   };
   ReactDOM.render(<App dataSource={dataSource} options={options} />, document.getElementById("root"));

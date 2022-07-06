@@ -1,7 +1,7 @@
 {
-  "id": "173f294e-30c9-465b-a871-35e5c232f19f",
+  "id": "a4576091-9287-4a58-9e6b-c217d7f276c9",
   "type": "analyzer",
-  "main": "main.bdf1f838.js",
+  "main": "main.88a9475e.js",
   "version": "2",
   "props": {
     "img": "custom_table.png",
@@ -12,19 +12,19 @@
     "domId": "ex_46fbe360-daa5-42af-8ca0-2ec3066ef216",
     "lib": [],
     "cssDep": [],
-    "scriptName": "main.b42fe2f5.js",
+    "scriptName": "main.88a9475e.js",
     "vars": [
       "barColor",
       "lineColor",
-      "markingTextSize",
-      "markingPosition",
+      "markTextSize",
+      "markPosition",
       "markingText",
       "titleText",
       "titlePosition",
-      "xAxisFontSize",
-      "xAxisFontFamily",
-      "numberFontSize",
-      "numberFontFamily"
+      "xFontSize",
+      "xFontFamily",
+      "FontSize",
+      "FontFamily"
     ],
     "optionModules": []
   }
