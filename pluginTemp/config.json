@@ -1,0 +1,20 @@
+{
+  "id": "f213bce6-1383-4651-b3fe-3b9e4b84dbe2",
+  "type": "exchange",
+  "main": "app.798496d4.js",
+  "version": "2",
+  "language": "vue",
+  "props": {
+    "code": "EN_37960034",
+    "img": "EN_0001.png",
+    "hover_img": "EN_0001_hover.png",
+    "name": "书名提取",
+    "classname": "com.sdata.customize.dataflow.CustomizeNode",
+    "input_count": 1,
+    "output_count": 999,
+    "lib": "[]",
+    "css_script": "[]",
+    "group_type": "constomize",
+    "group_name": "自定义"
+  }
+}
