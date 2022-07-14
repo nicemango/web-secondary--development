@@ -1,8 +1,9 @@
 {
-  "id": "35ef2da7-8d40-4b63-a3f2-c8b240b02ee2",
+  "id": "2d317ace-72a9-4a40-9e13-f7e17be4d609",
   "type": "analyzers",
-  "main": "app.66ff22af.js",
+  "main": "app.b33a12a5.js",
   "version": "2",
+  "baseVersion": "V8R4C50SPC210_RJGC_0620",
   "props": {
     "img": "custom_table.png",
     "type": "k23dasd547",
@@ -11,10 +12,12 @@
     "domId": "ex_custom_table_15",
     "lib": [],
     "cssDep": [],
-    "scriptName": "app.a515a2e6.js",
+    "scriptName": "app.b33a12a5.js",
     "optionModules": [],
     "vars": [
-      "fontSize"
+      "titleFontSize",
+      "titleFontFamily",
+      "titleFontColor"
     ]
   }
 }
