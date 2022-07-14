@@ -1,0 +1,76 @@
+{
+  "menus": {
+    "en-US": {
+      "/reporting": [
+        {
+          "title": "快速开始",
+          "path": "/reporting/快速开始",
+          "meta": {
+            "order": 1
+          },
+          "children": []
+        },
+        {
+          "title": "如何开发插件",
+          "path": "/reporting/如何开发插件",
+          "meta": {
+            "order": 2
+          },
+          "children": []
+        },
+        {
+          "title": "如何使用插件",
+          "path": "/reporting/如何使用插件",
+          "meta": {
+            "order": 3
+          },
+          "children": []
+        },
+        {
+          "title": "API",
+          "path": "/reporting/API",
+          "meta": {
+            "order": 4
+          },
+          "children": []
+        },
+        {
+          "title": "组件开发预览",
+          "path": "/reporting/dev",
+          "meta": {
+            "order": 5
+          },
+          "children": []
+        }
+      ],
+      "*": [
+        {
+          "path": "/",
+          "title": "Index",
+          "meta": {}
+        }
+      ]
+    }
+  },
+  "locales": [
+    {
+      "name": "en-US",
+      "label": "English"
+    }
+  ],
+  "navs": {
+    "en-US": [
+      {
+        "title": "填报",
+        "path": "/reporting"
+      }
+    ]
+  },
+  "title": "sdata-plugins",
+  "mode": "site",
+  "repository": {
+    "url": "",
+    "branch": "master"
+  },
+  "theme": {}
+}
