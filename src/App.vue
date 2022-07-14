@@ -3,7 +3,8 @@
     <div class="title">
       <div class="top">
         <div style="height:100%;width:60px">
-          <img src="../output/images/1c4c7d184fa9d98a46fd36d187204c3.png" alt="" class="icon" />
+          <img :src="titleImg" alt="" class="icon" />
+          <!-- <img src="./../output" alt=""> -->
         </div>
         <div>
           得民招聘网
@@ -40,14 +41,14 @@
               <div class="row1">
                 <div>
                   <div class="ctitle">{{ item.name }}</div>
-                  <div class="ccontent">{{ item.sex }} · {{ item.age }}岁 · {{ item.nation }}族 · 工龄{{ item.seniority }}年
+                  <div class="ccontent">{{ item.sex }} · {{ item.age }}岁 · {{ item.nation }} · 工龄{{ item.seniority }}年
                   </div>
                   <div class="lol">{{ item.skills }}</div>
                 </div>
                 <div class="cperson">{{ item.introduce }}</div>
               </div>
               <div class="row">
-                <div style="font-size:16px;color:#7F7F7F">{{ item.position }}}</div>
+                <div style="font-size:16px;color:#7F7F7F;word-wrap: break-word;">{{ item.position }}</div>
                 <el-button type="primary">立即联系</el-button>
               </div>
             </div>
@@ -608,7 +609,8 @@ export default {
       showPrivacy: false,
       showServe: false,
       url: 'http://www.baidu.com',
-      url1: 'http://www.baidu.com'
+      url1: 'http://www.baidu.com',
+      titleImg: require('./../output/images/1c4c7d184fa9d98a46fd36d187204c3.png').default
     }
   },
   computed: {
@@ -1042,6 +1044,7 @@ body {
 }
 
 .row {
+  width: 132.83px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
