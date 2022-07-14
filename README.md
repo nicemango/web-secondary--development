@@ -376,7 +376,7 @@ export default new EventBus();
 
 ![](https://img.kancloud.cn/f9/37/f9371a4b3598436545d7960b9cf4e48b_116x44.png)插件源码里“../pluginTemp/config.json”里的customconf字段决定了用户的配置项。
 #### 大屏
-1. 新增插件已经上传Smartdata平台，具体步骤可参见[上传插件](../%E4%B8%8A%E4%BC%A0%E6%8F%92%E4%BB%B6.md)。
+1. 新增插件已经上传Smartdata平台
 
 2. 登录数睿企业级无代码平台，单击“![](https://img.kancloud.cn/06/f8/06f830a879acad5a56b443985af69ea9_33x36.png)”，选择数据大屏进入数据大屏模块。
 3. 选择目录，新增或者编辑一个大屏。
@@ -389,7 +389,7 @@ export default new EventBus();
 ![](https://img.kancloud.cn/81/03/8103a1a57db3190d916f85be87ab1dc0_2944x1404.png)
 
 #### 分析仪
-1. 新增插件已经上传Smartdata平台，具体步骤可参见[上传插件](../%E4%B8%8A%E4%BC%A0%E6%8F%92%E4%BB%B6.md)。
+1. 新增插件已经上传Smartdata平台
 
 2. 进入首页，在菜单栏中选择分析仪模块。
 
@@ -418,7 +418,7 @@ export default new EventBus();
 ![](https://img.kancloud.cn/4e/77/4e774c6931707660548ba9b08a1b4858_768x1082.png =591x)
 
 #### 填报
-1. 新增插件已经上传Smartdata平台，具体步骤可参见[上传插件](../%E4%B8%8A%E4%BC%A0%E6%8F%92%E4%BB%B6.md)。
+1. 新增插件已经上传Smartdata平台
 
 2. 在填报设计页选择“插入&gt; 自定义组件”，单击&quot;插入&quot;，分别将自定义组件添加到主表与子表中，单击“保存”。
 
