@@ -5,8 +5,19 @@ import '../add/index.css'
 // import ReactDOM from 'react-dom'
 import { Button } from 'antd'
 export default class App extends Component {
-  componentDidMount() {
+  state = {
+    flag: false,
+    tabData: [],
+    contentData: [],
+    currentIndex: 0,
+    showMaskIndex: 0,
+    maskeShow: true,
+    url: ''
+  }
+  change = () => {
+    this.setState({ flag: true })
     let aaa = window.location.href
+    console.log(aaa);
     let num = aaa.indexOf('?')
     const value = aaa.substr(num + 1)
     const arr = value.split('&')
@@ -24,7 +35,8 @@ export default class App extends Component {
       })
       this.setState({ contentData: res.data })
     })
-    // getContentData().then(res => {
+    // getContentData({ dataId: 'c09821f938804950a9745e4e826f2e4d', viewId: 'cb01da8b084c40f88a085d2300affe8c', formId: 'c09821f938804950a9745e4e826f2e4d' }).then(res => {
+    //   // console.log(res);
     //   let arr = []
     //   res.data.forEach(item => {
     //     arr.push(item.name)
@@ -32,19 +44,6 @@ export default class App extends Component {
     //   })
     //   this.setState({ contentData: res.data })
     // })
-
-  }
-  state = {
-    flag: false,
-    tabData: [],
-    contentData: [],
-    currentIndex: 0,
-    showMaskIndex: 0,
-    maskeShow: true,
-    url: ''
-  }
-  change = () => {
-    this.setState({ flag: true })
   }
   closeMask = () => {
     this.setState({ flag: false, maskeShow: true })
@@ -109,8 +108,8 @@ export default class App extends Component {
                             <div key={index} style={{ width: '100%', height: '100%' }}>
                               <h1 style={{ textAlign: 'center' }}>{item.name}</h1>
                               <div style={{ overflow: 'scroll', width: '98%', height: '82%', wordBreak: 'break-all', marginLeft: '10px' }} className="scrollBar">
-                                <iframe src="https://www.lilnong.top/static/pdf/B-4-RxJS%E5%9C%A8React%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8-%E9%BE%99%E9%80%B8%E6%A5%A0_.pdf" style={{ width: '100%', height: '100%' }} scroll='true'></iframe>
-                                {/* <iframe src={item.url} style={{ width: '100%', height: '100%' }} scroll='true'></iframe> */}
+                                {/* <iframe src="http://10.15.111.9:7217/storage_area/template/c138f94fcaf346d08df179eb05413780.pdf" style={{ width: '100%', height: '100%' }} scroll='true'></iframe> */}
+                                <iframe src={item.url} style={{ width: '100%', height: '100%'}} scroll='true' className='IfRame'></iframe>
                               </div>
                             </div>
                           ) : null
