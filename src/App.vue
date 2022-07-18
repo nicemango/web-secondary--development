@@ -7,7 +7,7 @@
           <!-- <img src="./../output" alt=""> -->
         </div>
         <div>
-          得民招聘网
+          得民培训网
         </div>
       </div>
     </div>
@@ -21,35 +21,23 @@
         <div class="lbottom">
           <div v-if="this.count1 == 0">
             <div v-for="item in this.contentData" class="content">
+              <div class="train_left">
+                <img :src="item.imgUrl" alt="">
+              </div>
               <div class="content-left">
                 <div class="ctitle">{{ item.title }}</div>
                 <div class="ccontent">{{ item.content }}</div>
-                <div class="cperson">联系人：{{ item.person }}</div>
-              </div>
-              <div class="row">
-                <div class="red1">正在招</div>
-                <div class="ccontent">{{ item.position }}}</div>
-                <el-button type="primary">立即联系</el-button>
               </div>
             </div>
           </div>
           <div v-if="this.count1 == 1">
-            <div v-for="item in this.userData" class="content1">
-              <div class="userImg1">
+            <div v-for="item in this.userData" class="content">
+              <div class="train_left">
                 <img :src="item.imgUrl" alt="" class="userImg">
               </div>
-              <div class="row1">
-                <div>
-                  <div class="ctitle">{{ item.name }}</div>
-                  <div class="ccontent">{{ item.sex }} · {{ item.age }}岁 · {{ item.nation }} · 工龄{{ item.seniority }}年
-                  </div>
-                  <div class="lol">{{ item.skills }}</div>
-                </div>
-                <div class="cperson">{{ item.introduce }}</div>
-              </div>
-              <div class="row">
-                <div style="font-size:16px;color:#7F7F7F;word-wrap: break-word;">{{ item.position }}</div>
-                <el-button type="primary">立即联系</el-button>
+              <div class="content-left">
+                <div class="ctitle">{{ item.skillSchool }}</div>
+                <div class="ccontent">{{ item.introduce }}</div>
               </div>
             </div>
           </div>
@@ -601,7 +589,7 @@ export default {
       flag3: true,
       flag4: true,
       change: ['登录', '注册'],
-      tab: ['招工信息', '工人找活'],
+      tab: ['专业证书', '培训院校'],
       count: 0,
       count1: 0,
       count123: 0,
@@ -610,7 +598,7 @@ export default {
       showServe: false,
       url: 'http://www.baidu.com',
       url1: 'http://www.baidu.com',
-      titleImg: require('./../output/images/1c4c7d184fa9d98a46fd36d187204c3.png').default
+      titleImg: require('./../output/images/demin_trian.png').default
     }
   },
   computed: {
@@ -666,9 +654,8 @@ export default {
       let contentData = this.translatePlatformDataToJsonArray(res)
       contentData.forEach((item, index) => {
         item.title = item[userConfig[0].title]
+        item.imgUrl = item[userConfig[0].imgUrl]
         item.content = item[userConfig[0].content]
-        item.person = item[userConfig[0].person]
-        item.position = item[userConfig[0].position]
         this.contentData.push(item)
       })
       if (this.contentData.length > 10) {
@@ -678,15 +665,9 @@ export default {
     queryAssetById(userConfig[1].asset_id).then(res => {
       let userData = this.translatePlatformDataToJsonArray(res)
       userData.forEach((item, index) => {
-        item.name = item[userConfig[1].name]
-        item.sex = item[userConfig[1].sex]
-        item.age = item[userConfig[1].age]
-        item.nation = item[userConfig[1].nation]
-        item.seniority = item[userConfig[1].seniority]
         item.introduce = item[userConfig[1].introduce]
         item.imgUrl = item[userConfig[1].imgUrl]
-        item.skills = item[userConfig[1].skills]
-        item.position = item[userConfig[1].position]
+        item.skillSchool = item[userConfig[1].skillSchool]
         this.userData.push(item)
       })
       if (this.userData.length > 10) {
@@ -883,6 +864,15 @@ export default {
   padding: 0;
 }
 
+.train_left {
+  flex: 2;
+}
+
+.train_left>img {
+  width: 100%;
+  height: 100%;
+}
+
 .close {
   position: absolute;
   right: 20px;
@@ -979,8 +969,7 @@ button {
 }
 
 .userImg1 {
-  height: 100%;
-  line-height: 100px;
+  flex: 2;
 }
 
 html,
@@ -1051,15 +1040,15 @@ body {
 }
 
 .row1 {
-  width: 70%;
+  flex: 5;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
 }
 
 .content-left {
   height: 50%;
-  width: 70%;
+  flex: 5;
+  margin-left: 10px;
   overflow: hidden;
   word-wrap: break-word;
   text-overflow: ellipsis;
