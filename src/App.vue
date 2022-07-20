@@ -76,6 +76,7 @@ export default {
         eventActionDefine
       );
     
+    this.customConfig.assetId = 'f6515bb2-8c25-9702-dcc7-c000a54ff8e3'
     this.getTreeData()
   },
 
@@ -83,12 +84,11 @@ export default {
     // 请求资产并处理数据格式, 渲染页面
     getTreeData() {
       let { assetId } = this.customConfig
-
+      
       queryAssetById({assetId: assetId}).then( (res) => {
           const nest = (items, id = '') => items.filter(item => item['parentId'] == id).map(item => ({ ...item, children: nest(items, item.id) }));
 
           this.treeList = nest(res.data)
-
           this.$nextTick(() => {
             this.labelList = [];
             this.createTableData(this.treeList);
@@ -166,23 +166,31 @@ export default {
         createTbSample(dataForm).then( (res) => {
           this.getTreeData()
         })
-        
       }).catch(() => {});
     },
 
     // 修改节点
     edit() {
-      this.$prompt("请输入节点名称", "编辑", { confirmButtonText: "确定", cancelButtonText: "取消", }).then((e) => {
-          let { assetId } = this.customConfig
-          let dataForm = {
-            assetId: assetId,
-            name: e.value || "节点",
-            id: this.treeData.id,
-          }
+      this.$prompt("请输入节点名称", "编辑", { confirmButtonText: "确定", cancelButtonText: "取消", inputValue: this.treeData.name, }).then((e) => {
+        let { assetId } = this.customConfig
 
-          updateTbSample(dataForm).then( (res) => {
-            this.getTreeData()
-          })
+        let dataForm = {
+          assetId: assetId,
+          name: e.value || "节点",
+          id: this.treeData.id,
+        }
+
+        // let tierList = []
+        // this.tableData.forEach( (e) => {
+        //   if(e.sample.indexOf(this.treeData.name) != -1) {
+        //     tierList.push(e.sample)
+        //   }
+        // })
+        // dataForm.tier = tierList
+
+        updateTbSample(dataForm).then( (res) => {
+          this.getTreeData()
+        })
 
       }).catch(() => {});
     },
