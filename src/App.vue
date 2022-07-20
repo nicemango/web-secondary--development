@@ -1,5 +1,5 @@
 <template>
-  <div class="multiFfilterDataGrid">
+    <div class="multiFfilterDataGrid">
     <div class="header">
       <div class="card-title">
         {{ title }}
@@ -59,6 +59,7 @@
         :page-size.sync="pageSize"
         layout="total, sizes, prev, pager, next"
         :total="total"
+        small
       >
       </el-pagination>
     </div>
@@ -194,7 +195,6 @@ export default {
       return result;
     },
     async load() {
-      console.log(11223);
 
       let { componentId } = this.customConfig || {};
 
@@ -204,8 +204,6 @@ export default {
       this.displayTableList = this.filterDataBySearchAndSelect(
         this.allTableList
       );
-      console.log("displayTableList>>>", this.displayTableList);
-
       if (this.sortConfig[1] && this.sortConfig[1] === "dateTime") {
         this.displayTableList.forEach((d) => {
           d[this.sortConfig[0]] = new Date(d[this.sortConfig[0]]).getTime();
@@ -377,11 +375,19 @@ export default {
 };
 </script>
 <style scoped>
+* {
+  margin: 0;
+  padding: 0;     
+  /* box-sizing: border-box; */
+}
 .header {
   display: flex;
   justify-content: space-around;
   height: 50px;
   line-height: 50px;
+}
+.multiConditionButton {
+  padding: 10px;
 }
 
 .header .card-title {
@@ -407,7 +413,6 @@ export default {
 
 .multiFfilterDataGrid >>> .el-table {
   max-height: 550px;
-  overflow: auto;
 }
 
 .multiFfilterDataGrid >>> .el-table .el-table__cell {
@@ -420,5 +425,10 @@ export default {
 }
 .multiFfilterDataGrid >>> .el-table__header-wrapper {
   display: none;
+}
+.pagaNation >>> .el-pagination {
+  width: 100%;
+  height: 50px;
+  overflow-x: auto;
 }
 </style>
