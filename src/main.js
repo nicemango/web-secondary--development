@@ -1,14 +1,16 @@
 import Vue from "vue";
 import App from "./App.vue";
 // 按需引入组件，引入方式见https://element.eleme.cn/#/zh-CN/component/quickstart#an-xu-yin-ru
-import { Input, Select, Option, Button, Avatar } from "element-ui";
+import { Input, DatePicker, Table, TableColumn, Button, Pagination, Dialog } from "element-ui";
 
 Vue.config.productionTip = false;
 Vue.use(Input);
-Vue.use(Select);
-Vue.use(Option);
+Vue.use(DatePicker);
+Vue.use(Table);
+Vue.use(TableColumn);
 Vue.use(Button);
-Vue.use(Avatar);
+Vue.use(Pagination);
+Vue.use(Dialog);
 
 // import * as appService from "@njsdata/app-sdk";
 
