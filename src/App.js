@@ -21,6 +21,7 @@ export default class App extends Component {
     this.from3 = external.区间三 || '160-200'
     this.fromMax = external.区间最大值 || '200'
     this.fromTitle = external.仪表盘标题 || 'km/h'
+    this.titleHeight = external.仪表盘标题位置 || '50'
     this.fromValue = external.仪表盘数值 || '80'
 
   }
@@ -78,7 +79,13 @@ export default class App extends Component {
         tickLength: 10,
         tickColor: '#666',
         labels: { step: 2, rotation: 'auto' },
-        title: { text: this.fromTitle },
+        title: { 
+          text: this.fromTitle,
+          style: {
+            transform: `translateY(${this.titleHeight}%)`
+          },
+        },
+        titleLocation: 'end',
         plotBands: [
           {
             from: Number(this.from1.split('-')[0]),
