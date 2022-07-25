@@ -1,7 +1,7 @@
 {
-  "id": "e58d249f-703c-4918-9e0d-892936394f78",
+  "id": "6f57addd-719f-42ee-8bf4-8c2ec3cf46a8",
   "type": "app",
-  "main": "app.9439dbc9.js",
+  "main": "app.a65becc1.js",
   "version": "2",
   "props": {
     "type": "customize",
@@ -11,10 +11,10 @@
     "lib": [],
     "css_script": [],
     "customconf": [
-      "title",
-      "url",
-      "desc",
-      "imgUrl"
+      "deviceAsset",
+      "eventAsset",
+      "pictureKey",
+      "productId"
     ]
   }
 }

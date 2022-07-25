@@ -4,7 +4,7 @@ import qs from "querystringify";
 let apiContextPath = "";
 if (process.env.NODE_ENV === "development") {
   document.cookie =
-    "token=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpblRpbWVzdGFtcCI6MTY0NjcyMjI2ODY4NSwidXNlcklkIjoiMTIzNDU2Nzg5MCJ9.F8wr84ha-dW18J9wZOQeTXj55mXTdqKfLBeNlNueoLY";
+    "token=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpblRpbWVzdGFtcCI6MTY1ODcxODgyOTgwNiwidXNlcklkIjoiMTIzNDU2Nzg5MCJ9.oceWL4ql7gjyBBrbEZwrVpKfPADi7S1nFUfB1vUB1G4";
   document.cookie =
     "refreshToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpblRpbWVzdGFtcCI6MTY0NjcyMjI2ODY4Nn0.TEVE_nopHNZlvSQM_RUZrLcCzkaERiHo8nz0q-ksL3E";
   document.cookie = "username=admin";
@@ -45,9 +45,9 @@ instance.interceptors.response.use(
     return response;
   },
   error => {
-    if (error.response && error.response.status === 401) {
-      return;
-    }
+    // if (error.response && error.response.status === 401) {
+    //   return;
+    // }
 
     return Promise.reject(error.response);
   }
