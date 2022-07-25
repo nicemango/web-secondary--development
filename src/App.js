@@ -21,7 +21,10 @@ export default class App extends Component {
     this.from3 = external.区间三 || '160-200'
     this.fromMax = external.区间最大值 || '200'
     this.fromTitle = external.仪表盘标题 || 'km/h'
+<<<<<<< HEAD
     this.titleHeight = external.仪表盘标题位置 || '50'
+=======
+>>>>>>> e76b264f40e4a9bb3b4a52dc6eb315e1b73dfc53
     this.fromValue = external.仪表盘数值 || '80'
 
   }
