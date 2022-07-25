@@ -1,10 +1,14 @@
 <template>
   <div style="height: 100%; width: 100%;">
-    <el-steps direction="vertical" :active="this.tableData.length + 1" space="10%" class="steps">
+  <div  class="setp-header" >法律状态</div>
+  <div class="setp_main">
+ <el-steps direction="vertical" :active="this.tableData.length + 1" space="10%" class="steps">
       <el-step v-for="item in tableData" :key="item.title" :title="(item.title)" :description="(item.description)"
-        :status="(item.status)"></el-step>
+        :status="(item.status)"  ></el-step>
       <el-step style="display:none" ref="iite"></el-step>
     </el-steps>
+  </div>
+   
   </div>
 </template>
 
@@ -20,7 +24,7 @@ export default {
   },
   data() {
     return {
-      tableData: this.customConfig.dataSouce
+   
     }
   },
   computed: {
@@ -30,8 +34,38 @@ export default {
     desc() {
       return this.customConfig?.desc || "描述";
     },
+    tableData(){
+      let tempData=null
+      try {
+        tempData=  JSON.parse(this.customConfig.dataSouce)
+      } catch (error) {
+         tempData=[   {
+      "title": '2021-11-16',
+      "description": '公开',
+      "status": 'wait'
+    },
+    {
+      "title": '2021-12-03',
+      "description": '实质审查的生效',
+      "status": 'wait'
+    },
+    {
+      "title": '2022-02-22',
+      "description": '授权',
+      "status": 'wait'
+    },
+    {
+      "title": '2022-03-15',
+      "description": '专利申请权、专利权的转移',
+      "status": 'finish'
+    }
+   ]
+      }
+      return  tempData
+    }
   },
   mounted() {
+    console.log(this.tableData,'===============');
     let { componentId } = this.customConfig || {};
     componentId &&
       window.componentCenter?.register(
@@ -81,9 +115,37 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style lang="less"   scoped>
 .steps {
   display: flex;
   flex-direction: column-reverse;
+  font-size: 16px;   
+   
 }
+.setp-header{
+  padding:10px 0;
+  font-weight: 900;
+  font-size: 18px;
+  color:#111111;
+  // margin-bottom:-20px
+}
+
+ /deep/ .is-finish{
+        color:#2c88d3 ;
+  }
+      /deep/   .el-step__main{
+        .is-wait{
+ color:#464646
+        }
+       
+       }
+  /deep/ .el-step__head.is-wait{
+    color:#9e9e9e
+  }
+  /deep/.el-step__main .is-finish{
+    color:#464646
+  }
+  /deep/ .el-step__line{
+    border-color:#9e9e9e
+  }
 </style>

@@ -19,40 +19,26 @@ if (process.env.NODE_ENV !== "production") {
   let customConfig = {
     dataSouce: [
     {
-      title: '步骤1',
-      description: '213459874651236584856',
-      status: 'wait'
+      "title": '2021-11-16',
+      "description": '公开',
+      "status": 'wait'
     },
     {
-      title: '步骤2',
-      description: '213459874651236584856',
-      status: 'wait'
+      "title": '2021-12-03',
+      "description": '实质审查的生效',
+      "status": 'wait'
     },
     {
-      title: '步骤3',
-      description: '213459874651236584856',
-      status: 'wait'
+      "title": '2022-02-22',
+      "description": '授权',
+      "status": 'wait'
     },
     {
-      title: '步骤4',
-      description: '213459874651236584856',
-      status: 'wait'
-    },
-    {
-      title: '步骤5',
-      description: '213459874651236584856',
-      status: 'wait'
-    },
-    {
-      title: '步骤6',
-      description: '213459874651236584856',
-      status: 'wait'
-    },
-    {
-      title: '步骤7',
-      description: '213459874651236584856',
-      status: 'wait'
+      "title": '2022-03-15',
+      "description": '专利申请权、专利权的转移',
+      "status": 'wait'
     }
+    
   ]
   };
 
