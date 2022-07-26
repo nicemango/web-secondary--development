@@ -9,11 +9,8 @@ import DesignConfiguration from "./components/DesignConfiguration.vue";
 export default {
   name: "App",
   props: {
-    // 组件类型
     type: String,
-    // 平台数据
     platformProps: Object,
-    // 本地数据
     customConfig: Object
   },
   components: {
