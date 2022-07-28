@@ -25,6 +25,32 @@ export const events = [
         dataType: "string",
       }
     ],
+  },
+  {
+    key: "reanderTree",
+    name: "树形组件渲染完成",
+    payload: [
+      {
+        name: "默认选中节点ID",
+        key: "dataId",
+        dataType: "string",
+      },
+      {
+        name: "默认选中节点名称",
+        key: "name",
+        dataType: "string",
+      },
+      {
+        name: "默认选中节点父级ID",
+        key: "parentId",
+        dataType: "string",
+      },
+      {
+        name: "默认选中节点列表ID",
+        key: "listId",
+        dataType: "string",
+      }
+    ],
   }
 ];
 
