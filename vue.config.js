@@ -3,7 +3,8 @@ module.exports = {
     disableHostCheck: true,
     proxy: {
       "/api": {
-        target: "http://10.15.111.9:12245",
+        // target: "http://10.15.111.9:12245",
+        target: "http://10.15.70.123:12203",
         changeOrigin: true,
         pathRewrite: {
           "/api": "",
@@ -35,10 +36,10 @@ module.exports = {
         }
       );
     });
-    // config.module
-    //   .rule("images")
-    //   .use("url-loader")
-    //   .loader("url-loader")
-    //   .tap(options => Object.assign(options, { limit: 1 * 100 * 1024 * 1024 }));
+    config.module
+      .rule("fonts")
+      .use("url-loader")
+      .loader("url-loader")
+      .tap(options => Object.assign(options, { limit: 1 * 100 * 1024 * 1024 }));
   },
 };

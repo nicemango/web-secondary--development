@@ -1,12 +1,15 @@
 {
-  "id": "38d34a26-cf25-42ab-aba5-6d9459fc94c4",
+  "id": "7635ec59-361f-492c-808f-411e7309cce0",
   "type": "bigscreen",
-  "main": "app.131f629b.js",
+  "main": "app.219f51d8.js",
   "version": "2",
   "props": {
     "img": "APP_0001.png",
     "disableimg": "disabled_custom_table.png",
     "name": "Vue版本的演示Demo",
-    "className": "className-demo"
+    "className": "className-demo",
+    "vars": [
+      "videoWidth"
+    ]
   }
 }
