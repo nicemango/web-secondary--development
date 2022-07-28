@@ -1,8 +1,7 @@
 {
-  "id": "4519b44f-8f66-47ca-bdbf-75d655404b88-list-custom-btn",
-  "type": "list-custom-btn",
-  "main": "main.27ebc554.js",
-  "baseVersion": "V8R4C50SPC210",
+  "id": "20897e86-60cd-4af8-ae65-38e7e566228b",
+  "type": "reporting",
+  "main": "main.ef749585.js",
   "version": "2",
   "props": {
     "styleArr": "[\"title\",\"height\",\"key\", \"eventCenterConfig\"]",

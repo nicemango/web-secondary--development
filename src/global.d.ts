@@ -8,5 +8,4 @@ interface FormAttribute {
 interface Window {
   _form: FormAttribute;
   CUSTOM_PLUGIN: any;
-  pubSub: any;
 }

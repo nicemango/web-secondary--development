@@ -1,23 +1,26 @@
-import React, {useState} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
-import List from "./components/list";
+import Design from "./components/set";
+import Add from "./components/add";
+import Child from "./components/child";
+import Table from "./components/table";
+import Preview from "./components/preview";
 import DesignConfiguration from "./components/designConfiguration";
 
 const renderHashMap = {
-  list: List,
+  set: Design,
+  add: Add,
+  child: Child,
+  table: Table,
+  preview: Preview,
   designConfiguration: DesignConfiguration,
 };
 
 const App = ({ type, ...props }) => {
   let Comp = () => <></>;
-  const {
-  isDesign,
-  pluginId,
-  setSetPluginProps, ...restProps} = props;
-  console.log('data-form-list', restProps);
   if (renderHashMap[type]) Comp = renderHashMap[type];
-  return <Comp {...restProps} />;
+  return <Comp {...props} />;
 };
 
 App.propTypes = {
