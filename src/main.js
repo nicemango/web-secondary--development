@@ -18,8 +18,11 @@ Vue.prototype.$message = Message;
 
 if (process.env.NODE_ENV !== "production") {
   // 添加 customConfig 进行测试
-  let customConfig = {};
-
+  let customConfig = {
+    筛选对应key:'name',
+    筛选对应name:'device_name',
+    系统变量对应name:'create_member',
+  };
   new Vue({
     render: h => {
       return <App customConfig={customConfig} />;

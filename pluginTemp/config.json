@@ -1,7 +1,7 @@
 {
-  "id": "6f57addd-719f-42ee-8bf4-8c2ec3cf46a8",
+  "id": "6f57addd-719f-42ee-8bf4-8c2ec3cf46a7",
   "type": "app",
-  "main": "app.a65becc1.js",
+  "main": "app.8d8ae782.js",
   "version": "2",
   "props": {
     "type": "customize",
@@ -14,7 +14,10 @@
       "deviceAsset",
       "eventAsset",
       "pictureKey",
-      "productId"
+      "productId",
+      "筛选对应key",
+      "筛选对应name",
+      "系统变量对应name"
     ]
   }
 }
