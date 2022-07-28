@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Row, Col , Modal, Button } from "antd";
-import { getAssetJSONForProduct } from './../../api/asset';
-
+import { Modal } from "antd";
+import { queryLiveing } from "../../api/asset"
+import Reflv from 'reflv';
 import './index.less';
 
 const List = ({
@@ -12,64 +12,47 @@ const List = ({
   deleteData
 }) => {
 
-  const { width } = customParams;
+  const { width } = customParams.width;
+  const [modalVisible, setModalVisible] = useState(false);
+  const [liveRes, setliveRes] = useState({});
+  const [liveUrl, setliveUrl] = useState('');
 
-  const [ JsonContent, setJsonContent ] = useState('');
 
   useEffect(() => {
-    handleClick();
+    setModalVisible(true);
   }, [])
+
+  useEffect(() => {
+    handleClick()
+  }, [modalVisible])
 
   const handleClick = async () => {
     try {
-      const { data } = await getAssetJSONForProduct(dataId);
-      const formatedJson = JSON.stringify(data?.params || {}, null, 4);
-      setJsonContent(formatedJson);
+      const { result } = await queryLiveing('888d40c0299348a280a00feb33c66cc5')
+      // liveUrl = result.url;
+      setliveRes(result)
+      console.log(result,liveUrl);
     } catch (error) {
-      setJsonContent('');
+      console.log(error);
     }
-    
-    setModalVisible(true);
+    setliveUrl('https://rtmp01open.ys7.com:9188/v3/openlive/G07869142_1_1.flv?expire=1657796434&id=467752284147683328&t=0f69d8d6aaab9e439d3264f36c3098dea919994c1ce5382dbe2c98ec725189f0&ev=100')
   }
 
-  const [modalVisible, setModalVisible] = useState(false);
-
-
-  const handleDownLoad = async () => {
-    downloadEvt('模型文件.json');
+  const destroyflvPlayer = () =>{
+    setModalVisible(false)
   }
-
-  const downloadEvt = fileName =>  {
-    const Link = document.createElement('a');
-    Link.download = fileName;
-    Link.style.display = 'none';
-    // 字符内容转变成blob地址
-    const blob = new Blob([JsonContent]);
-    Link.href = URL.createObjectURL(blob);
-    // 触发点击
-    document.body.appendChild(Link);
-    Link.click();
-    // 然后移除
-    document.body.removeChild(Link);
-  }
-
-
 
   return (
-    
-    <Modal title="查看物模型" visible={modalVisible} footer={null} onCancel={()=> setModalVisible(false)} className="tranfer-table-filter-modal" width={width}>
-      <Row>
-        <Col span={24}>
-          <pre className="json-content">{JsonContent}</pre>
-        </Col>
-      </Row>
-      <Row>
-        <Col span={24} className="btn-container">
-          <Button type="primary" onClick={handleDownLoad}>导出模型文件</Button>
-        </Col>
-      </Row>
-    </Modal>     
-    
+    <>
+      <Modal title="青白江消控中心监控摄像头" visible={modalVisible} destroyOnClose={true} footer={null} closable={false} onCancel={destroyflvPlayer} className="tranfer-table-filter-modal" width={width}>
+        <Reflv
+          url={liveUrl}
+          type="flv"
+          isLive
+          cors
+        />
+      </Modal>
+    </> 
   );
 };
 

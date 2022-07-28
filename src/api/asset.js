@@ -5,3 +5,6 @@ export const getAssetJSONForProduct = id =>
 
 export const downloadAssetJSONForProduct = id =>
   request.get(`iot/product/downloadAssetJSONForProduct?productId=${id}`);
+
+export const queryLiveing = id =>
+  request.post(`iot/video/queryLiveStreaming?deviceId=${id}`)

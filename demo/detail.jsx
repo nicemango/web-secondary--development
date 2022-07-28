@@ -4,7 +4,7 @@ import App from "../src/App";
 const PreviewComponent = (props) => {
   const customConfig = {
     componentId: "111",
-    data: "111",
+    data: "11111",
     formConfig: {},
     component: {},
     configuration: '{"size":"large","placeholder":"33333","allowClear":true}',

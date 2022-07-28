@@ -3,8 +3,8 @@ import App from "../src/App";
 
 const PreviewComponent = (props) => {
   const customConfig = {
-    componentId: "111",
-    data: "111",
+    componentId: "1111",
+    data: "1111",
     formConfig: {
     },
     component: {},
@@ -15,7 +15,7 @@ const PreviewComponent = (props) => {
       <App {...customConfig} type="table" />
       <br />
       <br />
-      <div>回填值: {customConfig.data}</div>
+      <div>回填值1: {customConfig.data}</div>
     </div>
   );
 };

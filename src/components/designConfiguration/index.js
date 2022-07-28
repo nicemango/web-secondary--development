@@ -27,12 +27,12 @@ const DesignConfiguration = ({ changeConfiguration, configuration }) => {
         form={form}
         onValuesChange={onFormLayoutChange}
       >
-        <Form.Item label="宽度：" name="width" initialValue={520}>
+        <Form.Item label="宽度：" name="width" initialValue={600}>
           <InputNumber />
         </Form.Item>
-        <Form.Item label="高度：" name="height" initialValue={640}>
+        {/* <Form.Item label="高度：" name="height" initialValue={750}>
           <InputNumber />
-        </Form.Item>
+        </Form.Item> */}
       </Form>
     </>
   );
