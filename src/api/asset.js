@@ -1,14 +1,16 @@
 import request from "./request";
 
 /**
- * 查询资产(新的)
- * @param {*} params
+ * 查询资产
+ * @param id 资产ID
  */
-export const getAssets = (cata, type, params2) =>
-  request.post(`asset/queryList?cata=${cata}&type=${type}`, params2);
+export const queryAssetById = id =>
+  request.post(`/asset/getAssetData?asset_id=${id}`, []);
+
 
 /**
  * 查询资产
+ * @param id 资产ID
  */
-export const queryAssetById = (id) =>
-  request.get("asset", { params: { asset_id: id } });
+ export const queryByDatappId = (id, type) =>
+ request.get(`/datapp/menu/queryByDatappId?datappId=${id}&entryType=${type}`);
