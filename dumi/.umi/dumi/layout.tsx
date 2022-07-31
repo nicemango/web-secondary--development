@@ -3,6 +3,6 @@ import React from 'react';
 import config from '@@/dumi/config';
 import demos from '@@/dumi/demos';
 import apis from '@@/dumi/apis';
-import Layout from '/Users/wangjinbao/code/sdata-custome-plugins/list-custom-btn/list-custom-btn/node_modules/@umijs/preset-dumi/lib/theme/layout';
+import Layout from 'D:/Project/fillinbutton-ns_batchOperation/node_modules/_@umijs_preset-dumi@1.1.46@@umijs/preset-dumi/lib/theme/layout';
 
 export default (props) => <Layout {...props} config={config} demos={demos} apis={apis} />;

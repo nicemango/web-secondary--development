@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Form, InputNumber } from "antd";
+import { Form, Input } from "antd";
 
 const DesignConfiguration = ({ changeConfiguration, configuration }) => {
   const [form] = Form.useForm();
@@ -16,25 +16,12 @@ const DesignConfiguration = ({ changeConfiguration, configuration }) => {
   };
 
   const formItemLayout = {
-    labelCol: { span: 6 },
-    wrapperCol: { span: 18 },
+    labelCol: { span: 3 },
+    wrapperCol: { span: 24 },
   };
 
   return (
-    <>
-      <Form
-        {...formItemLayout}
-        form={form}
-        onValuesChange={onFormLayoutChange}
-      >
-        <Form.Item label="宽度：" name="width" initialValue={520}>
-          <InputNumber />
-        </Form.Item>
-        <Form.Item label="高度：" name="height" initialValue={640}>
-          <InputNumber />
-        </Form.Item>
-      </Form>
-    </>
+    <></>
   );
 };
 

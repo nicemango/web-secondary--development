@@ -1,13 +1,14 @@
 {
-  "id": "4519b44f-8f66-47ca-bdbf-75d655404b47-list-custom-btn",
+  "id": "4519b44f-8f66-47ca-bdbf-73d555404b47-list-custom-btn",
   "type": "list-custom-btn",
-  "main": "main.e0da94ed.js",
+  "main": "main.b3a1edad.js",
   "baseVersion": "V8R4C50SPC210",
   "version": "2",
   "props": {
     "styleArr": "[\"title\",\"height\",\"key\", \"eventCenterConfig\"]",
     "columnStyle": "{title:'自定义'}",
     "componentAttributes": "{\"style\":[\"title\",\"height\"],\"data\":[\"key\"],\"interaction\":[\"eventCenterConfig\"]}",
-    "assetColumnList": "[{\"col_name\":\"自定义\",\"col_datatype\":0}]"
+    "assetColumnList": "[{\"col_name\":\"自定义\",\"col_datatype\":0}]",
+    "supportBatch": true
   }
 }

@@ -15,7 +15,7 @@ const App = ({ type, ...props }) => {
   isDesign,
   pluginId,
   setSetPluginProps, ...restProps} = props;
-  console.log('data-form-list', restProps);
+  // console.log('data-form-list', restProps);
   if (renderHashMap[type]) Comp = renderHashMap[type];
   return <Comp {...restProps} />;
 };

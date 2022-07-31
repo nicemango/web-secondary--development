@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { createBrowserHistory, History } from '/Users/wangjinbao/code/sdata-custome-plugins/list-custom-btn/list-custom-btn/node_modules/@umijs/runtime';
+import { createBrowserHistory, History } from 'D:/Project/fillinbutton-ns_batchOperation/node_modules/_@umijs_runtime@3.5.30@@umijs/runtime';
 
 let options = {
   "basename": "/"
