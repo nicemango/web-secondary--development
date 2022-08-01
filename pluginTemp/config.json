@@ -1,0 +1,20 @@
+{
+  "id": "fdd747d4-5ade-4fb3-a4f3-6e69aef613f4",
+  "type": "analyzers",
+  "main": "app.de431288.js",
+  "version": "2",
+  "props": {
+    "img": "custom_table.png",
+    "type": "k23dasd548",
+    "disableimg": "disabled_custom_table.png",
+    "name": "Vue3分析仪Demo",
+    "domId": "ex_custom_table_15",
+    "lib": [],
+    "cssDep": [],
+    "scriptName": "app.a515a2e6.js",
+    "optionModules": [],
+    "vars": [
+      "fontSize"
+    ]
+  }
+}
