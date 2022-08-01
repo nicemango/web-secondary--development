@@ -2,7 +2,7 @@
   <div class="menu_all">
     <el-menu @select="handleSelect">
       <div v-for="(item, index) in menuList" :key="index">
-        <el-submenu :index="item.id" v-if="item.name != '应用管理'">
+        <el-submenu :index="item.id" v-if="JSON.stringify(item.children) != '[]'">
           <!-- 一级菜单 -->
           <template slot="title">
             <span class="nav_line"></span>
@@ -16,7 +16,7 @@
           <el-menu-item-group>
             <el-row class="menu_row" :gutter="8">
               <el-col :span="12" v-for="(e, i) in item.children" :key="i" class="menu_col">
-                <el-menu-item :index="e.id">
+                <el-menu-item :index="e.id" >
                   <el-badge :value="getBadge(e, 'value')" class="ment_badge" :max="99" :hidden="getBadge(e, 'type')">
                     <img :src="getImgUrl(e)" alt="" v-if="e.icon">
                     <img src="./assets/menuIcon.png" alt="" v-else>
@@ -28,7 +28,7 @@
           </el-menu-item-group>
         </el-submenu>
         <!-- 应用管理 -->
-        <el-menu-item :index="item.id" v-if="item.name == '应用管理'">
+        <el-menu-item :index="item.id" v-if="JSON.stringify(item.children) == '[]'">
           <div class="title_image">
             <img :src="getImgUrl(item)" alt="" v-if="item.icon">
             <img src="./assets/menuTitle.png" alt="" v-else>
@@ -52,10 +52,10 @@ export default {
   name: "App",
 
   props: {
-    // appVariables: Array,
+    appVariables: Array,
     customConfig: Object,
     goHistory: Function,
-    // variables: Object,
+    variables: Object,
   },
 
   data() {
@@ -66,24 +66,6 @@ export default {
       appid: '',
       // 小红点状态
       badgeHidden: true,
-
-      appVariables: [
-        {
-            "id": "3e8efdfb-0506-485a-b474-d9a279658f06",
-            "name": "aaa",
-            "data_type": 0,
-            "default_value": "10"
-        },
-        {
-            "id": "87fee857-0598-406e-a500-518042aef098",
-            "name": "aaa",
-            "data_type": 0,
-            "default_value": "10"
-        }
-      ],
-      variables:{
-        "aaa": 20
-      }
     }
   },
 
@@ -91,8 +73,8 @@ export default {
     let { componentId } = this.customConfig || {};
     componentId && window.componentCenter?.register(componentId, "comp", this, eventActionDefine);
 
-    // this.appid = qs.parse(window.location.search).appid
-    this.appid = '1cc59075-95c1-409a-498d-ffb67f64c14a'
+    this.appid = qs.parse(window.location.search).appid
+    // this.appid = '1cc59075-95c1-409a-498d-ffb67f64c14a'
 
     this.getMenuList()
   },
@@ -109,15 +91,19 @@ export default {
     handleSelect(rowId) {
       let menuRow = {}
       this.menuList.forEach( (item) => {
-        if(item.name == '应用管理' && rowId == item.id) {
-          menuRow = item
-          menuRow.id = 'system#1'
-        } else {
+        if(JSON.stringify(item.children) != '[]') {
           item.children.forEach( (e) => {
             if(rowId == e.id) {
               menuRow = e
             }
           })
+        } else {
+          if(rowId == item.id) {
+            menuRow = item
+            if(item.name == '应用管理') {
+              menuRow.id = 'system#1'
+            }
+          }
         }
       })
       this.routerHistry(menuRow)
