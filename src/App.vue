@@ -391,10 +391,10 @@ export default {
     },
     // 告警图片
     async queryimg() {
-      let { pictureId } = this.customConfig || {};
+      let { pictureKey } = this.customConfig || {};
       let params = {
         devId: this.selectItem.device_id,
-        eveId: this.diaContent[pictureId]
+        eveId: this.diaContent[pictureKey]
         // eveId: this.diaContent.alarm_picture_info,
       };
       await queryWarnPicture(params)
