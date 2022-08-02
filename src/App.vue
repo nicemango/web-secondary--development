@@ -67,7 +67,6 @@ export default {
   },
   computed: {},
   mounted() {
-    console.log(this.customConfig);
     this.pasgesize = this.customConfig?.page ? JSON.parse(this.customConfig?.page) : [8, 16, 32];
     this.limit = this.pasgesize[0];
     let { componentId } = this.customConfig || {};
@@ -97,6 +96,7 @@ export default {
         let arr = paramsArr[i].split("=");
         obj[arr[0]] = arr[1];
       }
+      console.log(obj);
       return obj;
     },
     handleSizeChange(val) {
@@ -109,6 +109,10 @@ export default {
       this.page = val;
       this.pageList();
     },
+    formatDate(time) {
+      let date = new Date(time);
+      return date.toJSON().substr(0, 19).replace("T", " ").replace(/-/g, "-");
+    },
     showDialog(item) {
       if (item.requestFlag == 1) {
         let message = {
@@ -117,6 +121,7 @@ export default {
         };
         queryWarnPicture(message).then((res) => {
           this.imgSrc = res.data.picUrl;
+          this.dialogTitle = res.data.eventDesc + " ，" + this.formatDate(res.data.reportTime);
           this.dialogVisible = true;
         });
       }
