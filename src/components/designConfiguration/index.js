@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Form, InputNumber } from "antd";
+import { Form, InputNumber, Input } from "antd";
 
 const DesignConfiguration = ({ changeConfiguration, configuration }) => {
   const [form] = Form.useForm();
@@ -30,8 +30,32 @@ const DesignConfiguration = ({ changeConfiguration, configuration }) => {
         <Form.Item label="宽度：" name="width" initialValue={520}>
           <InputNumber />
         </Form.Item>
-        <Form.Item label="高度：" name="height" initialValue={640}>
-          <InputNumber />
+        <Form.Item label="视频对应字段：" name="videoKey"
+          rules={[
+            {
+              required: true,
+              message: '',
+            },
+          ]}>
+          <Input />
+        </Form.Item>
+        <Form.Item label="视频主键字段：" name="videoIdKey"
+          rules={[
+            {
+              required: true,
+              message: '',
+            },
+          ]}>
+          <Input />
+        </Form.Item>
+        <Form.Item label="资产ID：" name="assetId"
+          rules={[
+            {
+              required: true,
+              message: '',
+            },
+          ]}>
+          <Input />
         </Form.Item>
       </Form>
     </>

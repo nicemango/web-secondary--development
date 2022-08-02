@@ -1,5 +1,6 @@
 import React from "react";
 import App from "../src/App";
+import Design from "../src/components/designConfiguration/index";
 import "./mockComponentCenter";
 
 const DesignConfiguration = (props) => {
@@ -9,9 +10,9 @@ const DesignConfiguration = (props) => {
     component: {},
     changeConfiguration: (values) => console.log(values),
     configuration:
-      '{"size":"middle", "placeholder": "123", "allowClear": true }',
+      '{"width":500, "assetId": "7715734e-ca73-480e-a9e5-e788fc1bb647", "videoKey": "videoUrl" ,"videoIdKey":"device_id"}',
   };
-  return <App {...customConfig} type="designConfiguration" />;
+  return <Design {...customConfig} type="designConfiguration" />;
 };
 
 DesignConfiguration.propTypes = {};

@@ -2,9 +2,19 @@ import axios from "axios";
 import qs from "querystringify";
 
 // const apiContextPath = "http://192.168.1.240:43214";
+let apiContextPath = "";
+if (process.env.NODE_ENV === "development") {
+  document.cookie =
+    "token=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpblRpbWVzdGFtcCI6MTY1OTM0NDY0OTUyNiwidXNlcklkIjoiMTIzNDU2Nzg5MCJ9.3WbAgN9qhnqaF0aCTra4SVJIoiv34CpUhDaYxmV9wEw";
+  document.cookie =
+    "refreshToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpblRpbWVzdGFtcCI6MTY1ODg4NjUyNjEwMX0.uT84ejpGxWiYBiYYuHG-Jgjy-WJg4VztNETQuR0uFk4";
+  document.cookie = "username=admin";
+  document.cookie = "windowOnline=true";
+  apiContextPath = "/api";
+}
 
 const instance = axios.create({
-  baseURL: `/sdata/rest`,
+  baseURL: `${apiContextPath}/sdata/rest`,
   timeout: 60000,
   validateStatus: function (status) {
     return status >= 200 && status < 300; // default
@@ -20,6 +30,7 @@ instance.defaults.headers.post["Content-Type"] = "application/json";
 
 instance.interceptors.response.use(
   (response) => {
+    console.log('response====',response);
     let { data } = response;
     if (typeof data === "string") {
       data = JSON.parse(data);

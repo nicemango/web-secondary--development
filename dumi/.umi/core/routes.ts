@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React from 'react';
-import { ApplyPluginsType } from '/Users/wangjinbao/code/sdata-custome-plugins/list-custom-btn/list-custom-btn/node_modules/@umijs/runtime';
+import { ApplyPluginsType } from 'D:/workTest/web-secondary--development/node_modules/_@umijs_runtime@3.5.31@@umijs/runtime';
 import * as umiExports from './umiExports';
 import { plugin } from './plugin';
 
@@ -12,7 +12,7 @@ export function getRoutes() {
     "wrappers": [require('../dumi/layout').default],
     "component": ((props) => {
         const React = require('react');
-        const { default: getDemoRenderArgs } = require('/Users/wangjinbao/code/sdata-custome-plugins/list-custom-btn/list-custom-btn/node_modules/@umijs/preset-dumi/lib/plugins/features/demo/getDemoRenderArgs');
+        const { default: getDemoRenderArgs } = require('D:/workTest/web-secondary--development/node_modules/_@umijs_preset-dumi@1.1.46@@umijs/preset-dumi/lib/plugins/features/demo/getDemoRenderArgs');
         const { default: Previewer } = require('dumi-theme-default/es/builtins/Previewer.js');
         const { usePrefersColor, context } = require('dumi/theme');
 
@@ -55,15 +55,15 @@ export function getRoutes() {
     "__dumiRoot": true,
     "layout": false,
     "path": "/",
-    "wrappers": [require('../dumi/layout').default, require('/Users/wangjinbao/code/sdata-custome-plugins/list-custom-btn/list-custom-btn/node_modules/dumi-theme-default/es/layout.js').default],
+    "wrappers": [require('../dumi/layout').default, require('D:/workTest/web-secondary--development/node_modules/_dumi-theme-default@1.1.22@dumi-theme-default/es/layout.js').default],
     "routes": [
       {
         "path": "/reporting/快速开始/1",
-        "component": require('/Users/wangjinbao/code/sdata-custome-plugins/list-custom-btn/list-custom-btn/dumi/docs/1.快速开始.md').default,
+        "component": require('D:/workTest/web-secondary--development/dumi/docs/1.快速开始.md').default,
         "exact": true,
         "meta": {
           "filePath": "dumi/docs/1.快速开始.md",
-          "updatedTime": 1654852328000,
+          "updatedTime": 1657784076000,
           "title": "快速开始",
           "nav": {
             "title": "填报",
@@ -96,11 +96,11 @@ export function getRoutes() {
       },
       {
         "path": "/reporting/如何开发插件/2",
-        "component": require('/Users/wangjinbao/code/sdata-custome-plugins/list-custom-btn/list-custom-btn/dumi/docs/2.开发插件.md').default,
+        "component": require('D:/workTest/web-secondary--development/dumi/docs/2.开发插件.md').default,
         "exact": true,
         "meta": {
           "filePath": "dumi/docs/2.开发插件.md",
-          "updatedTime": 1654852328000,
+          "updatedTime": 1657784076000,
           "title": "如何开发插件",
           "nav": {
             "title": "填报",
@@ -149,11 +149,11 @@ export function getRoutes() {
       },
       {
         "path": "/reporting/如何使用插件/3",
-        "component": require('/Users/wangjinbao/code/sdata-custome-plugins/list-custom-btn/list-custom-btn/dumi/docs/3.使用插件.md').default,
+        "component": require('D:/workTest/web-secondary--development/dumi/docs/3.使用插件.md').default,
         "exact": true,
         "meta": {
           "filePath": "dumi/docs/3.使用插件.md",
-          "updatedTime": 1654852328000,
+          "updatedTime": 1657784076000,
           "title": "如何使用插件",
           "nav": {
             "title": "填报",
@@ -170,11 +170,11 @@ export function getRoutes() {
       },
       {
         "path": "/reporting/API/4",
-        "component": require('/Users/wangjinbao/code/sdata-custome-plugins/list-custom-btn/list-custom-btn/dumi/docs/4.API.md').default,
+        "component": require('D:/workTest/web-secondary--development/dumi/docs/4.API.md').default,
         "exact": true,
         "meta": {
           "filePath": "dumi/docs/4.API.md",
-          "updatedTime": 1654852328000,
+          "updatedTime": 1657784076000,
           "title": "API",
           "nav": {
             "title": "填报",
@@ -282,11 +282,11 @@ export function getRoutes() {
       },
       {
         "path": "/",
-        "component": require('/Users/wangjinbao/code/sdata-custome-plugins/list-custom-btn/list-custom-btn/dumi/docs/index.md').default,
+        "component": require('D:/workTest/web-secondary--development/dumi/docs/index.md').default,
         "exact": true,
         "meta": {
           "filePath": "dumi/docs/index.md",
-          "updatedTime": 1654852328000,
+          "updatedTime": 1657784076000,
           "hero": {
             "title": "sdata-plugins",
             "desc": "<div class=\"markdown\"><p>二次开发组件</p></div>",
@@ -322,11 +322,11 @@ export function getRoutes() {
       },
       {
         "path": "/reporting/dev/快速预览",
-        "component": require('/Users/wangjinbao/code/sdata-custome-plugins/list-custom-btn/list-custom-btn/dumi/docs/快速预览.md').default,
+        "component": require('D:/workTest/web-secondary--development/dumi/docs/快速预览.md').default,
         "exact": true,
         "meta": {
           "filePath": "dumi/docs/快速预览.md",
-          "updatedTime": 1654852328000,
+          "updatedTime": 1659349021000,
           "title": "组件开发预览",
           "nav": {
             "title": "填报",
@@ -353,26 +353,6 @@ export function getRoutes() {
               "depth": 3,
               "value": "配置项",
               "heading": "配置项"
-            },
-            {
-              "depth": 2,
-              "value": "新增/编辑 主表组件",
-              "heading": "新增编辑-主表组件"
-            },
-            {
-              "depth": 2,
-              "value": "新增/编辑 子表组件",
-              "heading": "新增编辑-子表组件"
-            },
-            {
-              "depth": 2,
-              "value": "列表页组件",
-              "heading": "列表页组件"
-            },
-            {
-              "depth": 2,
-              "value": "详情页组件",
-              "heading": "详情页组件"
             }
           ],
           "hasPreviewer": true

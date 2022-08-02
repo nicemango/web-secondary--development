@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Row, Col , Modal, Button } from "antd";
-import { getAssetJSONForProduct } from './../../api/asset';
+import { Modal, Empty, message } from "antd";
+import { getAssetData } from '../../api/asset'
 
 import './index.less';
 
@@ -12,9 +12,20 @@ const List = ({
   deleteData
 }) => {
 
-  const { width } = customParams;
+  const width = customParams.width;
+  const assetId = customParams.assetId;
+  const videoIdKey = customParams.videoIdKey;
+  const videoKey = customParams.videoKey;
+  console.log({
+    "width===": width,
+    "assetId===": assetId,
+    "videoIdKey===": videoIdKey,
+    "videoKey===": videoKey,
+    "dataId===":dataId
+  });
 
-  const [ JsonContent, setJsonContent ] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [videoObj, setVideoObj] = useState({});
 
   useEffect(() => {
     handleClick();
@@ -22,52 +33,39 @@ const List = ({
 
   const handleClick = async () => {
     try {
-      const { data } = await getAssetJSONForProduct(dataId);
-      const formatedJson = JSON.stringify(data?.params || {}, null, 4);
-      setJsonContent(formatedJson);
+      await getAssetData(assetId).then(res=>{
+        let key = res.data[0]
+        let value = res.data[1]
+        let data = value.map(val => {
+          let obj = {};
+          key.forEach((k,index) =>{
+            obj[k.col_name] = val[index]
+          })
+          return obj;
+        }).filter(x=>{
+          return x[videoIdKey] === dataId
+        })
+        console.log('data=============>',data);
+        if (data.length > 0) {
+          setVideoObj(data[0])
+        }else {
+          message.info('暂无视频');
+        }
+      }).catch(err=>{
+        console.log(err);
+      });
     } catch (error) {
-      setJsonContent('');
+      return false;
     }
-    
     setModalVisible(true);
   }
 
-  const [modalVisible, setModalVisible] = useState(false);
-
-
-  const handleDownLoad = async () => {
-    downloadEvt('模型文件.json');
-  }
-
-  const downloadEvt = fileName =>  {
-    const Link = document.createElement('a');
-    Link.download = fileName;
-    Link.style.display = 'none';
-    // 字符内容转变成blob地址
-    const blob = new Blob([JsonContent]);
-    Link.href = URL.createObjectURL(blob);
-    // 触发点击
-    document.body.appendChild(Link);
-    Link.click();
-    // 然后移除
-    document.body.removeChild(Link);
-  }
-
-
-
   return (
     
-    <Modal title="查看物模型" visible={modalVisible} footer={null} onCancel={()=> setModalVisible(false)} className="tranfer-table-filter-modal" width={width}>
-      <Row>
-        <Col span={24}>
-          <pre className="json-content">{JsonContent}</pre>
-        </Col>
-      </Row>
-      <Row>
-        <Col span={24} className="btn-container">
-          <Button type="primary" onClick={handleDownLoad}>导出模型文件</Button>
-        </Col>
-      </Row>
+    <Modal title="视频弹窗" visible={modalVisible} footer={null} onCancel={()=> setModalVisible(false)} className="tranfer-table-filter-modal" width={width} destroyOnClose={true}>
+      {
+        videoObj[videoKey] ? <video className="centeredVideo" controls src={videoObj[videoKey]} poster=""></video> : <Empty />
+      }
     </Modal>     
     
   );

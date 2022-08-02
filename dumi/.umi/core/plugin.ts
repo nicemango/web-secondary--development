@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Plugin } from '/Users/wangjinbao/code/sdata-custome-plugins/list-custom-btn/list-custom-btn/node_modules/@umijs/runtime';
+import { Plugin } from 'D:/workTest/web-secondary--development/node_modules/_@umijs_runtime@3.5.31@@umijs/runtime';
 
 const plugin = new Plugin({
   validKeys: ['modifyClientRenderOpts','patchRoutes','rootContainer','render','onRouteChange','__mfsu',],

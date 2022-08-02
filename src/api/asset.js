@@ -1,7 +1,12 @@
 import request from "./request";
 
-export const getAssetJSONForProduct = id =>
-  request.get(`iot/product/getAssetJSONForProduct?productId=${id}`);
+export const getAssetData = id =>
+  request.post(`asset/data?id=${id}`);
 
-export const downloadAssetJSONForProduct = id =>
-  request.get(`iot/product/downloadAssetJSONForProduct?productId=${id}`);
+/**
+ * 查询资产
+ * @param id 资产ID
+ */
+ export const queryAssetById = (id) =>
+  request.post(`/asset/getAssetData?asset_id=${id}&count=99999&pageNum=1&pageSize=9999`, [])
+  
