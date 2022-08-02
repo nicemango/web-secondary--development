@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
-import { getAssetJSONForProduct } from './../../api/asset';
 
-import { batchOperation } from '../../api/asset'
+import {batchOperation} from '../../api/asset'
 
 import './index.less';
 
@@ -18,35 +17,37 @@ const List = (props) => {
     let resData = {}
     let resDataList = []
 
-    props.dataSource && props.dataSource.forEach( (item, index) => {
-      if(item.length) {
+    props.dataSource && props.dataSource.forEach((item, index) => {
+      if (item.length) {
         let resObj = {}
-        item.forEach( (e, i) => {
-          switch(e.title) {
-            case '设备id': 
+        item.forEach((e, i) => {
+          switch (e.title) {
+            case '设备id':
               resObj.device_id = e.value.value;
-            case '设备状态': 
+            case '设备状态':
               resObj.status = e.value.value;
           }
         })
         resDataList.push(resObj)
       } else {
-        switch(item.title) {
-          case '设备id': 
+        switch (item.title) {
+          case '设备id':
             resData.device_id = item.value.value;
-          case '设备状态': 
+          case '设备状态':
             resData.status = item.value.value;
         }
       }
     })
-    
-    if(resDataList.length) {
-      batchOperation(resDataList).then( (res) => {
+
+    if (resDataList.length) {
+      batchOperation(resDataList).then((res) => {
         console.log('批量操作')
+        props.refreshFlag && props.handleSearch()
       })
     } else {
-      batchOperation([resData]).then( (res) => {
+      batchOperation([resData]).then((res) => {
         console.log('单条操作')
+        props.refreshFlag && props.handleSearch()
       })
     }
   }
