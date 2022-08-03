@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/static/js/main.91a5e74e.js",
+    "main.js.map": "/static/js/main.91a5e74e.js.map",
+    "index.html": "/index.html",
+    "static/js/main.91a5e74e.js.LICENSE.txt": "/static/js/main.91a5e74e.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/main.91a5e74e.js"
+  ]
+}

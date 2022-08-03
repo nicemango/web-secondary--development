@@ -38,16 +38,15 @@ const List = (props) => {
         }
       }
     })
-
     if (resDataList.length) {
       batchOperation(resDataList).then((res) => {
         console.log('批量操作')
-        props.refreshFlag && props.handleSearch()
+        props.handleSearch()
       })
     } else {
       batchOperation([resData]).then((res) => {
         console.log('单条操作')
-        props.refreshFlag && props.handleSearch()
+        props.handleSearch()
       })
     }
   }
