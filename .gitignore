@@ -31,7 +31,7 @@ pluginTemp/js/*
 pluginTemp/libs/*
 plugin-*.zip
 
-.umi
+/dumi/.umi/.cache/babel-loader
 
 .history
 temp

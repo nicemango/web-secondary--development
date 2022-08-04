@@ -1,13 +1,14 @@
 import Vue from "vue";
 import App from "./App.vue";
 // 按需引入组件，引入方式见https://element.eleme.cn/#/zh-CN/component/quickstart#an-xu-yin-ru
-import { Input, Select, Option } from "element-ui";
+import { Input, Select, Option, Dialog } from "element-ui";
 import echarts from "echarts";
 
 import "./index.css";
 Vue.config.productionTip = false;
 Vue.use(Input);
 Vue.use(Select);
+Vue.use(Dialog);
 Vue.use(Option);
 Vue.prototype.$echarts = echarts;
 

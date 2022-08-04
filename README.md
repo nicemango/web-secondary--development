@@ -71,6 +71,7 @@
 this.customConfig?.variable.default_value
 
 ## 数据源的获取
+
 **`字符串形式`**
 
 使用JSON.stringify()转化数据
@@ -242,7 +243,6 @@ export default new EventBus();
 | 前端插件包 | 在本地选择需要上传的前端插件包。 |
 | 图标 | 单击“选择图标”，根据需要选择面性或线性类型的图标，并且可以通过配置主题颜色，配置图标的颜色。也可以选择自定义，上传自定义图标，支持的自定义图标格式有jpg、jpeg、png、bmp和svg，且图片的大小不能超过128K。 |
 ### 插件使用
-
 
 #### 大屏
 1. 新增插件已经上传Smartdata平台。
