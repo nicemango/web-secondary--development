@@ -1,7 +1,32 @@
 import Vue from "vue";
 import App from "./App.vue";
+import "videojs-flash";
+import "videojs-contrib-hls";
+import VideoPlayer from "vue-video-player/src";
+require("video.js/dist/video-js.css");
+require("vue-video-player/src/custom-theme.css");
 // 按需引入组件，引入方式见https://element.eleme.cn/#/zh-CN/component/quickstart#an-xu-yin-ru
-import { Input, Select, Option, Button, Avatar } from "element-ui";
+import {
+  Input,
+  Select,
+  Option,
+  Button,
+  Switch,
+  Avatar,
+  RadioGroup,
+  Radio,
+  Tabs,
+  TabPane,
+  Icon,
+  TableColumn,
+  Checkbox,
+  Table,
+  Carousel,
+  CarouselItem,
+  CheckboxGroup,
+  Dialog,
+  Message,
+} from "element-ui";
 
 Vue.config.productionTip = false;
 Vue.use(Input);
@@ -9,7 +34,21 @@ Vue.use(Select);
 Vue.use(Option);
 Vue.use(Button);
 Vue.use(Avatar);
-
+Vue.use(Tabs);
+Vue.use(TabPane);
+Vue.use(Checkbox);
+Vue.use(CheckboxGroup);
+Vue.use(Carousel);
+Vue.use(CarouselItem);
+Vue.use(Dialog);
+Vue.use(Table);
+Vue.use(TableColumn);
+Vue.use(Icon);
+Vue.use(Switch);
+Vue.use(Radio);
+Vue.use(RadioGroup);
+Vue.use(VideoPlayer);
+Vue.prototype.$message = Message;
 // import * as appService from "@njsdata/app-sdk";
 
 if (process.env.NODE_ENV !== "production") {
@@ -18,12 +57,11 @@ if (process.env.NODE_ENV !== "production") {
     title: "数据构建",
     desc: "无码化应用搭建，弹指间即完成数据从无到有到收集和使用",
     url: "http://baidu.com",
-    imgUrl:
-      "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png",
+    imgUrl: "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png",
   };
 
   new Vue({
-    render: h => {
+    render: (h) => {
       return <App customConfig={customConfig} />;
     },
   }).$mount("#app");
@@ -32,17 +70,14 @@ if (process.env.NODE_ENV !== "production") {
     window.CUSTOM_PLUGIN = new Map();
   }
 
-  window.CUSTOM_PLUGIN.set(
-    process.env.VUE_APP_CUSTOM_PLUGIN_ID,
-    (dom, props) => {
-      if (dom.childNodes.length > 0) {
-        dom.removeChild(dom.childNodes[0]);
-      }
-      const div = document.createElement("div");
-      dom.appendChild(div);
-      new Vue({
-        render: h => <App {...{ props }} />,
-      }).$mount(div);
+  window.CUSTOM_PLUGIN.set(process.env.VUE_APP_CUSTOM_PLUGIN_ID, (dom, props) => {
+    if (dom.childNodes.length > 0) {
+      dom.removeChild(dom.childNodes[0]);
     }
-  );
+    const div = document.createElement("div");
+    dom.appendChild(div);
+    new Vue({
+      render: (h) => <App {...{ props }} />,
+    }).$mount(div);
+  });
 }
