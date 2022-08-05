@@ -1,47 +1,249 @@
-.infoCard {
-  background-color: #0454f2;
-  color: white;
-  width: 24%;
-  height: 15.15vw;
-  border-radius: 16px;
-  padding: 2vw;
-  position: relative;
-  top: 300px;
-  left: 500px;
-  .card-title {
-    position: relative;
-    font-weight: bold;
-    font-size: 28px;
-    line-height: 39px;
-    padding-bottom: 1vw;
-    margin-bottom: 1vw;
-    border-bottom: 1px solid #fff3;
-    z-index: 10;
-  }
-  .card-desc {
-    position: relative;
-    font-size: 14px;
-    line-height: 20px;
-    color: #ffffffb3;
-    margin-bottom: 1vw;
-    z-index: 10;
-  }
-  .card-bg {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    display: flex;
-    flex-direction: row-reverse;
-    z-index: 0;
-  }
-  .ant-btn-background-ghost {
-    border-color: #fff8;
-    width: 100px;
-  }
-  @media (max-width: 1680px) {
-    .card-title {
-      font-size: 26px;
-      line-height: 37px;
+.ant-tabs-nav-wrap {
+  background: #092860;
+  color: #ffffff;
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+}
+.ant-tabs-nav {
+  margin: 0 !important;
+}
+:global.ant-form-item-label {
+  width: 100px !important;
+}
+:global.ant-form-item-control {
+  width: 100px !important;
+}
+.topImg {
+  width: 100%;
+  height: 160px;
+  // background: url("./assets/img/backgroundImg.png") no-repeat;
+  // background-size: 100% 100%;
+}
+.firtsListOne {
+  // display: flex;
+  // justify-content: space-around;
+  .firtsListOneCard {
+    width: 94%;
+    height: 166px;
+    margin: 0 3%;
+    background: #ffffff;
+    .firtsListOneTop {
+      height: 25%;
+      width: 96%;
+      margin: 3% 2% 2% 0;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2px dashed #3f3f3f;
+      .firtsListOneTopTilte {
+        height: 70%;
+        min-width: 40%;
+        text-align: center;
+        background: #0664c8;
+        color: #ffffff;
+        line-height: 28px;
+        margin: 2% 0 0 2%;
+      }
+      .firtsListOneTopMore {
+        margin: 3%;
+        cursor: pointer;
+        color: #51b4df;
+      }
+    }
+    .firtsListOneInfo {
+      height: 66%;
+      width: 96%;
+      margin: 0 0 0 4%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      span {
+        cursor: pointer;
+        font-size: 14px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      span:hover {
+        color: #5182e4;
+      }
     }
   }
+}
+.currencyCard {
+  width: 100%;
+  height: 80px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: space-between;
+  .currencyLeft {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+    // justify-content: space-around;
+    .currencyLeftTitle {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      margin-top: 15px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .currencyLeftInfo {
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  .currencyRight {
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    line-height: 16px;
+    text-align: center;
+    margin-top: 32px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+}
+
+.firstInfo {
+  height: 100%;
+  width: 100%;
+  .topTitle {
+    height: 50px;
+    width: 100%;
+    background: #ffffff;
+    text-align: left;
+    margin-bottom: 10px;
+    span {
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 50px;
+      margin-left: 10%;
+    }
+  }
+  .InfoLable {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2px;
+    div:first-child {
+      margin-top: 20px;
+      font-weight: bold;
+      width: 35%;
+      text-align: left;
+      font-size: 16px;
+      font-family: 黑体;
+    }
+    div:last-child {
+      width: 65%;
+      margin-top: 20px;
+      word-wrap: break-word;
+      word-break: normal;
+      text-align: right;
+      font-family: 黑体;
+      font-size: 16px;
+    }
+  }
+  .buttomInfo {
+    width: 100%;
+    height: 100%;
+    padding: 0 5%;
+    margin-left: 0%;
+    background: #ffffff;
+  }
+}
+.currencyInfo {
+  width: 100%;
+  min-height: 520px;
+  text-align: center;
+  .topTitle {
+    height: 50px;
+    width: 100%;
+    background: #ffffff;
+    text-align: left;
+    margin-bottom: 10px;
+    span {
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 50px;
+      margin-left: 10%;
+    }
+  }
+  .buttomInfo {
+    width: 100%;
+    height: 100%;
+    padding: 0 5%;
+    margin-left: 0%;
+    background: #ffffff;
+    padding: 20px 20px;
+    box-sizing: border-box;
+    h4 {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .mainInfo {
+      text-indent: 30px;
+      text-align-last: left;
+      p:first-child {
+        text-indent: 0em;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    span {
+      font-size: 12px;
+    }
+    .enclosure {
+      color: #0664c8;
+    }
+  }
+}
+.ant-form {
+  max-width: 90% !important;
+  margin-left: 5% !important;
+  margin-top: 20px !important;
+}
+textarea.ant-input {
+  min-height: 75px !important;
+}
+.ant-picker-date-panel {
+  width: 260px !important;
+}
+.ant-picker-time-panel-column {
+  width: 40px !important;
+}
+.ant-picker {
+  width: 100%;
+}
+.submitBt {
+  height: 40px;
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.saveBt {
+  background-color: #0454f2 !important;
+  color: #ffffff !important;
+}
+.ant-tabs-nav-list {
+  width: 100%;
+  display: flex !important;
+  justify-content: space-around !important;
+}
+.ant-empty {
+  background-color: #ffffff !important;
+  margin: 0 !important;
+  padding-top: 25px !important;
 }

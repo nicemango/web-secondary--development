@@ -1,19 +1,15 @@
 import axios from "axios";
 import qs from "querystringify";
-
-// const apiContextPath = "http://192.168.1.240:43214";
-
+if (process.env.NODE_ENV === "development") {
+  document.cookie = "token=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpblRpbWVzdGFtcCI6MTY1Mjc2NTU1NDEyNSwidXNlcklkIjoiMTIzNDU2Nzg5MCJ9.OqItW_ILelbU7g99kSvc-rdWMXcHNijagvhgPswG6-I";
+}
 const instance = axios.create({
   baseURL: `${process.env.REACT_APP_API}/sdata/rest`,
   timeout: 60000,
   validateStatus: function (status) {
     return status >= 200 && status < 300; // default
   },
-  headers:
-    (window.location.search && qs.parse(window.location.search).token) ||
-    window.token
-      ? { token: qs.parse(window.location.search).token || window.token }
-      : {},
+  headers: (window.location.search && qs.parse(window.location.search).token) || window.token ? { token: qs.parse(window.location.search).token || window.token } : {},
 });
 
 instance.defaults.headers.post["Content-Type"] = "application/json";

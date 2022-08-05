@@ -10,3 +10,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+#root{
+  background: #F0F2F5;
+  /* min-height: 900px; */
+  /* height: 100%; */
+}
