@@ -158,7 +158,6 @@ export default {
       this.changeStatus()
     },
     changeStatus() {
-      // debugger
       switch (this.orderStatus) {
         case '部长初审中':
           this.imgSrc = require('../images/orderStart.png').default;
