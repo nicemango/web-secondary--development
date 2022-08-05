@@ -51,6 +51,7 @@ export default {
     const office_id = this.sysVariables.filter(x => {
       return x.name == 'current_office_id'
     })
+
     // console.log(office_id, '=======自定义变量');
     this.office_id = office_id[0].default_value
     // this.office_id = 'nanshan1-1'
@@ -283,7 +284,7 @@ export default {
     },
     renderContent(h, { node, data, store }) {
       return (
-        <div class="edit_tree">
+        <div class="edit_tree" title={node.label}>
           {node.label}
         </div>
       )
@@ -306,11 +307,16 @@ export default {
 <style lang="less" scoped>
 .nanShan_tree {
   width: 100%;
-  height: 100%;
+  height: 800px;
+  overflow-y: scroll;
+  background:#fff;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   /deep/ .el-tree-node__content {
-    margin-right: 10px;
-    height: 40px;
+    padding: 0 10px;
+    height: 34px;
     color: #757877;
 
     .el-tree-node__expand-icon {
@@ -326,17 +332,27 @@ export default {
     .edit_tree {
       font-size: 14px;
       font-weight: 500;
-      text-indent: 24px;
-      height: 34px;
-      line-height: 34px;
+      text-indent: 18px;
+      height: 32px;
+      line-height: 32px;
       margin-left: -22px;
       width: 100%;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
     }
   }
 
   /deep/.el-tree-node.is-current>.el-tree-node__content {
     color: #fff !important;
     background-color: #ffffff;
+
+    .el-tree-node__expand-icon {
+      color: #fff;
+    }
+    .el-tree-node__expand-icon.is-leaf {
+      color: transparent;
+    }
 
     .edit_tree {
       background-color: #3354f2 !important;
