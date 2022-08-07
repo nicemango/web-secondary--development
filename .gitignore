@@ -4,10 +4,17 @@ node_modules
 .pnp.js
 # production
 docs-dist
+dist
+build
 es
 lib
 
 # misc
+
+.DS_Store
+pluginTemp/js/*
+**/pluginTemp/js/*.js
+pluginTemp/libs/*
 plugin-*.zip
 
 /dumi/.umi/.cache/babel-loader
