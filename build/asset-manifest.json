@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.js": "/static/js/main.8cf4f058.js",
+    "main.js.map": "/static/js/main.8cf4f058.js.map",
+    "index.html": "/index.html",
+    "static/js/main.8cf4f058.js.LICENSE.txt": "/static/js/main.8cf4f058.js.LICENSE.txt",
+    "static/media/end.png": "/static/media/end.c3f7c126.png",
+    "static/media/not-found.png": "/static/media/not-found.f4789896.png"
+  },
+  "entrypoints": [
+    "static/js/main.8cf4f058.js"
+  ]
+}

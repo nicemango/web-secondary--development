@@ -1,16 +1,11 @@
 {
-  "code": "17364516-8468-4dda-93c2-4940200765d2",
+  "code": "12f51b6e-b48b-4d7e-bee9-9342e7c9fe71",
   "type": "customize",
   "img": "APP_0001.png",
-  "name": "om-app-plugin-react-boilerplate_4",
+  "name": "app-plugin_13",
   "lib": [],
   "css_script": [],
-  "js_script": "main.8b300cce.js",
+  "js_script": "main.8cf4f058.js",
   "loadStyle": 0,
-  "customconf": [
-    "title",
-    "url",
-    "desc",
-    "imgUrl"
-  ]
+  "customconf": []
 }
