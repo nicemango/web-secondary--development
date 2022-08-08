@@ -1,0 +1,95 @@
+{
+    "office_id": {
+        "label": "部门",
+        "value": "房屋征收管理系统"
+    },
+    "create_member": {
+        "label": "创建人",
+        "value": "系统管理员"
+    },
+    "childData": [
+        {
+            "chengdusiping_house_detail": [
+                {
+                    "set_area": {
+                        "label": "数字",
+                        "value": 2222
+                    },
+                    "data_id": {
+                        "value": "e2b182d802bc4d8384e0d5e4235399ed"
+                    },
+                    "building_number": {
+                        "label": "多行文本",
+                        "value": "1111"
+                    },
+                    "parent_id": {
+                        "value": "e7b5fff6d1054798a425a1734e400e21"
+                    },
+                    "createMemberId": {
+                        "value": "1234567890"
+                    }
+                }
+            ]
+        }
+    ],
+    "business_status": {
+        "label": "业务状态",
+        "value": "结束"
+    },
+    "flow_instance_id": {
+        "label": "流程实例ID",
+        "value": "eb884b8e-1074-4291-b91a-c81a3d9b3401"
+    },
+    "data_id": {
+        "value": "e7b5fff6d1054798a425a1734e400e21"
+    },
+    "handle_usernames": {
+        "label": "经办人",
+        "value": ""
+    },
+    "create_time": {
+        "label": "创建时间",
+        "value": 1659336524000
+    },
+    "po_name": {
+        "label": "单行文本",
+        "value": "dm_test_2"
+    },
+    "last_modify_time": {
+        "label": "最后修改时间",
+        "value": 1659336558000
+    },
+    "process_status": {
+        "label": "流程状态",
+        "value": "end"
+    }
+}
+
+form_id=6f33cabca75e4e6594e1b9c0394f169c&isApply=true&related=0&goback=1&isCopyData=false&appid=dbc2d7db-8703-ad00-445a-ddc4bfaa7d63&menuId=4b895c4e-0a7a-f412-eddc-856607dddac5%233&type=view&menuName=集体征收补偿&breadcrumb=编辑1&appid=dbc2d7db-8703-ad00-445a-ddc4bfaa7d63&type=view&menuId=4b895c4e-0a7a-f412-eddc-856607dddac5%233&project_name=审核项目&data_id=b071dbbaf6e648aea222cbf58f1b565d&flow_inst_id=3a8cd13c-49ce-48be-a62f-43c49f13de7c&currentOpen=true
+
+
+
+
+ {application_money: 1599787.87, payment_time: Moment, data_id: '104307b53f384c53a32b759a67d6f80b', parent_id: 'b071dbbaf6e648aea222cbf58f1b565d', createMemberId: '1234567890'
+}
+1: {application_money: 8888, payment_time: Moment, data_id: '7e4446cb61314cfeab9e6aab78653f13', parent_id: 'b071dbbaf6e648aea222cbf58f1b565d', createMemberId: '1234567890'
+}
+2: {application_money: 90264.4, payment_time: Moment, data_id: 'acbc3d69423541ed8d1e12e63c16624a', parent_id: 'b071dbbaf6e648aea222cbf58f1b565d', createMemberId: '1234567890'
+}
+3: {application_money: 10000, payment_time: Moment, data_id: '07a844928f414fcb8b7b81a0de83b4a1', parent_id: 'b071dbbaf6e648aea222cbf58f1b565d', createMemberId: '1234567890'
+}
+4: {application_money: 55555, payment_time: Moment, data_id: '5d5942ed48a5459c8db6e67600ad8448', parent_id: 'b071dbbaf6e648aea222cbf58f1b565d', createMemberId: '1234567890'
+}
+5: {application_money: 1198834.9, payment_time: Moment, data_id: 'ce88f6586f5e44809b9effeeb6504462', parent_id: 'b071dbbaf6e648aea222cbf58f1b565d', createMemberId: '1234567890'
+}
+6: {application_money: 5086129.42, payment_time: Moment, data_id: '1d784a523d27435fbe02648e83d12bad', parent_id: 'b071dbbaf6e648aea222cbf58f1b565d', createMemberId: '1234567890'
+}
+7: {data_id: '9ba71930be874b819fdda0cb1ddb2563', parent_id: 'b071dbbaf6e648aea222cbf58f1b565d', createMemberId: '1234567890', payment_time: Moment, application_money: undefined
+}
+8: {data_id: '312affec9bbe4219b34c8d90b7a53b3d', parent_id: 'b071dbbaf6e648aea222cbf58f1b565d', createMemberId: '1234567890', payment_time: Moment, application_money: undefined
+}
+9: {data_id: 'fa1d0f1c482c45fbbdeafdb5bb82081a', parent_id: 'b071dbbaf6e648aea222cbf58f1b565d', createMemberId: '1234567890', payment_time: Moment, application_money: undefined
+}
+10: {data_id: '621b6066b79647419d9bd8a4d28144c5', parent_id: 'b071dbbaf6e648aea222cbf58f1b565d', createMemberId: '1234567890', payment_time: Moment, application_money: undefined
+}
+11: {application_money: 1599787.87, payment_time: Moment, data_id: '26fb013c8a64415ca46fce09bfc690f6', parent_id: 'b071dbbaf6e648ae
