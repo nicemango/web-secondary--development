@@ -2,7 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
-// const paths = require("./paths");
+const paths = require("./paths");
 const pluginTempConfig = require("../pluginTemp/config.json");
 function generateUUID(){
   var d = new Date().getTime();
