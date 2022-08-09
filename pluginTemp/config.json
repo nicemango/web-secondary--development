@@ -1,11 +1,11 @@
 {
-  "id": "fddace41-dcc2-448f-b9aa-188b99954120",
+  "id": "978da083-1c01-4736-be3d-aa6c3353d87a",
   "type": "reporting",
-  "main": "main.477f4d99.js",
+  "main": "main.560fd116.js",
   "version": "2",
   "props": {
     "styleArr": "[\"title\",\"height\",\"key\", \"eventCenterConfig\"]",
-    "columnStyle": "{title:'自定义'}",
+    "columnStyle": "{title:'数字组件'}",
     "componentAttributes": "{\"style\":[\"title\",\"height\"],\"data\":[\"key\"],\"interaction\":[\"eventCenterConfig\"]}",
     "assetColumnList": "[{\"col_name\":\"自定义\",\"col_datatype\":0}]"
   }
