@@ -11,28 +11,6 @@ const { RangePicker } = DatePicker;
 const Subsidy = (props) => {
   const { form } = props;
 
-  // 合计信息
-  const [totalData, setTotalData] = useState({});
-  // 面积信息
-  const [areaTotalData, setAreaTotalData] = useState({});
-  // 奖励信息
-  const [specialData, setSpecialData] = useState({});
-
-  useEffect(() => {
-    eventbus.on("richmanType", (obj) => {
-      setSpecialData(obj);
-    });
-    eventbus.on("zz_areaTotal", (obj) => {
-      setAreaTotalData(obj);
-    });
-    eventbus.on("countAreaData", (obj) => {
-      setTotalData(obj);
-    });
-    eventbus.emit("resetSubsidy", {});
-    eventbus.emit("resetPropertyRight", {});
-    eventbus.emit("initTotalEndList", {});
-  }, []);
-
   // 获取合计数据
   const setTotalItem = () => {
     const {
@@ -45,7 +23,7 @@ const Subsidy = (props) => {
       num6: zzcq_resettlement_total,
       num8,
       num9,
-    } = totalData;
+    } = form.getFieldsValue();
 
     form.setFieldsValue({
       hb_relocation_total,
@@ -69,7 +47,7 @@ const Subsidy = (props) => {
           datatype: 0,
           type: 4,
           varibleType: "components",
-          compareObj: areaTotalData.project_name,
+          compareObj: form.getFieldsValue().project_name,
           satisfy_type: 0,
         },
       ],
@@ -141,31 +119,15 @@ const Subsidy = (props) => {
     form.setFieldsValue(formData);
   };
 
-  // 获取奖励信息
-  const setSpecial = async () => {
-    const {
-      moveReward: special_moving_reward,
-      signingReward: special_signing_bonus,
-    } = specialData || {};
-    form.setFieldsValue({
-      special_moving_reward,
-      special_signing_bonus,
-    });
-  };
-
   useEffect(() => {
     setTotalItem();
-  }, [totalData, setTotalItem]);
+  }, [form.getFieldsValue(), setTotalItem]);
 
   useEffect(() => {
-    if (areaTotalData.project_name) {
+    if (form.getFieldsValue().project_name) {
       setOtherAmount();
     }
-  }, [areaTotalData.project_name, setOtherAmount]);
-
-  useEffect(() => {
-    setSpecial();
-  }, [specialData, setSpecial]);
+  }, [form.getFieldsValue().project_name, setOtherAmount]);
 
   // 非住宅搬迁单价（货币）
   const HBRelocation = useMemo(() => {
@@ -183,7 +145,7 @@ const Subsidy = (props) => {
     return (
       <Col span={6}>
         <Form.Item label="F搬迁次数" name="hb_relocation_cs">
-          <InputNumber min={0} step={1.0} precision={2} />
+          <InputNumber min={0} />
         </Form.Item>
       </Col>
     );
@@ -216,7 +178,7 @@ const Subsidy = (props) => {
     return (
       <Col span={6}>
         <Form.Item label="搬迁次数" name="zzhb_relocation_cs">
-          <InputNumber min={0} step={1.0} precision={2} />
+          <InputNumber min={0} />
         </Form.Item>
       </Col>
     );
@@ -249,7 +211,7 @@ const Subsidy = (props) => {
     return (
       <Col span={6}>
         <Form.Item label="搬迁次数" name="zzcq_relocation_cs">
-          <InputNumber min={0} step={1.0} precision={2} />
+          <InputNumber min={0} />
         </Form.Item>
       </Col>
     );
@@ -282,7 +244,7 @@ const Subsidy = (props) => {
     return (
       <Col span={6}>
         <Form.Item label="F安置月数" name="hb_resettlement_mon">
-          <InputNumber min={0} step={1.0} precision={2} />
+          <InputNumber min={0} />
         </Form.Item>
       </Col>
     );
@@ -315,7 +277,7 @@ const Subsidy = (props) => {
     return (
       <Col span={6}>
         <Form.Item label="安置月数" name="zzhb_resettlement_mon">
-          <InputNumber min={0} step={1.0} precision={2} />
+          <InputNumber min={0} />
         </Form.Item>
       </Col>
     );
@@ -373,7 +335,7 @@ const Subsidy = (props) => {
     return (
       <Col span={6}>
         <Form.Item label="安置月数" name="zzcq_resettlement_mon">
-          <InputNumber min={0} step={1.0} precision={2} />
+          <InputNumber min={0} />
         </Form.Item>
       </Col>
     );
@@ -406,7 +368,7 @@ const Subsidy = (props) => {
     return (
       <Col span={6}>
         <Form.Item label="F安置月数" name="2hb_resettlement_mon">
-          <InputNumber min={0} step={1.0} precision={2} />
+          <InputNumber min={0} />
         </Form.Item>
       </Col>
     );
@@ -439,7 +401,7 @@ const Subsidy = (props) => {
     return (
       <Col span={6}>
         <Form.Item label="安置月数" name="2zzhb_resettlement_mon">
-          <InputNumber min={0} step={1.0} precision={2} />
+          <InputNumber min={0} />
         </Form.Item>
       </Col>
     );
@@ -472,7 +434,7 @@ const Subsidy = (props) => {
     return (
       <Col span={6}>
         <Form.Item label="b安置月数" name="2zzcq_resettlement_mon">
-          <InputNumber min={0} step={1.0} precision={2} />
+          <InputNumber min={0} />
         </Form.Item>
       </Col>
     );

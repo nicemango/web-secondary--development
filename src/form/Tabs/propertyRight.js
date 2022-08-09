@@ -189,29 +189,29 @@ const PropertyRight = (props, ref) => {
       eventbus.emit("countAreaData", totalEndListData || {});
     });
 
-    if (props.propsDataList.childData) {
-      let poopsData = JSON.parse(JSON.stringify(props.propsDataList.childData));
-      let propsArray = [];
-      poopsData.forEach((item) => {
-        if (item.gy_placement) {
-          if (item.gy_placement.length > 0) {
-            item.gy_placement.forEach((e) => {
-              let propsObj = {};
-              for (let key in e) {
-                if (e[key]["label"]) {
-                  propsObj[key] = e[key]["value"];
-                } else {
-                  propsObj[key] = e[key];
-                }
-              }
-              propsObj.key = propsObj.data_id;
-              propsArray.push(propsObj);
-            });
-          }
-        }
-      });
-      setDataList(propsArray);
-    }
+    // if (props.propsDataList.childData) {
+    //   let poopsData = JSON.parse(JSON.stringify(props.propsDataList.childData));
+    //   let propsArray = [];
+    //   poopsData.forEach((item) => {
+    //     if (item.gy_placement) {
+    //       if (item.gy_placement.length > 0) {
+    //         item.gy_placement.forEach((e) => {
+    //           let propsObj = {};
+    //           for (let key in e) {
+    //             if (e[key]["label"]) {
+    //               propsObj[key] = e[key]["value"];
+    //             } else {
+    //               propsObj[key] = e[key];
+    //             }
+    //           }
+    //           propsObj.key = propsObj.data_id;
+    //           propsArray.push(propsObj);
+    //         });
+    //       }
+    //     }
+    //   });
+    //   setDataList(propsArray);
+    // }
 
     getUnitPrice();
   }, []);
@@ -415,7 +415,6 @@ const PropertyRight = (props, ref) => {
 
   // 打开弹窗
   const showModal = () => {
-    eventbus.emit("resetPropertyRight", {});
     setIsModalVisible(true);
   };
 

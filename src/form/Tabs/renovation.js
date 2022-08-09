@@ -24,7 +24,6 @@ import { PlusOutlined } from "@ant-design/icons";
 // 引入接口方法
 import { getDataWithSort } from "../api/asset";
 // 引入eventBus
-import eventbus from "../api/eventBus";
 import { handleUploadData } from "./enclosure";
 
 const { TextArea } = Input;
@@ -87,12 +86,6 @@ const Renovation = (props, ref) => {
   // 评估报告跳转ID
   const [skipId, setSkipId] = useState("");
 
-  // 面积信息
-  const [areaTotal, setAreaTotalData] = useState({});
-
-  // 房屋编号信息
-  const [houseId, setHouseId] = useState("");
-
   // 获取装修包干单价
   const getContractUnit = async () => {
     let queryForm = {
@@ -101,7 +94,7 @@ const Renovation = (props, ref) => {
         {
           datatype: 0,
           column: "project_name",
-          compareObj: areaTotal.project_name,
+          compareObj: form.getFieldsValue().project_name,
           satisfy_type: 0,
           varibleType: "components",
           type: 4,
@@ -122,9 +115,8 @@ const Renovation = (props, ref) => {
   // 设置装修包干金额
   const setDecorateBaogan = async () => {
     const contractUnit = await getContractUnit();
-    const { zz_areaTotal } = areaTotal;
     form.setFieldsValue({
-      decorate_baogan: contractUnit * (zz_areaTotal ?? 0),
+      decorate_baogan: contractUnit * (form.getFieldsValue().zz_areaTotal ?? 0),
     });
     setTotalAmount();
   };
@@ -137,7 +129,7 @@ const Renovation = (props, ref) => {
         {
           datatype: 0,
           column: "project_name",
-          compareObj: areaTotal.project_name,
+          compareObj: form.getFieldsValue().project_name,
           satisfy_type: 0,
           varibleType: "components",
           type: 4,
@@ -145,7 +137,7 @@ const Renovation = (props, ref) => {
         {
           datatype: 0,
           column: "house_id",
-          compareObj: houseId,
+          compareObj: form.getFieldsValue().house_id,
           satisfy_type: 0,
           varibleType: "components",
           type: 4,
@@ -170,7 +162,7 @@ const Renovation = (props, ref) => {
         {
           datatype: 0,
           column: "project_name",
-          compareObj: areaTotal.project_name,
+          compareObj: form.getFieldsValue().project_name,
           satisfy_type: 0,
           varibleType: "components",
           type: 4,
@@ -178,7 +170,7 @@ const Renovation = (props, ref) => {
         {
           datatype: 0,
           column: "house_id",
-          compareObj: houseId,
+          compareObj: form.getFieldsValue().house_id,
           satisfy_type: 0,
           varibleType: "components",
           type: 4,
@@ -203,7 +195,7 @@ const Renovation = (props, ref) => {
         {
           datatype: 0,
           column: "house_id",
-          compareObj: houseId,
+          compareObj: form.getFieldsValue().house_id,
           satisfy_type: 0,
           varibleType: "components",
           type: 4,
@@ -305,46 +297,78 @@ const Renovation = (props, ref) => {
     }
   };
 
-  // 获取 "被征收人信息" 页签数据
-  const getAndSetLevyData = () => {
-    eventbus.on("zz_areaTotal", (obj) => {
-      setAreaTotalData(obj);
-    });
-    eventbus.emit("resetPropertyRight", {});
-    eventbus.on("getHouseId", (value) => {
-      setHouseId(value);
-    });
-    eventbus.emit("initHouseId", {});
-  };
-
   useEffect(() => {
-    getAndSetLevyData();
+    // if (props.propsDataList.childData) {
+    //   let poopsData = JSON.parse(JSON.stringify(props.propsDataList.childData));
+    //   let assessAmountArray = [];
+    //   let auxiliaryRealArray = [];
+
+    //   poopsData.forEach((item) => {
+    //     // 装修工程量测量记录表
+    //     if (item.gy_sign_decorate) {
+    //       if (item.gy_sign_decorate.length > 0) {
+    //         item.gy_sign_decorate.forEach((e) => {
+    //           let propsObj = {};
+    //           for (let key in e) {
+    //             if (e[key]["label"]) {
+    //               propsObj[key] = e[key]["value"];
+    //             } else {
+    //               propsObj[key] = e[key];
+    //             }
+    //           }
+    //           propsObj.key = propsObj.data_id;
+    //           assessAmountArray.push(propsObj);
+    //         });
+    //       }
+    //     }
+    //     // 附属工程量测量记录表
+    //     if (item.gy_sign_attached) {
+    //       if (item.gy_sign_attached.length > 0) {
+    //         item.gy_sign_attached.forEach((e) => {
+    //           let propsObj = {};
+    //           for (let key in e) {
+    //             if (e[key]["label"]) {
+    //               propsObj[key] = e[key]["value"];
+    //             } else {
+    //               propsObj[key] = e[key];
+    //             }
+    //           }
+    //           propsObj.key = propsObj.data_id;
+    //           assessAmountArray.push(propsObj);
+    //         });
+    //       }
+    //     }
+    //   });
+    //   setAssessAmountTableData(assessAmountArray);
+    //   setAuxiliaryRealQuantityTableData(auxiliaryRealArray);
+    // }
+
     getAndSetAppurtenanceList();
   }, []);
 
   useEffect(() => {
-    if (houseId) {
+    if (form.getFieldsValue().house_id) {
       getAndSetSkipID();
     }
-  }, [houseId]);
+  }, [form.getFieldsValue().house_id]);
 
   useEffect(() => {
-    if (areaTotal.project_name && houseId) {
+    if (form.getFieldsValue().project_name && form.getFieldsValue().house_id) {
       setCompensationAmount();
       setDecoratePingu();
     }
   }, [
-    areaTotal.project_name,
-    houseId,
+    form.getFieldsValue().project_name,
+    form.getFieldsValue().house_id,
     setCompensationAmount,
     getDecoratePingu,
   ]);
 
   useEffect(() => {
-    if (areaTotal.project_name) {
+    if (form.getFieldsValue().project_name) {
       setDecorateBaogan();
     }
-  }, [areaTotal, setDecorateBaogan]);
+  }, [form.getFieldsValue().project_name, setDecorateBaogan]);
 
   useEffect(() => {
     createTableColumn("assess");

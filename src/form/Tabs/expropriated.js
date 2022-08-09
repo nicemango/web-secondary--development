@@ -52,44 +52,9 @@ const Expropriated = (props) => {
   const handleClick = (checkData) => {
     props.click(checkData.value);
     zz_areaTotal_count();
-    sendEventBus();
   };
 
   useEffect(() => {
-    // eventbus.on("resetSubsidy", () => {
-    //   if (form.getFieldsValue().richman_type) {
-    //     if (form.getFieldsValue().richman_type !== "承租人") {
-    //       let obj = {
-    //         moveReward: 30000,
-    //         signingReward: 20000,
-    //       };
-    //       eventbus.emit("richmanType", obj);
-    //       sendEventBus();
-    //     } else {
-    //       let obj = {
-    //         moveReward: 0,
-    //         signingReward: 0,
-    //       };
-    //       eventbus.emit("richmanType", obj);
-    //       sendEventBus();
-    //     }
-    //   } else {
-    //     eventbus.emit("richmanType", null);
-    //   }
-    // });
-
-    eventbus.on("resetCompensate", () => {
-      if (form.getFieldsValue().house_use) {
-        let obj = {
-          project_name: form.getFieldsValue().project_name || "",
-          house_use: form.getFieldsValue().house_use || null,
-        };
-        eventbus.emit("houseUse", obj);
-      } else {
-        eventbus.emit("houseUse", null);
-      }
-    });
-
     // 获取房屋编号
     getAllData();
 
@@ -273,19 +238,17 @@ const Expropriated = (props) => {
 
   // 被征收人类型切换, 设置隐藏组件值
   const change_richman_type = (value) => {
-    // if (value !== "承租人") {
-    //   let obj = {
-    //     moveReward: 30000,
-    //     signingReward: 20000,
-    //   };
-    //   eventbus.emit("richmanType", obj);
-    // } else {
-    //   let obj = {
-    //     moveReward: 0,
-    //     signingReward: 0,
-    //   };
-    //   eventbus.emit("richmanType", obj);
-    // }
+    if (value !== "承租人") {
+      form.setFieldsValue({
+        special_signing_bonus: 20000,
+        special_moving_reward: 3000,
+      });
+    } else {
+      form.setFieldsValue({
+        special_signing_bonus: 0,
+        special_moving_reward: 0,
+      });
+    }
     value === "个人"
       ? form.setFieldsValue({
           protocal_type: 1,
@@ -303,24 +266,15 @@ const Expropriated = (props) => {
         });
   };
 
-  // 房屋用途切换
-  const change_house_use = (checkData) => {
-    let obj = {
-      project_name: form.getFieldsValue().project_name || "",
-      house_use: checkData.value,
-    };
-    eventbus.emit("houseUse", obj);
-    sendEventBus();
-  };
-
   // 应安面积计算
   const ya_area_count = () => {
     let azf = form.getFieldsValue().gt_xs_azf || 0;
     let zhengzai = form.getFieldsValue().zhengzaitaonei_area || 0;
-    form.setFieldsValue({
-      ya_area: zhengzai * (1 + azf),
-    });
-    sendEventBus();
+    if (azf && zhengzai) {
+      form.setFieldsValue({
+        ya_area: zhengzai * (1 + azf),
+      });
+    }
   };
 
   // 证载合法面积计算
@@ -422,22 +376,10 @@ const Expropriated = (props) => {
         }
       }
     );
-    sendEventBus();
   };
 
-  // 发送bus参数
-  const sendEventBus = () => {
-    let obj = {
-      project_name: form.getFieldsValue().project_name || null,
-      idcard: form.getFieldsValue().idcard || null,
-      house_use: form.getFieldsValue().house_use || null,
-      placement_method: form.getFieldsValue().placement_method || null,
-      zz_areaTotal: form.getFieldsValue().zz_areaTotal || null,
-      yamj: form.getFieldsValue().ya_area || null,
-    };
-    eventbus.emit("propertyRightInfo", obj);
-    eventbus.emit("zz_areaTotal", obj);
-  };
+  // 切换房屋用途
+  const change_house_use = () => {};
 
   return (
     <>

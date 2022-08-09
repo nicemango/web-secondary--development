@@ -79,6 +79,31 @@ const Campaign = (props, ref) => {
   ];
 
   useEffect(() => {
+    // if (props.propsDataList.childData) {
+    //   let poopsData = JSON.parse(JSON.stringify(props.propsDataList.childData));
+    //   let propsArray = [];
+
+    //   poopsData.forEach((item) => {
+    //     if (item.evaluation_plan1gy) {
+    //       if (item.evaluation_plan1gy.length > 0) {
+    //         item.evaluation_plan1gy.forEach((e) => {
+    //           let propsObj = {};
+    //           for (let key in e) {
+    //             if (e[key]["label"]) {
+    //               propsObj[key] = e[key]["value"];
+    //             } else {
+    //               propsObj[key] = e[key];
+    //             }
+    //           }
+    //           propsObj.key = propsObj.data_id;
+    //           propsArray.push(propsObj);
+    //         });
+    //       }
+    //     }
+    //   });
+    //   setDataSource(propsArray);
+    // }
+
     getPlayRecord();
   }, []);
 

@@ -15,15 +15,11 @@ import {
   Col,
   Select,
 } from "antd";
-import eventbus from "../api/eventBus";
-
 import { getDataWithSort } from "../api/asset";
 
 const PropertyRight = (props, ref) => {
   const { Option } = Select;
   const { form } = props;
-
-  let [housePurpose, setHousePurpose] = useState(null);
 
   // 有证非住宅结算
   const [houseSettleData, sethouseSettleData] = useState([]);
@@ -36,7 +32,7 @@ const PropertyRight = (props, ref) => {
       align: "center",
       render: (_, record, index) => (
         <Select
-          onChange={e => {
+          onChange={(e) => {
             changeStructure(e, index, "structure", "houseSettle");
           }}
         >
@@ -57,7 +53,7 @@ const PropertyRight = (props, ref) => {
           step={1.0}
           precision={2}
           value={_}
-          onChange={e => {
+          onChange={(e) => {
             inputChange(e, index, "area", "houseSettle");
           }}
           style={{ width: "100%" }}
@@ -75,7 +71,7 @@ const PropertyRight = (props, ref) => {
           step={1.0}
           precision={2}
           value={_}
-          onChange={e => {
+          onChange={(e) => {
             inputChange(e, index, "price", "houseSettle");
           }}
           style={{ width: "100%" }}
@@ -93,7 +89,7 @@ const PropertyRight = (props, ref) => {
           step={1.0}
           precision={2}
           value={_}
-          onChange={e => {
+          onChange={(e) => {
             inputChange(e, index, "percent", "houseSettle");
           }}
           style={{ width: "100%" }}
@@ -134,7 +130,7 @@ const PropertyRight = (props, ref) => {
       align: "center",
       render: (_, record, index) => (
         <Select
-          onChange={e => {
+          onChange={(e) => {
             changeStructure(e, index, "structure", "unhouseSettle");
           }}
         >
@@ -155,7 +151,7 @@ const PropertyRight = (props, ref) => {
           step={1.0}
           precision={2}
           value={_}
-          onChange={e => {
+          onChange={(e) => {
             inputChange(e, index, "area", "unhouseSettle");
           }}
           style={{ width: "100%" }}
@@ -173,7 +169,7 @@ const PropertyRight = (props, ref) => {
           step={1.0}
           precision={2}
           value={_}
-          onChange={e => {
+          onChange={(e) => {
             inputChange(e, index, "price", "unhouseSettle");
           }}
           style={{ width: "100%" }}
@@ -191,7 +187,7 @@ const PropertyRight = (props, ref) => {
           step={1.0}
           precision={2}
           value={_}
-          onChange={e => {
+          onChange={(e) => {
             inputChange(e, index, "percent", "unhouseSettle");
           }}
           style={{ width: "100%" }}
@@ -232,7 +228,7 @@ const PropertyRight = (props, ref) => {
       align: "center",
       render: (_, record, index) => (
         <Select
-          onChange={e => {
+          onChange={(e) => {
             changeStructure(e, index, "structure", "legal");
           }}
         >
@@ -253,7 +249,7 @@ const PropertyRight = (props, ref) => {
           step={1.0}
           precision={2}
           value={_}
-          onChange={e => {
+          onChange={(e) => {
             inputChange(e, index, "area", "legal");
           }}
           style={{ width: "100%" }}
@@ -271,7 +267,7 @@ const PropertyRight = (props, ref) => {
           step={1.0}
           precision={2}
           value={_}
-          onChange={e => {
+          onChange={(e) => {
             inputChange(e, index, "price", "legal");
           }}
           style={{ width: "100%" }}
@@ -289,7 +285,7 @@ const PropertyRight = (props, ref) => {
           step={1.0}
           precision={2}
           value={_}
-          onChange={e => {
+          onChange={(e) => {
             inputChange(e, index, "percent", "legal");
           }}
           style={{ width: "100%" }}
@@ -327,7 +323,7 @@ const PropertyRight = (props, ref) => {
       align: "center",
       render: (_, record, index) => (
         <Select
-          onChange={e => {
+          onChange={(e) => {
             changeStructure(e, index, "structure", "reformHouse");
           }}
         >
@@ -348,7 +344,7 @@ const PropertyRight = (props, ref) => {
           step={1.0}
           precision={2}
           value={_}
-          onChange={e => {
+          onChange={(e) => {
             inputChange(e, index, "area", "reformHouse");
           }}
           style={{ width: "100%" }}
@@ -366,7 +362,7 @@ const PropertyRight = (props, ref) => {
           step={1.0}
           precision={2}
           value={_}
-          onChange={e => {
+          onChange={(e) => {
             inputChange(e, index, "price", "reformHouse");
           }}
           style={{ width: "100%" }}
@@ -384,7 +380,7 @@ const PropertyRight = (props, ref) => {
           step={1.0}
           precision={2}
           value={_}
-          onChange={e => {
+          onChange={(e) => {
             inputChange(e, index, "percentCount", "reformHouse");
           }}
           style={{ width: "100%" }}
@@ -425,7 +421,7 @@ const PropertyRight = (props, ref) => {
       align: "center",
       render: (_, record, index) => (
         <Select
-          onChange={e => {
+          onChange={(e) => {
             changeStructure(e, index, "structure", "selfHouse");
           }}
         >
@@ -450,7 +446,7 @@ const PropertyRight = (props, ref) => {
           step={1.0}
           precision={2}
           value={_}
-          onChange={e => {
+          onChange={(e) => {
             inputChange(e, index, "area", "selfHouse");
           }}
           style={{ width: "100%" }}
@@ -468,7 +464,7 @@ const PropertyRight = (props, ref) => {
           step={1.0}
           precision={2}
           value={_}
-          onChange={e => {
+          onChange={(e) => {
             inputChange(e, index, "materials", "selfHouse");
           }}
           style={{ width: "100%" }}
@@ -486,7 +482,7 @@ const PropertyRight = (props, ref) => {
           step={1.0}
           precision={2}
           value={_}
-          onChange={e => {
+          onChange={(e) => {
             inputChange(e, index, "rewardPrice", "selfHouse");
           }}
           style={{ width: "100%" }}
@@ -522,15 +518,15 @@ const PropertyRight = (props, ref) => {
     selfHouseData,
   }));
 
-  const translatePlatformDataToJsonArray = originTableData => {
+  const translatePlatformDataToJsonArray = (originTableData) => {
     let originTableHeader = originTableData.data[0];
     let tableHeader = [];
-    originTableHeader.forEach(item => {
+    originTableHeader.forEach((item) => {
       tableHeader.push(item.col_name);
     });
     let tableBody = originTableData.data[1];
     let tableData = [];
-    tableBody.forEach(tableItem => {
+    tableBody.forEach((tableItem) => {
       let temp = {};
       tableItem.forEach((item, index) => {
         temp[tableHeader[index]] = item;
@@ -541,7 +537,7 @@ const PropertyRight = (props, ref) => {
   };
 
   const get_UUID = () => {
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
       return (c === "x" ? (Math.random() * 16) | 0 : "r&0x3" | "0x8").toString(
         16
       );
@@ -549,13 +545,110 @@ const PropertyRight = (props, ref) => {
   };
 
   useEffect(() => {
-    // sethouseSettleData(form.)
-
+    // if (props.propsDataList.childData) {
+    //   let poopsData = JSON.parse(JSON.stringify(props.propsDataList.childData));
+    //   let houseSettlArray = [];
+    //   let unhouseSettleArray = [];
+    //   let legalArray = [];
+    //   let reformHouseArray = [];
+    //   let selfHouseArray = [];
+    //   poopsData.forEach((item) => {
+    //     if (form.getFieldsValue().house_use === 1) {
+    //       // 有证住宅结算
+    //       if (item.gy_sign_certificate) {
+    //         if (item.gy_sign_certificate.length > 0) {
+    //           item.gy_sign_certificate.forEach((e) => {
+    //             let propsObj = {};
+    //             for (let key in e) {
+    //               if (e[key]["label"]) {
+    //                 propsObj[key] = e[key]["value"];
+    //               } else {
+    //                 propsObj[key] = e[key];
+    //               }
+    //             }
+    //             propsObj.key = propsObj.data_id;
+    //             houseSettlArray.push(propsObj);
+    //           });
+    //         }
+    //       }
+    //     } else if (form.getFieldsValue().house_use === 2) {
+    //       // 有证非住宅结算
+    //       if (item.gy_sign_uncertificate) {
+    //         if (item.gy_sign_uncertificate.length > 0) {
+    //           item.gy_sign_uncertificate.forEach((e) => {
+    //             let propsObj = {};
+    //             for (let key in e) {
+    //               if (e[key]["label"]) {
+    //                 propsObj[key] = e[key]["value"];
+    //               } else {
+    //                 propsObj[key] = e[key];
+    //               }
+    //             }
+    //             propsObj.key = propsObj.data_id;
+    //             houseSettlArray.push(propsObj);
+    //           });
+    //         }
+    //       }
+    //     }
+    //     // 合法性认定面积
+    //     if (item.gy_sign_legal) {
+    //       if (item.gy_sign_legal.length > 0) {
+    //         item.gy_sign_legal.forEach((e) => {
+    //           let propsObj = {};
+    //           for (let key in e) {
+    //             if (e[key]["label"]) {
+    //               propsObj[key] = e[key]["value"];
+    //             } else {
+    //               propsObj[key] = e[key];
+    //             }
+    //           }
+    //           propsObj.key = propsObj.data_id;
+    //           legalArray.push(propsObj);
+    //         });
+    //       }
+    //     }
+    //     // 住改非结算
+    //     if (item.gy_sign_zgf) {
+    //       if (item.gy_sign_zgf.length > 0) {
+    //         item.gy_sign_zgf.forEach((e) => {
+    //           let propsObj = {};
+    //           for (let key in e) {
+    //             if (e[key]["label"]) {
+    //               propsObj[key] = e[key]["value"];
+    //             } else {
+    //               propsObj[key] = e[key];
+    //             }
+    //           }
+    //           propsObj.key = propsObj.data_id;
+    //           reformHouseArray.push(propsObj);
+    //         });
+    //       }
+    //     }
+    //     // 无证自建房结算
+    //     if (item.monetary_indemnity) {
+    //       if (item.monetary_indemnity.length > 0) {
+    //         item.monetary_indemnity.forEach((e) => {
+    //           let propsObj = {};
+    //           for (let key in e) {
+    //             if (e[key]["label"]) {
+    //               propsObj[key] = e[key]["value"];
+    //             } else {
+    //               propsObj[key] = e[key];
+    //             }
+    //           }
+    //           propsObj.key = propsObj.data_id;
+    //           selfHouseArray.push(propsObj);
+    //         });
+    //       }
+    //     }
+    //   });
+    //   sethouseSettleData(houseSettlArray);
+    //   setUnhouseSettleData(unhouseSettleArray);
+    //   setlegalData(legalArray);
+    //   setReformHouseData(reformHouseArray);
+    //   setSelfHouseData(selfHouseArray);
+    // }
     // 获取房屋用途
-    eventbus.on("houseUse", obj => {
-      setHousePurpose(obj);
-    });
-    eventbus.emit("resetCompensate", null);
   }, []);
 
   //  数据改变
@@ -641,7 +734,7 @@ const PropertyRight = (props, ref) => {
   };
 
   // 新增
-  const addRows = type => {
+  const addRows = (type) => {
     let row = {
       key: get_UUID(),
       area: 0,
@@ -685,7 +778,7 @@ const PropertyRight = (props, ref) => {
   const deleteRows = (_, record, type) => {
     if (type === "houseSettle") {
       let tableList = JSON.parse(JSON.stringify(houseSettleData));
-      let index = tableList.findIndex(e => {
+      let index = tableList.findIndex((e) => {
         return e.key === record.key;
       });
       tableList.splice(index, 1);
@@ -694,7 +787,7 @@ const PropertyRight = (props, ref) => {
     }
     if (type === "unhouseSettle") {
       let tableList = JSON.parse(JSON.stringify(unhouseSettleData));
-      let index = tableList.findIndex(e => {
+      let index = tableList.findIndex((e) => {
         return e.key === record.key;
       });
       tableList.splice(index, 1);
@@ -703,7 +796,7 @@ const PropertyRight = (props, ref) => {
     }
     if (type === "legal") {
       let tableList = JSON.parse(JSON.stringify(legalData));
-      let index = tableList.findIndex(e => {
+      let index = tableList.findIndex((e) => {
         return e.key === record.key;
       });
       tableList.splice(index, 1);
@@ -712,7 +805,7 @@ const PropertyRight = (props, ref) => {
     }
     if (type === "reformHouse") {
       let tableList = JSON.parse(JSON.stringify(reformHouseData));
-      let index = tableList.findIndex(e => {
+      let index = tableList.findIndex((e) => {
         return e.key === record.key;
       });
       tableList.splice(index, 1);
@@ -721,7 +814,7 @@ const PropertyRight = (props, ref) => {
     }
     if (type === "selfHouse") {
       let tableList = JSON.parse(JSON.stringify(selfHouseData));
-      let index = tableList.findIndex(e => {
+      let index = tableList.findIndex((e) => {
         return e.key === record.key;
       });
       tableList.splice(index, 1);
@@ -733,7 +826,7 @@ const PropertyRight = (props, ref) => {
   // 计算合计
   const computeTotal = (list, field) => {
     let total = 0;
-    list.forEach(item => (total += item.total));
+    list.forEach((item) => (total += item.total));
     form.setFieldsValue({ [field]: Number(total.toFixed(2)) });
   };
 
@@ -743,7 +836,7 @@ const PropertyRight = (props, ref) => {
       let rowList = JSON.parse(JSON.stringify(houseSettleData));
       rowList[index][field] = e;
 
-      if (housePurpose) {
+      if (form.getFieldsValue().project_name) {
         let columnField = [];
         if (e === "框架") {
           columnField = ["frame_unitprice_yzzh", "percent_yzzh"];
@@ -760,14 +853,14 @@ const PropertyRight = (props, ref) => {
               datatype: 0,
               type: 4,
               varibleType: "components",
-              compareObj: housePurpose.project_name,
+              compareObj: form.getFieldsValue().project_name,
               satisfy_type: 0,
             },
           ],
           columnNames: columnField,
           sorts: [],
         };
-        getDataWithSort(asset_id, queryForm).then(res => {
+        getDataWithSort(asset_id, queryForm).then((res) => {
           let resData = translatePlatformDataToJsonArray(res)[0];
           if (resData) {
             rowList[index].percent = resData.percent_yzzh;
@@ -799,7 +892,7 @@ const PropertyRight = (props, ref) => {
       }
 
       let total = 0;
-      rowList.forEach(item => {
+      rowList.forEach((item) => {
         total += item.total;
       });
 
@@ -809,7 +902,7 @@ const PropertyRight = (props, ref) => {
       let rowList = JSON.parse(JSON.stringify(unhouseSettleData));
       rowList[index][field] = e;
 
-      if (housePurpose) {
+      if (form.getFieldsValue().project_name) {
         let columnField = [];
         if (e === "框架") {
           columnField = ["frame_unitprice_yzfzz", "percent_yzfzz"];
@@ -827,14 +920,14 @@ const PropertyRight = (props, ref) => {
               datatype: 0,
               type: 4,
               varibleType: "components",
-              compareObj: housePurpose.project_name,
+              compareObj: form.getFieldsValue().project_name,
               satisfy_type: 0,
             },
           ],
           columnNames: columnField,
           sorts: [],
         };
-        getDataWithSort(asset_id, queryForm).then(res => {
+        getDataWithSort(asset_id, queryForm).then((res) => {
           let resData = translatePlatformDataToJsonArray(res)[0];
           if (resData) {
             rowList[index].percent = resData.percent_yzfzz;
@@ -866,7 +959,7 @@ const PropertyRight = (props, ref) => {
       }
 
       let total = 0;
-      rowList.forEach(item => {
+      rowList.forEach((item) => {
         total += item.total;
       });
 
@@ -884,7 +977,7 @@ const PropertyRight = (props, ref) => {
       setlegalData(rowList);
 
       let total = 0;
-      rowList.forEach(item => {
+      rowList.forEach((item) => {
         total += item.total;
       });
       form.setFieldsValue({ legitimate: Number(total) });
@@ -902,7 +995,7 @@ const PropertyRight = (props, ref) => {
       setReformHouseData(rowList);
 
       let total = 0;
-      rowList.forEach(item => {
+      rowList.forEach((item) => {
         total += item.total;
       });
       form.setFieldsValue({ reformHouse: Number(total) });
@@ -911,7 +1004,7 @@ const PropertyRight = (props, ref) => {
       let rowList = JSON.parse(JSON.stringify(selfHouseData));
       rowList[index][field] = e;
 
-      if (housePurpose) {
+      if (form.getFieldsValue().project_name) {
         let columnField = [];
         if (e === "框架") {
           columnField = ["gy_frame_glbz", "gy_frame_jlbz"];
@@ -937,14 +1030,14 @@ const PropertyRight = (props, ref) => {
               datatype: 0,
               type: 4,
               varibleType: "components",
-              compareObj: housePurpose.project_name,
+              compareObj: form.getFieldsValue().project_name,
               satisfy_type: 0,
             },
           ],
           columnNames: columnField,
           sorts: [],
         };
-        getDataWithSort(asset_id, queryForm).then(res => {
+        getDataWithSort(asset_id, queryForm).then((res) => {
           let resData = translatePlatformDataToJsonArray(res)[0];
           if (resData) {
             if (e === "框架") {
@@ -1010,7 +1103,7 @@ const PropertyRight = (props, ref) => {
       }
 
       let total = 0;
-      rowList.forEach(item => {
+      rowList.forEach((item) => {
         total += item.total;
       });
       form.setFieldsValue({ selfBuilt: total });
