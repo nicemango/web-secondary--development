@@ -1,0 +1,77 @@
+.space {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.spaceBetween {
+  &:extend(.space);
+
+  justify-content: space-between;
+}
+
+.tips {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  height: var(--om-form-item-height);
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addNewOption {
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+
+  a {
+    padding: 8px;
+  }
+}
+
+.my4 {
+  margin: 4px 0;
+}
+
+.hide {
+  display: none;
+}
+
+.wrapLine {
+  min-width: 0;
+  line-height: var(--om-input-label-line-height);
+
+  span {
+    display: inline;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: normal;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.noWrap {
+  min-width: 0;
+  line-height: var(--om-input-label-line-height);
+
+  span {
+    display: inline;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: normal;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+}
