@@ -34,8 +34,6 @@ class ButtonModal extends Component {
     gzcaToken: "",
   };
 
-  // 'project_name=project_name'  localStorage.getItem
-
   change = () => {
     let search =
       window.location && window.location.search
@@ -61,7 +59,7 @@ class ButtonModal extends Component {
         viewId: viewId || "",
         type: form.getFieldsValue().protocal_type || "2",
         isGenerate: processStatus === "pendingApply" ? "Y" : "N",
-        idCard:form.getFieldsValue().idcard,
+        idCard: form.getFieldsValue().idcard,
       })
         .then((res) => {
           let arr = [];
