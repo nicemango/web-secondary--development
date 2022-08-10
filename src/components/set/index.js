@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { Form, InputNumber } from "antd";
+import { Input } from "antd";
 
 import useDelegator from "../../UseDelegator";
 import eventActionDefine from "../../msgCompConfig";
 import "../../common/style/formItem.less";
 
 const Set = (props) => {
-  const [customPluginConfig, setcustomPluginConfig] = useState({});
   const Event_Center_getName = () => {
     return `${props.formConfig?.form_name}-${props.component.columnStyle.title}`;
   };
@@ -15,19 +14,6 @@ const Set = (props) => {
   const Event_Center_getParentInfo = () => {
     return { scene: "dataForm" };
   };
-
-  const { columnStyle = {} } = props.component;
-
-  useEffect(() => {
-    try {
-      if (columnStyle?.customPluginConfig) {
-        const customPluginConfig = JSON.parse(columnStyle?.customPluginConfig);
-        setcustomPluginConfig(customPluginConfig);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  }, [columnStyle?.customPluginConfig]);
 
   useDelegator(
     props.component.id,
