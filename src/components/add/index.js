@@ -5,7 +5,6 @@ import { Form, Input } from "antd";
 import useDelegator from "../../UseDelegator";
 import eventActionDefine from "../../msgCompConfig";
 import Validate from "../../common/utils/validate";
-
 const Add = ({
   data,
   onChange,
