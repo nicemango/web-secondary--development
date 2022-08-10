@@ -1,7 +1,7 @@
 {
-  "id": "978da083-1c01-4736-be3d-aa6c3353d87a",
+  "id": "a6851d01-5f85-4108-bb47-af8870ba7130",
   "type": "reporting",
-  "main": "main.560fd116.js",
+  "main": "main.b461d9e4.js",
   "version": "2",
   "props": {
     "styleArr": "[\"title\",\"height\",\"key\", \"eventCenterConfig\"]",

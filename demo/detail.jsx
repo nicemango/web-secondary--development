@@ -7,7 +7,8 @@ const PreviewComponent = (props) => {
     data: "111",
     formConfig: {},
     component: {},
-    configuration: '{"size":"large","placeholder":"33333","allowClear":true}',
+    configuration:
+      '{"size":"large","placeholder":"33333","allowClear":true,"precision":2}',
   };
   return (
     <div>

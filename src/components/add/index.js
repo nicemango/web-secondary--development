@@ -4,7 +4,7 @@ import { Form, Input } from "antd";
 
 import useDelegator from "../../UseDelegator";
 import eventActionDefine from "../../msgCompConfig";
-
+import Validate from "../../common/utils/validate";
 const Add = ({
   data,
   onChange,
@@ -14,20 +14,27 @@ const Add = ({
   eventCenter,
   componentCenter,
 }) => {
+  const [form] = Form.useForm();
   const state2 = useRef(data);
   const [state, setState] = useState(data);
   const [configuration, setConfiguration] = useState({});
 
+  const initData = () => {
+    if (data) {
+      form.setFieldsValue({ customInputNumber: data });
+    }
+  };
+
   useEffect(() => {
     try {
-      setConfiguration(JSON.parse(propsConfiguration));
+      initData();
+      if (propsConfiguration) {
+        setConfiguration(JSON.parse(propsConfiguration));
+      }
     } catch (error) {
       console.error("configuration解析错误", error);
     }
   }, []);
-
-  console.log("zzh Add data", data);
-  console.log("zzh Add propsConfiguration", propsConfiguration);
 
   const triggerEventCenter = async (targetEvent, targetValue) => {
     await eventCenter.triggerEventNew({
@@ -50,6 +57,7 @@ const Add = ({
 
   const do_EventCenter_setValue = function ({ value }) {
     setState(value);
+    form.setFieldsValue({ customInputNumber: value });
     // state2.current = value;
   };
 
@@ -89,39 +97,11 @@ const Add = ({
       ? num_max_value
       : Number.MAX_SAFE_INTEGER;
 
-  const rules = [
-    {
-      validator: (_, value) => {
-        if (value === "" || value === undefined) {
-          return Promise.resolve();
-        } else {
-          if (!/(^\-?[0-9]*$)|(^\-?[0-9]+\.[0-9]+$)/.test(value)) {
-            return Promise.reject(new Error("请输入数字"));
-          } else {
-            if (Number(value) >= Number(min) && Number(value) <= Number(max)) {
-              const regExp =
-                precision === 0
-                  ? /^\-?[0-9]+$/
-                  : new RegExp(`^\-?[0-9]+\.?[0-9]{0,${precision}}$`);
-              if (regExp.test(value)) {
-                return Promise.resolve();
-              } else {
-                return Promise.reject(`小数位数不能超过${precision}位`);
-              }
-            } else {
-              return Promise.reject(`请输入${min}~${max}范围之内的数字`);
-            }
-          }
-        }
-      },
-    },
-  ];
-
   return (
-    <Form>
+    <Form form={form}>
       <Form.Item
-        name={component.id || "customInputNumber"}
-        rules={rules}
+        name={"customInputNumber"}
+        rules={Validate.rules(precision, min, max)}
         validateTrigger={["onChange", "onBlur"]}
       >
         <Input

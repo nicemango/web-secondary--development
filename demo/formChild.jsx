@@ -12,7 +12,8 @@ const PreviewComponent = (props) => {
     },
     formConfig: {},
     component: {},
-    configuration: '{"size":"large","placeholder":"33333","allowClear":true}',
+    configuration:
+      '{"num_min_value":1,"num_max_value":99,"allowClear":true,"precision":2}',
     componentCenter,
     eventCenter,
   };
