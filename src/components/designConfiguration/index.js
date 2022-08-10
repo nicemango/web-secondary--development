@@ -10,7 +10,10 @@ const DesignConfiguration = ({ changeConfiguration, configuration }) => {
   const [form] = Form.useForm();
   useEffect(() => {
     try {
-      form.setFieldsValue(JSON.parse(configuration));
+      if (configuration) {
+        form.setFieldsValue(JSON.parse(configuration));
+        setAllValue(JSON.parse(configuration));
+      }
     } catch (error) {
       console.error("configuration解析错误", error);
     }
@@ -19,7 +22,6 @@ const DesignConfiguration = ({ changeConfiguration, configuration }) => {
   const [allValue, setAllValue] = useState({});
 
   const onFormLayoutChange = (changedValues, allValues) => {
-    console.log("zzh onFormLayoutChange ,", allValues);
     setAllValue({ ...allValues });
     changeConfiguration(JSON.stringify(allValues));
   };
@@ -28,7 +30,6 @@ const DesignConfiguration = ({ changeConfiguration, configuration }) => {
     allValue[key] = value;
     setAllValue({ ...allValue });
     changeConfiguration(JSON.stringify(allValue));
-    console.log("zzh onValueChange ,", allValue);
   };
 
   const formItemLayout = {

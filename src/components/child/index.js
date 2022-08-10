@@ -1,10 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Input } from "antd";
+import { Input, Form } from "antd";
 
 import useDelegator from "../../UseDelegator";
 import eventActionDefine from "../../msgCompConfig";
-import { getThemeStyle } from "../themeColor";
+import Validate from "../../common/utils/validate";
 
 const Child = ({
   data,
@@ -18,18 +18,22 @@ const Child = ({
   eventCenter,
   componentCenter,
 }) => {
+  const [form] = Form.useForm();
   const state2 = useRef(data);
   const [state, setState] = useState(data);
-  const [configuration, setConfiguration] = useState({});
+  const [customPluginConfig, setcustomPluginConfig] = useState({});
 
+  const { columnStyle = {} } = component;
   useEffect(() => {
     try {
-      console.log(propsConfiguration);
-      setConfiguration(JSON.parse(propsConfiguration));
-    } catch (error) {
-      console.error("configuration解析错误", error);
+      if (columnStyle?.customPluginConfig) {
+        const customPluginConfig = JSON.parse(columnStyle?.customPluginConfig);
+        setcustomPluginConfig(customPluginConfig);
+      }
+    } catch (e) {
+      console.error(e);
     }
-  }, []);
+  }, [columnStyle?.customPluginConfig]);
 
   const triggerEventCenter = async (targetValue) => {
     await window.eventCenter.triggerEventNew({
@@ -45,7 +49,6 @@ const Child = ({
   };
 
   const do_EventCenter_getValue = function () {
-    console.log(state2.current);
     return {
       value: state2.current,
     };
@@ -53,6 +56,7 @@ const Child = ({
 
   const do_EventCenter_setValue = function ({ value }) {
     setState(value);
+    form.setFieldsValue({ customInputNumber: value });
     // state2.current = value;
   };
 
@@ -71,19 +75,42 @@ const Child = ({
     { eventCenter, componentCenter }
   );
 
+  //逻辑控制
+  const handleChange = (e) => {
+    let value = e.target.value;
+    onChange(value);
+    triggerEventCenter("change", value);
+    state2.current = value;
+    setState(value);
+  };
+
+  // props
+  const { num_max_value, num_min_value, precision } = customPluginConfig;
+
+  const min =
+    num_min_value !== undefined && num_min_value !== null
+      ? num_min_value
+      : Number.MIN_SAFE_INTEGER;
+  const max =
+    num_max_value !== undefined && num_max_value !== null
+      ? num_max_value
+      : Number.MAX_SAFE_INTEGER;
+
   return (
-    <Input
-      style={getThemeStyle(formConfig.theme)}
-      value={state}
-      defaultValue={data}
-      onChange={(e) => {
-        onChange(e.target.value);
-        triggerEventCenter(e.target.value);
-        state2.current = e.target.value;
-        setState(e.target.value);
-      }}
-      {...configuration}
-    />
+    <Form form={form}>
+      <Form.Item
+        name={"customInputNumber"}
+        rules={Validate.rules(precision, min, max)}
+        validateTrigger={["onChange", "onBlur"]}
+        initialValue={state}
+      >
+        <Input
+          className={"number-input"}
+          onChange={handleChange}
+          onBlur={() => triggerEventCenter("blur")}
+        />
+      </Form.Item>
+    </Form>
   );
 };
 

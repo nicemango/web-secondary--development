@@ -13,10 +13,10 @@ function useDelegator(
   useEffect(() => {
     let initId = id;
     if (child_id) {
-      initId = `${initId}__childId__${child_id.substr(0, 10)}`;
+      initId = `${initId}_childtable`;
     }
     if (index > -1) {
-      initId = `${initId}__index__${index}`;
+      initId = `${initId}_${index}`;
     }
     componentCenter.register(initId, "comp", ref.current, eventActionDefine);
     return () => {
