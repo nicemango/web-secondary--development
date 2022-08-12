@@ -9,11 +9,10 @@ const instance = axios.create({
   validateStatus: function (status) {
     return status >= 200 && status < 300; // default
   },
-  headers:
-    (window.location.search && qs.parse(window.location.search).token) ||
-    window.token
-      ? { token: qs.parse(window.location.search).token || window.token }
-      : {},
+  headers: {
+    token:
+      "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpblRpbWVzdGFtcCI6MTY2MDI2NzEwNDA5NiwidXNlcklkIjoiMTIzNDU2Nzg5MCJ9.34YOLsG6QMXLQjPFLokijRZuJu9bbbnuY1z2XLQCz-s",
+  },
 });
 
 instance.defaults.headers.post["Content-Type"] = "application/json";

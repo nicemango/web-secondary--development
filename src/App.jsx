@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
 import Design from "./components/set";
@@ -7,6 +7,7 @@ import Child from "./components/child";
 import Table from "./components/table";
 import Preview from "./components/preview";
 import DesignConfiguration from "./components/designConfiguration";
+import "./locales";
 
 const renderHashMap = {
   set: Design,
