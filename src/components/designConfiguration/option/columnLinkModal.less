@@ -1,0 +1,88 @@
+.columnLinkModal,
+.columnRequiredModal {
+  .clear {
+    margin-bottom: 20px;
+
+    .clear-title {
+      margin: 0 10px;
+    }
+
+    .info {
+      display: inline-block;
+      padding: 4px 8px;
+      font-size: 12px;
+      color: #ff7d7d;
+      background: #fee;
+      border-radius: 2px;
+      opacity: 1;
+    }
+  }
+
+  .ant-modal-close {
+    display: none;
+  }
+
+  .ant-modal-header {
+    padding: 16px 24px 0 24px;
+    border: none;
+  }
+
+  .ant-modal-footer {
+    text-align: center;
+    border: none;
+  }
+
+  .ant-modal-body {
+    max-height: 500px;
+    overflow-y: auto;
+
+    .tips {
+      margin-bottom: 16px;
+      font-size: 14px;
+      color: #999;
+    }
+
+    .ant-select {
+      width: 100%;
+    }
+  }
+
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    padding: 5px 0 5px 16px;
+    border-bottom: none;
+  }
+
+  .ant-table-tbody {
+    & > tr > th {
+      padding: 12px 14px;
+    }
+
+    & > tr:nth-of-type(1) {
+      & > td {
+        padding-top: 20px;
+      }
+    }
+
+    & > tr > td {
+      // & > tr > td:nth-last-of-type(2) {
+      .ant-select-selection__choice {
+        color: #5182e4;
+        background: #eef4ff;
+      }
+    }
+  }
+
+  .add-button {
+    width: 200px;
+    margin: 5px 0 5px 16px;
+    color: #5182e4;
+    background: #eef4ff;
+    border: 1px dashed #5182e4;
+    border-radius: 4px;
+  }
+
+  .ant-select-selection-overflow {
+    gap: 4px;
+  }
+}

@@ -1,0 +1,48 @@
+.set_value {
+  display: flex;
+  flex: auto;
+  align-items: center;
+  justify-content: space-between;
+
+  .set_value_title {
+    height: 20px;
+    font-size: 14px !important;
+    line-height: 20px;
+    color: #555;
+  }
+
+  .ant-btn.set_value_button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: auto !important;
+    height: 32px;
+    padding: 6px 8px;
+    margin: 0 !important;
+    color: #0454f2 !important;
+    background-color: inherit !important;
+    border-color: #0454f2;
+    border-radius: 4px;
+
+    span {
+      position: relative;
+      height: 20px;
+      line-height: 20px;
+
+      &:not(:last-child) {
+        margin-right: 17px;
+      }
+
+      &:not(:last-child)::after {
+        position: absolute;
+        top: 2px;
+        right: -8px;
+        display: inline-block;
+        width: 1px;
+        height: 16px;
+        content: '';
+        border-left: 1px solid #0454f2;
+      }
+    }
+  }
+}

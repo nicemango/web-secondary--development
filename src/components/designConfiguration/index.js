@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
-import { Form, Input, Switch, Radio } from "antd";
+import { Form } from "antd";
+
+import Option from "./option/render";
 
 const DesignConfiguration = ({ changeConfiguration, configuration }) => {
   const [form] = Form.useForm();
@@ -15,33 +17,28 @@ const DesignConfiguration = ({ changeConfiguration, configuration }) => {
     changeConfiguration(JSON.stringify(allValues));
   };
 
-  const formItemLayout = {
-    labelCol: { span: 24 },
-    wrapperCol: { span: 24 },
-  };
-
   return (
     <>
-      <Form
-        {...formItemLayout}
-        layout="vertical"
-        form={form}
-        onValuesChange={onFormLayoutChange}
-      >
-        <Form.Item label="控件大小" name="size" de>
-          <Radio.Group>
-            <Radio.Button value="small">小</Radio.Button>
-            <Radio.Button value="middle">中 </Radio.Button>
-            <Radio.Button value="large">大</Radio.Button>
-          </Radio.Group>
-        </Form.Item>
-        <Form.Item label="占位符" name="placeholder">
-          <Input />
-        </Form.Item>
-        <Form.Item label="允许删除" name="allowClear" valuePropName="checked">
-          <Switch></Switch>
-        </Form.Item>
-      </Form>
+      <Option
+        configuration={JSON.parse(configuration)}
+        onValueChange={(state) => {
+          const {
+            option_asset_id,
+            option_asset_name,
+            option_value_column,
+            option_key_column,
+            option_asset_show_columns,
+          } = state;
+          console.log("zzh 资产选择", state);
+          onFormLayoutChange(null, {
+            option_asset_id,
+            option_asset_name,
+            option_value_column,
+            option_key_column,
+            option_asset_show_columns,
+          });
+        }}
+      />
     </>
   );
 };

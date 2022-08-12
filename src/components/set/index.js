@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Input } from "antd";
+import { Select } from "antd";
 
 import useDelegator from "../../UseDelegator";
 import eventActionDefine from "../../msgCompConfig";
 
+const { Option } = Select;
 const Set = (props) => {
   const Event_Center_getName = () => {
     return `${props.formConfig?.form_name}-${props.component.columnStyle.title}`;
@@ -18,7 +19,13 @@ const Set = (props) => {
     props.index,
     { eventCenter: props.eventCenter, componentCenter: props.componentCenter }
   );
-  return <Input />;
+  return (
+    <Select style={{ width: "100%" }}>
+      <Option value="a">1</Option>
+      <Option value="b">2</Option>
+      <Option value="c">3</Option>
+    </Select>
+  );
 };
 
 Set.propTypes = {

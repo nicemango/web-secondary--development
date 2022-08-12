@@ -1,0 +1,184 @@
+@import "variables.less";
+
+.analysis_asset_modal {
+  &.ant-modal {
+    top: 40px;
+  }
+
+  .ant-modal-header {
+    border-bottom: none;
+  }
+
+  .ant-modal-footer {
+    padding: 25px 30px;
+    border-top: none;
+
+    .ant-btn {
+      width: 86px;
+    }
+  }
+
+  .ant-modal-body {
+    padding: 0 30px;
+  }
+
+  .asset_modal_content {
+    width: 1200px;
+    height: 667px;
+    margin: 0 auto;
+    border: 1px solid @border-color-base;
+
+    .asset_modal_header {
+      height: 64px;
+      padding: 20px;
+      border-bottom: 1px solid @border-color-base;
+
+      .asset-search {
+        position: relative;
+        top: -8px;
+        float: right;
+
+        .anticon-search {
+          transform: rotate(-270deg);
+        }
+      }
+    }
+
+    .asset_modal_select {
+      display: flex;
+      height: calc(100% - 64px);
+
+      .asset_modal_left {
+        width: 260px;
+        height: 100%;
+        background: white;
+        border-right: 1px solid @border-color-base;
+        box-shadow: none;
+
+        .asset_label {
+          padding: 20px 26px 10px;
+          font-size: 16px;
+        }
+      }
+
+      .ant-menu-inline {
+        overflow-x: hidden;
+        border-right: 0;
+      }
+
+      .ant-menu-item::after {
+        border-right: 0;
+      }
+
+      .ant-menu-item-selected {
+        color: #5e605f;
+      }
+
+      .ant-menu-item,
+      .ant-menu-submenu-title {
+        &:hover,
+        &.active {
+          color: @blue-3;
+          background: @gray-1;
+        }
+      }
+
+      .active .ant-menu-submenu-title,
+      .ant-menu-item.active {
+        background: @gray-1;
+        border-right: 3px solid @blue-3;
+      }
+
+      .ant-menu-inline .ant-menu-submenu-title,
+      .ant-menu-item {
+        width: 100% !important;
+        margin: 0;
+      }
+
+      .menu_normal .ant-menu-submenu > .ant-menu {
+        border-radius: 0;
+      }
+
+      .asset_modal_right {
+        width: calc(100% - 260px);
+        height: 100%;
+      }
+    }
+  }
+
+  .listing-content {
+    flex: 1;
+    width: 100%;
+
+    .ant-list-item {
+      height: 80px;
+      padding: 0 32px;
+      cursor: pointer;
+      background-color: #fff;
+      box-shadow: none;
+
+      &:last-child {
+        border-bottom: 1px solid @border-color-base;
+      }
+
+      &:hover {
+        background: @gray-1;
+
+        .ant-list-item-meta-title {
+          color: @blue-3;
+        }
+      }
+
+      &.add-button {
+        display: flex;
+        justify-content: center;
+        font-size: 16px;
+        color: @blue-3;
+        text-align: center;
+        cursor: pointer;
+
+        .icon-tianjia1 {
+          font-size: 16px;
+        }
+      }
+
+      .ant-list-item-content {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .ant-list-item-meta {
+        width: 25%;
+
+        .ant-list-item-meta-content {
+          width: calc(100% - 56px);
+        }
+      }
+
+      .update-at {
+        width: 140px;
+      }
+
+      .field-count,
+      .record-count {
+        width: 80px;
+      }
+
+      .check-asset {
+        position: relative;
+        top: -4px;
+        width: 80px;
+        font-size: 18px;
+        color: @blue-3;
+
+        &.hidden {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .sider-catalog-menus .sider-headers {
+    margin: 0 !important;
+  }
+}

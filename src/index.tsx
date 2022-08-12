@@ -2,6 +2,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import "./index.less";
 import App from "./App";
 import styled from "styled-components";
 // import { ResponseDataHoc } from "@sd-ui/custom-plugin";  // 响应式能力
@@ -100,7 +101,7 @@ if (process.env.NODE_ENV !== "production") {
     process.env.CUSTOM_PLUGIN_ID,
     (dom: any, props: any, context: any, eventBus: any) => {
       // const pluginProps = {
-      //   props,
+      //   props,z
       //   context,
       //   eventBus,
       // };

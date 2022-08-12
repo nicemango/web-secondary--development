@@ -1,11 +1,11 @@
 {
-  "id": "fddace41-dcc2-448f-b9aa-188b99954120",
+  "id": "04f2dc14-55bb-48d4-839a-d277e8b8e270",
   "type": "reporting",
-  "main": "main.477f4d99.js",
+  "main": "main.892a514d.js",
   "version": "2",
   "props": {
     "styleArr": "[\"title\",\"height\",\"key\", \"eventCenterConfig\"]",
-    "columnStyle": "{title:'自定义'}",
+    "columnStyle": "{title:'下拉弹窗'}",
     "componentAttributes": "{\"style\":[\"title\",\"height\"],\"data\":[\"key\"],\"interaction\":[\"eventCenterConfig\"]}",
     "assetColumnList": "[{\"col_name\":\"自定义\",\"col_datatype\":0}]"
   }
