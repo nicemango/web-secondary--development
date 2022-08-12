@@ -33,5 +33,6 @@ export const formatDate = (date) => {
 export const formatDataDetail = (date) => {
   if (date) {
     return moment(date).format("YYYY-MM-DD HH:mm");
+
   }
 };
