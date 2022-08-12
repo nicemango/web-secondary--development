@@ -17,7 +17,6 @@ const Add = ({
   eventCenter,
   componentCenter,
 }) => {
-  const [form] = Form.useForm();
   const state2 = useRef(data);
   const [value, setValue] = useState(data);
   let [configuration, setConfiguration] = useState({});
@@ -79,7 +78,8 @@ const Add = ({
     option_asset_show_columns,
   } = configuration;
 
-  let formId = formConfig?.id || "1bc845215d2345b09ce466ff7f80eeba";
+  let formId = formConfig?.id;
+
   let dataSource = [];
   let [tableData, setTableData] = useState([]);
   let [loading, setLoading] = useState(false);
@@ -98,6 +98,7 @@ const Add = ({
   const saveSelectModal = (value) => {
     setValue(value);
   };
+
   useEffect(() => {
     try {
       setLoading(true);
