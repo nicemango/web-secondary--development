@@ -129,7 +129,6 @@ class SiderOption extends Component {
   render() {
     const { smart_data_type, id, configuration } = this.props;
 
-    console.log("zzh design configuration", configuration);
     const {
       visible,
       columnData,

@@ -7,7 +7,9 @@ const DesignConfiguration = ({ changeConfiguration, configuration }) => {
   const [form] = Form.useForm();
   useEffect(() => {
     try {
-      form.setFieldsValue(JSON.parse(configuration));
+      if (configuration) {
+        form.setFieldsValue(JSON.parse(configuration));
+      }
     } catch (error) {
       console.error("configuration解析错误", error);
     }
@@ -29,7 +31,6 @@ const DesignConfiguration = ({ changeConfiguration, configuration }) => {
             option_key_column,
             option_asset_show_columns,
           } = state;
-          console.log("zzh 资产选择", state);
           onFormLayoutChange(null, {
             option_asset_id,
             option_asset_name,

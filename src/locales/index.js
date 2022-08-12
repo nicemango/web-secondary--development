@@ -35,8 +35,6 @@ const getLanguage = () => {
 
 export const lang_type = getLanguage();
 
-console.log("zzh lang_type", lang_type, locales);
-
 export const setLang = () => {
   intl.init({
     currentLocale: lang_type,
