@@ -1,13 +1,13 @@
 // 组件可派发事件
 export const events = [
   {
-    key: 'change',
-    name: '内容改变',
+    key: "change",
+    name: "内容改变",
     payload: [
       {
-        name: '内容',
-        key: 'value',
-        dataType: 'string',
+        name: "内容",
+        key: "value",
+        dataType: "string",
       },
     ],
   },
@@ -16,27 +16,27 @@ export const events = [
 // 组件可接收事件
 export const actions = [
   {
-    key: 'setValue',
-    name: '设值',
-    isSupportChild: true,
+    key: "setValue",
+    name: "设值",
+    isSupportChild: false,
     params: [
       {
-        key: 'value',
-        name: '值',
-        dataType: 'string',
+        key: "value",
+        name: "值",
+        dataType: "string",
       },
     ],
   },
   {
-    key: 'getValue',
-    name: '取值',
+    key: "getValue",
+    name: "取值",
     hasReturn: true,
-    isSupportChild: true,
+    isSupportChild: false,
     returns: [
       {
-        key: 'value',
-        name: '值',
-        dataType: 'string',
+        key: "value",
+        name: "值",
+        dataType: "string",
       },
     ],
   },
@@ -44,5 +44,5 @@ export const actions = [
 
 export default {
   actions,
-  events
+  events,
 };

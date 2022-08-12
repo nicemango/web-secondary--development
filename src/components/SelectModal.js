@@ -54,7 +54,6 @@ export default class SelectModal extends Component {
   isClear = false;
 
   componentDidMount = () => {
-    console.log(this.props.dataSource, "this.props.dataSource");
     this.setState({ dataSource: this.props.dataSource });
   };
 
@@ -168,7 +167,6 @@ export default class SelectModal extends Component {
     } else {
       filterTableColums = [];
     }
-    console.log("tableColumnstableColumns2", filterTableColums, dataSource);
     return (
       <Modal
         title={modalTitle}
@@ -258,9 +256,6 @@ export default class SelectModal extends Component {
       //   defaultValue,
     } = this.props;
     const { dataSource } = this.state;
-
-    console.log("valueColumn:", valueColumn);
-    console.log("labelColumn:", labelColumn);
 
     return (
       <>

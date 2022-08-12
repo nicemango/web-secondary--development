@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Form, Input } from "antd";
 
 import moment from "moment";
 import useDelegator from "../../UseDelegator";
@@ -20,16 +19,16 @@ const Add = ({
 }) => {
   const [form] = Form.useForm();
   const state2 = useRef(data);
-  const [state, setState] = useState(data);
   const [value, setValue] = useState(data);
   let [configuration, setConfiguration] = useState({});
 
   useEffect(() => {
     try {
-      console.log("zzh 解析propsConfiguration", JSON.parse(propsConfiguration));
-      setConfiguration(JSON.parse(propsConfiguration));
+      if (propsConfiguration) {
+        setConfiguration(JSON.parse(propsConfiguration));
+      }
     } catch (error) {
-      console.error("zzh configuration解析错误", error);
+      console.error(" configuration解析错误", error);
     }
   }, []);
 
@@ -46,14 +45,14 @@ const Add = ({
   };
 
   const do_EventCenter_getValue = function () {
-    console.log(state2.current);
     return {
       value: state2.current,
     };
   };
 
   const do_EventCenter_setValue = function ({ value }) {
-    setState(value);
+    console.log("do_EventCenter_setValue", value);
+    setValue(value);
     // state2.current = value;
   };
 
@@ -73,19 +72,6 @@ const Add = ({
   );
 
   // ADD态
-
-  console.log("zzh  ADD", {
-    data,
-    onChange,
-    formConfig,
-    component,
-    configuration: propsConfiguration,
-    eventCenter,
-    componentCenter,
-  });
-
-  console.log("zzh  ADD  configuration", configuration);
-
   const {
     option_asset_id: assetId,
     option_value_column: valueColumn,
@@ -93,11 +79,7 @@ const Add = ({
     option_asset_show_columns,
   } = configuration;
 
-  console.log("zzh a", assetId);
-
   let formId = formConfig?.id || "1bc845215d2345b09ce466ff7f80eeba";
-
-  const [selectValue, setSelectValue] = useState();
   let dataSource = [];
   let [tableData, setTableData] = useState([]);
   let [loading, setLoading] = useState(false);
@@ -114,12 +96,8 @@ const Add = ({
   };
 
   const saveSelectModal = (value) => {
-    console.log("zzh 选中值", value);
     setValue(value);
   };
-
-  console.log("👿👿👿 组件渲染", selectValue);
-
   useEffect(() => {
     try {
       setLoading(true);
@@ -163,7 +141,6 @@ const Add = ({
         }
         // conditionList
       );
-      console.log(assetSource1);
       assetSource1[1].map((ele) => {
         let obj = {};
         tableColumns.map((item, i) => {
@@ -195,8 +172,6 @@ const Add = ({
       });
     } catch (error) {}
   };
-  console.log("zzh tableData", tableData);
-  console.log("zzh tableColumns", tableColumns);
 
   return (
     <SelectModal

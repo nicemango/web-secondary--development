@@ -10,9 +10,14 @@ const Set = (props) => {
   const Event_Center_getName = () => {
     return `${props.formConfig?.form_name}-${props.component.columnStyle.title}`;
   };
+
+  const Event_Center_getParentInfo = () => {
+    return { scene: "dataForm" };
+  };
+
   useDelegator(
     props.component.id,
-    { Event_Center_getName },
+    { Event_Center_getName, Event_Center_getParentInfo },
     eventActionDefine,
     props.formConfig?.id,
     props.child_id,

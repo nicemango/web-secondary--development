@@ -24,8 +24,9 @@ const Child = ({
 
   useEffect(() => {
     try {
-      console.log(propsConfiguration);
-      setConfiguration(JSON.parse(propsConfiguration));
+      if (propsConfiguration) {
+        setConfiguration(JSON.parse(propsConfiguration));
+      }
     } catch (error) {
       console.error("configuration解析错误", error);
     }
@@ -71,20 +72,7 @@ const Child = ({
     { eventCenter, componentCenter }
   );
 
-  return (
-    <Input
-      style={getThemeStyle(formConfig.theme)}
-      value={state}
-      defaultValue={data}
-      onChange={(e) => {
-        onChange(e.target.value);
-        triggerEventCenter(e.target.value);
-        state2.current = e.target.value;
-        setState(e.target.value);
-      }}
-      {...configuration}
-    />
-  );
+  return <></>;
 };
 
 Child.propTypes = {
