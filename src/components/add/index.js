@@ -14,6 +14,7 @@ const Add = ({
   eventCenter,
   componentCenter,
 }) => {
+  console.log("组件配置项", formConfig);
   const [form] = Form.useForm();
   const state2 = useRef(data);
   const [state, setState] = useState(data);
@@ -98,7 +99,7 @@ const Add = ({
       : Number.MAX_SAFE_INTEGER;
 
   return (
-    <Form form={form}>
+    <Form form={form} className={"number-input"}>
       <Form.Item
         name={"customInputNumber"}
         rules={Validate.rules(precision, min, max)}
