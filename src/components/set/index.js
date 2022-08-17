@@ -7,6 +7,7 @@ import eventActionDefine from "../../msgCompConfig";
 import "../../common/style/formItem.less";
 
 const Set = (props) => {
+
   const isChildTableComponent = (showType) => {
     if (
       showType === "childtable" ||
