@@ -78,6 +78,7 @@ const Add = ({
     option_asset_show_columns,
   } = configuration;
 
+
   let formId = formConfig?.id;
 
   let dataSource = [];

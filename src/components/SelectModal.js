@@ -194,7 +194,6 @@ export default class SelectModal extends Component {
     } else {
       filterTableColums = [];
     }
-
     return (
       <Modal
         title={modalTitle}
