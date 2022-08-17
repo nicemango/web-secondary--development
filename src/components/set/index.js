@@ -7,8 +7,24 @@ import eventActionDefine from "../../msgCompConfig";
 import "../../common/style/formItem.less";
 
 const Set = (props) => {
+  const isChildTableComponent = (showType) => {
+    if (
+      showType === "childtable" ||
+      showType === "controlled_child_table" ||
+      showType === "pop_up_selection_child_table" ||
+      showType === "correlation_child_table"
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   const Event_Center_getName = () => {
-    return `${props.formConfig?.form_name}-${props.component.columnStyle.title}`;
+    let { component } = props;
+    if (component.parent && isChildTableComponent(component.parent.showType)) {
+      return `${component.parent?.columnStyle?.title}-${component.columnStyle.title}`;
+    }
+    return `${component.columnStyle.title}`;
   };
 
   const Event_Center_getParentInfo = () => {
