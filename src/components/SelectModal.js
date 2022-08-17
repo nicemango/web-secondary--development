@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Select, Modal, Input, Button, message, Spin } from "antd";
 import "./index.less";
+import moment from "moment";
 import Table2 from "../common/components/Table2";
 const { Option } = Select;
 
@@ -74,7 +75,27 @@ export default class SelectModal extends Component {
     this.setState({
       isModal: false,
     });
-    this.props.saveSelectModal(selectKey, selectRow);
+
+    let retSelectKey = selectKey;
+    if (selectRow) {
+      let selectedRowDatatype = null;
+      let selectDataIndex = Object.keys(selectRow).find(
+        (key) => selectRow[key] === retSelectKey
+      );
+      this.props.tableColumns.map((item) => {
+        const { dataIndex, col_datatype } = item;
+        if (dataIndex === selectDataIndex) {
+          selectedRowDatatype = col_datatype;
+        }
+      });
+      if (selectedRowDatatype === 5) {
+        retSelectKey = moment(selectKey).format("YYYY-MM-DD");
+      } else if (selectedRowDatatype === 6) {
+        retSelectKey = moment(selectKey).format("YYYY-MM-DD HH:mm:ss");
+      }
+    }
+
+    this.props.saveSelectModal(retSelectKey, selectRow);
   };
 
   onSelectClick = () => {
@@ -124,18 +145,24 @@ export default class SelectModal extends Component {
 
     const rowSelection = {
       type: "radio",
-      onChange(selectedRowKeys) {
-        that.setState({ selectKey: selectedRowKeys[0] });
+      onChange(selectedRowKeys, selectedRow) {
+        that.setState({
+          selectKey: selectedRow[0][that.props.valueColumn],
+          selectedRowKeys: selectedRowKeys,
+        });
       },
-      selectedRowKeys: [this.state.selectKey],
-      defaultSelectedRowKeys: [this.state.selectKey],
+      selectedRowKeys: this.state.selectedRowKeys,
+      defaultSelectedRowKeys: this.state.selectedRowKeys,
     };
 
     // 行点击时候选中该行
     const onRow = (record) => {
       return {
         onClick: () => {
-          that.setState({ selectKey: record?.key });
+          that.setState({
+            selectKey: record[this.props.valueColumn],
+            selectedRowKeys: [record?.key],
+          });
         },
       };
     };
@@ -167,6 +194,7 @@ export default class SelectModal extends Component {
     } else {
       filterTableColums = [];
     }
+
     return (
       <Modal
         title={modalTitle}
@@ -214,7 +242,7 @@ export default class SelectModal extends Component {
           </div>
           {!loading && (
             <Table2
-              rowKey={block.valueColumn}
+              rowKey={(record) => record.data_id}
               rowSelection={rowSelection}
               onRow={onRow}
               columns={filterTableColums}

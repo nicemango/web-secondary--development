@@ -75,10 +75,27 @@ class SiderOption extends Component {
   // * {intl.get('COMM.RTIA')}（部分）
 
   changeValueColumn = (e) => {
-    this.props.onValueChange(this.state);
-    this.setState({
-      option_value_column: e,
+    this.setState(
+      {
+        option_value_column: e,
+      },
+      () => {
+        this.props.onValueChange(this.state);
+      }
+    );
+
+    let datatype;
+    const { columnData } = this.state;
+    columnData.map((item) => {
+      if (e === item.col_name) {
+        datatype = item.col_datatype;
+      }
     });
+    if (datatype !== 5 && datatype !== 6) {
+      this.setState({
+        option_key_column: e,
+      });
+    }
   };
 
   changeKeyColumn = (e) => {
@@ -92,7 +109,7 @@ class SiderOption extends Component {
     );
   };
 
-  chooseAsset = () => {
+  chooseAsset = (currentAsset) => {
     this.setState({ visible: !this.state.visible }, () => {
       this.props.onValueChange(this.state);
     });

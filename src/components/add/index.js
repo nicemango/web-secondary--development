@@ -118,16 +118,21 @@ const Add = ({
         cacheDuration: 2 * 60 * 1000,
       });
       tableColumns = assetSource[0].map((ele) => ({
+        key: ele.data_id,
         dataIndex: ele.col_name,
         title: ele.col_alias ?? ele.col_name,
         col_datatype: ele.col_datatype,
         render: (text) => {
-          if (ele.col_datatype === 5) {
-            return <span>{moment(text).format("YYYY-MM-DD")}</span>;
-          } else if (ele.col_datatype === 6) {
-            return <span>{moment(text).format("YYYY-MM-DD HH:mm:ss")}</span>;
+          if (text) {
+            if (ele.col_datatype === 5) {
+              return <span>{moment(text).format("YYYY-MM-DD")}</span>;
+            } else if (ele.col_datatype === 6) {
+              return <span>{moment(text).format("YYYY-MM-DD HH:mm:ss")}</span>;
+            }
+            return <span>{text}</span>;
+          } else {
+            return null;
           }
-          return <span>{text}</span>;
         },
       }));
       setTableColumns(tableColumns);
@@ -148,7 +153,8 @@ const Add = ({
           obj[item.dataIndex] = ele[i];
         });
         setTableColumns(tableColumns);
-        obj.key = obj[valueColumn];
+        // obj.key = obj[valueColumn];
+        obj.key = obj?.data_id;
         tableData.push(obj);
         setTableData([...tableData]);
       });
@@ -165,7 +171,8 @@ const Add = ({
         tableColumns.map((item, i) => {
           obj[item.dataIndex] = ele[i];
         });
-        obj.key = obj[valueColumn];
+        // obj.key = obj[valueColumn];
+        obj.key = obj?.data_id;
         dataSource.push({
           value: ele[keyIndex],
           label: ele[valueIndex],

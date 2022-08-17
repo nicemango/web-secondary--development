@@ -23,7 +23,7 @@ const PreviewComponent = (props) => {
     },
     component: {},
     configuration:
-      '{"option_asset_id":"3183da26-6cf8-58ae-ef7b-46e4d2f36489","option_asset_name":"全组件","option_value_column":"danxingwenben","option_key_column":"mima","option_asset_show_columns":["danxingwenben","riqi", "lianjiedizhi", "baifenbi"]}',
+      '{"option_asset_id":"3183da26-6cf8-58ae-ef7b-46e4d2f36489","option_asset_name":"全组件","option_value_column":"danxingwenben","option_key_column":"mima","option_asset_show_columns":["danxingwenben","riqi", "lianjiedizhi", "baifenbi","data_id"]}',
     componentCenter,
     eventCenter,
   };
