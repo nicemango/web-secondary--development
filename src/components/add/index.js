@@ -6,6 +6,7 @@ import useDelegator from "../../UseDelegator";
 import eventActionDefine from "../../msgCompConfig";
 import Validate from "../../common/utils/validate";
 const Add = ({
+  ref,
   data,
   onChange,
   formConfig,
@@ -62,8 +63,30 @@ const Add = ({
     // state2.current = value;
   };
 
+  const isChildTableComponent = (showType) => {
+    if (
+      showType === "childtable" ||
+      showType === "controlled_child_table" ||
+      showType === "pop_up_selection_child_table" ||
+      showType === "correlation_child_table"
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   const Event_Center_getName = () => {
-    return `${formConfig?.form_name}-${component.columnStyle.title}`;
+    if (formConfig?.formName) {
+      return `${formConfig?.formName}-${component.columnStyle.title}`;
+    } else {
+      if (
+        component.parent &&
+        isChildTableComponent(component.parent.showType)
+      ) {
+        return `${component.parent?.columnStyle?.title}-${component.columnStyle.title}`;
+      }
+      return `${component.columnStyle.title}`;
+    }
   };
 
   // 事件中心注册挂载
@@ -84,6 +107,10 @@ const Add = ({
     triggerEventCenter("change", value);
     state2.current = value;
     setState(value);
+  };
+
+  const getRule = () => {
+    return Validate.rules(precision, min, max);
   };
 
   // props

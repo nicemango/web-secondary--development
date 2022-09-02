@@ -1,12 +1,12 @@
 {
-  "id": "ede5a7d5-7788-4b58-b80a-83214b8aa016",
+  "id": "fb8cb2bd-e98f-438e-8632-7d244b231687",
   "type": "reporting",
-  "main": "main.fd5e517d.js",
+  "main": "main.72c1519d.js",
   "version": "2",
   "props": {
     "styleArr": "[\"title\",\"height\",\"key\", \"eventCenterConfig\"]",
-    "columnStyle": "{title:'数字'}",
-    "componentAttributes": "{\"style\":[\"title\",\"height\"],\"data\":[\"key\"],\"interaction\":[\"eventCenterConfig\"]}",
+    "columnStyle": "{\"title\":\"数字\"}",
+    "componentAttributes": "{\"style\":[\"title\",\"height\"],\"data\":[\"key\"],\"interaction\":[\"eventCenterConfig\",\"multiple\"]}",
     "assetColumnList": "[{\"col_name\":\"自定义\",\"col_datatype\":8}]"
   }
 }
